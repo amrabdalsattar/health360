@@ -8,6 +8,7 @@ import 'package:health360/utils/app_asset.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/settings_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInScreen extends StatefulWidget {
   static const routeName = "SignIn";

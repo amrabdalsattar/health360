@@ -6,10 +6,12 @@ class MyTextField extends StatelessWidget {
   final String label;
   final Widget icon;
   final bool obscure;
+  final void Function(String)? onChanged;
   const MyTextField({super.key,
     required this.label,
     required this.icon,
     this.obscure = false,
+    this.onChanged,
   });
 
   @override
@@ -23,7 +25,8 @@ class MyTextField extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20,),
-            TextField(
+            TextFormField(
+              onChanged: onChanged,
               decoration: InputDecoration(
                 fillColor: AppColor.liteGrey,
                 filled: true,

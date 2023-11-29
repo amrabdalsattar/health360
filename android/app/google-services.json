@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "370641563703",
+    "project_id": "health360-749e9",
+    "storage_bucket": "health360-749e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370641563703:android:e2bc3a15abef8dd7fe0fb2",
+        "android_client_info": {
+          "package_name": "com.example.health360"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4v-_MwqMcn13J5FDGFqQ5n9cwpHTRAhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

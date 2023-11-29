@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../utils/app_color.dart';
+import '../../../../utils/dialog_utils.dart';
 import '../../../../utils/settings_provider.dart';
 import '../auth_shared_widgets/button.dart';
 import '../auth_shared_widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   static const routeName = "createAccount";
@@ -16,6 +18,14 @@ class CreateAccountScreen extends StatefulWidget {
 }
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
+  String email = "";
+
+  String password = "";
+
+  String confirmedPassword = "";
+
+  String userName = "";
+
   bool passwordShowed = true;
   bool confirmPasswordShowed = true;
   @override
@@ -50,11 +60,17 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         label: 'FULL NAME',
                         icon: Icon(Icons.person),
                       ),
-                      const MyTextField(
+                      MyTextField(
+                        onChanged: (text){
+                          email = text;
+                        },
                         label: 'EMAIL',
                         icon: Icon(Icons.email_outlined),
                       ),
                       MyTextField(
+                          onChanged: (text){
+                            password = text;
+                          },
                           label: 'PASSWORD',
                           icon: InkWell(
                             onTap: () {
@@ -67,6 +83,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           ),
                           obscure: passwordShowed),
                       MyTextField(
+                          onChanged: (text){
+                            confirmedPassword = text;
+                          },
                           label: 'CONFIRM PASSWORD',
                           icon: InkWell(
                             onTap: () {
@@ -80,7 +99,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           obscure: confirmPasswordShowed),
                     ],
                   )),
-              MyButton(onPressed: (){},
+              MyButton(onPressed: (){
+                register();
+              },
                   text: "SIGN UP"),
 
             ],
@@ -88,5 +109,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         ),
       ),
     );
+  }
+  void register() async {
+    print("entered");
+    try {
+      showLoading(context);
+
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+        print("user Added");
+      hideLoading(context);
+    } on FirebaseAuthException catch (error) {
+      hideLoading(context);
+      showErrorDialog(context,
+          error.message ?? "Something went wrong. please try again later!");
+    }
   }
 }
