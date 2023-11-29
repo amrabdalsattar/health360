@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
 import 'package:health360/utils/app_asset.dart';
 import '../home_screen/home_screen.dart';
 
@@ -16,7 +17,7 @@ class _SplashState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      Navigator.pushReplacementNamed(context, SignInScreen.routeName);
     });
   }
 
