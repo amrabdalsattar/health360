@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/auth_ui/create_account/create_account_screen.dart';
+import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
 import 'package:health360/ui/screens/splash_screen/splash_screen.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (_) => const SplashScreen(),
         SignInScreen.routeName: (_) => SignInScreen(),
         CreateAccountScreen.routeName: (_) => const CreateAccountScreen(),
+        ResetPasswordScreen.routeName: (_) => const ResetPasswordScreen()
       },
       initialRoute: SplashScreen.routeName,
       home: const HomeScreen(),

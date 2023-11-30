@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health360/ui/screens/home_screen/home_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../utils/app_color.dart';
@@ -34,6 +35,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   bool passwordShowed = true;
   bool confirmPasswordShowed = true;
   bool error = false;
+  bool visible = false;
   @override
   Widget build(BuildContext context) {
     SettingsProvider provider = Provider.of(context);
@@ -78,9 +80,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         icon: Icon(Icons.email_outlined),
                       ),
                       MyTextField(
-                        error: error,
-                        errorText: errorMessage,
-                          errorMessageColor: errorMessageColor,
+                        visible: isPasswordStrong(password) == true ? true : false,
                           onChanged: (text){
                             password = text;
                           },
@@ -95,27 +95,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                 : const Icon(CupertinoIcons.lock),
                           ),
                           obscure: passwordShowed,
-                          validator: (data) {
-                            if (password == true) {
-                              if (data!.isEmpty) {
-                                return "";
-                              } else if (data.length > 6 &&
-                                  !data.contains(RegExp(r'[A-Z]')) ||
-                                  !data.contains(RegExp(r'[a-z]'))) {
-                                // Set error and return an error message
-                                error = true;
-                                return "Weak Password";
-                              }else{
-                                error = false;
-                                return "Strong Password";
-                              }
-                            }
-                            // Reset error
-                            error = false;
-                            return null;
-                          },
                           ),
                       MyTextField(
+                          visible: matchedPassword(password, confirmedPassword)
+                          == true ? true : false,
                           onChanged: (text){
                             confirmedPassword = text;
                           },
@@ -144,11 +127,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     );
   }
   void register() async {
-    print(fullName);
-
     try {
       if (fullName.isEmpty) {
-        showErrorDialog(context, "Your Name is Required, Please Enter your Full Name");
+        showErrorDialog(context,
+            "Your Name is Required, Please Enter your Full Name");
         return;
       } else if (fullName.contains(RegExp(r'[0-9]'))) {
         showErrorDialog(context, "Invalid Name");
@@ -156,17 +138,21 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       } else if (!fullName.contains(" ")) {
         showErrorDialog(context, "Please Enter your Full Name not First Name");
         return;
-      } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$').hasMatch(email)) {
+      } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+          .hasMatch(email)) {
         showErrorDialog(context, "Invalid Email");
+        return;
+      }else if(password.isEmpty){
+        showErrorDialog(context, "The Password is Required");
         return;
       } else if (!isPasswordStrong(password)) {
         showErrorDialog(context, "Weak Password");
         return;
       } else if (password != confirmedPassword) {
-        showErrorDialog(context, "The two passwords entered do not match. Please try again.");
+        showErrorDialog(context,
+            "The two passwords entered do not match. Please try again.");
         return;
       }
-
       showLoading(context);
 
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -174,6 +160,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         password: password,
       );
       hideLoading(context);
+      Navigator.pop(context);
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
       print("User Added");
     } on FirebaseAuthException catch (error) {
       hideLoading(context);
@@ -186,7 +174,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         password.contains(RegExp(r'[A-Z]')) &&
         password.contains(RegExp(r'[a-z]')) &&
         password.contains(RegExp(r'[0-9]'));
-  }
 
+  }
+  bool matchedPassword(String password, String confirmedPassword){
+    if(password.isNotEmpty && password == confirmedPassword){
+      return true;
+    }
+    return false;
+  }
 
 }
