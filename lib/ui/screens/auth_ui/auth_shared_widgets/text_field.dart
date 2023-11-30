@@ -4,14 +4,22 @@ import '../../../../utils/app_color.dart';
 
 class MyTextField extends StatelessWidget {
   final String label;
+  final String? errorText;
   final Widget icon;
   final bool obscure;
+  final bool? error;
+  final Color? errorMessageColor;
+  final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   const MyTextField({super.key,
     required this.label,
     required this.icon,
     this.obscure = false,
     this.onChanged,
+    this.validator,
+    this.errorText,
+    this.errorMessageColor,
+    this.error = false,
   });
 
   @override
@@ -26,8 +34,12 @@ class MyTextField extends StatelessWidget {
           children: [
             const SizedBox(height: 20,),
             TextFormField(
+
+              validator: validator,
               onChanged: onChanged,
               decoration: InputDecoration(
+                errorStyle: TextStyle(color: errorMessageColor),
+                errorText: error == true? errorText : null,
                 fillColor: AppColor.liteGrey,
                 filled: true,
                 border: OutlineInputBorder(
@@ -52,4 +64,5 @@ class MyTextField extends StatelessWidget {
       ),
     );
   }
+
 }

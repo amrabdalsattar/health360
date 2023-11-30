@@ -18,16 +18,22 @@ class CreateAccountScreen extends StatefulWidget {
 }
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
+
   String email = "";
 
   String password = "";
 
   String confirmedPassword = "";
 
-  String userName = "";
+  String fullName = "";
+
+  String? errorMessage;
+
+  Color? errorMessageColor;
 
   bool passwordShowed = true;
   bool confirmPasswordShowed = true;
+  bool error = false;
   @override
   Widget build(BuildContext context) {
     SettingsProvider provider = Provider.of(context);
@@ -56,9 +62,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               Form(
                   child: Column(
                     children: [
-                      const MyTextField(
+                      MyTextField(
+                        onChanged: (text){
+                          fullName = text;
+                        },
                         label: 'FULL NAME',
                         icon: Icon(Icons.person),
+
                       ),
                       MyTextField(
                         onChanged: (text){
@@ -68,6 +78,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         icon: Icon(Icons.email_outlined),
                       ),
                       MyTextField(
+                        error: error,
+                        errorText: errorMessage,
+                          errorMessageColor: errorMessageColor,
                           onChanged: (text){
                             password = text;
                           },
@@ -81,7 +94,27 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                 ? const Icon(CupertinoIcons.lock_open)
                                 : const Icon(CupertinoIcons.lock),
                           ),
-                          obscure: passwordShowed),
+                          obscure: passwordShowed,
+                          validator: (data) {
+                            if (password == true) {
+                              if (data!.isEmpty) {
+                                return "";
+                              } else if (data.length > 6 &&
+                                  !data.contains(RegExp(r'[A-Z]')) ||
+                                  !data.contains(RegExp(r'[a-z]'))) {
+                                // Set error and return an error message
+                                error = true;
+                                return "Weak Password";
+                              }else{
+                                error = false;
+                                return "Strong Password";
+                              }
+                            }
+                            // Reset error
+                            error = false;
+                            return null;
+                          },
+                          ),
                       MyTextField(
                           onChanged: (text){
                             confirmedPassword = text;
@@ -111,18 +144,49 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     );
   }
   void register() async {
-    print("entered");
+    print(fullName);
+
     try {
+      if (fullName.isEmpty) {
+        showErrorDialog(context, "Your Name is Required, Please Enter your Full Name");
+        return;
+      } else if (fullName.contains(RegExp(r'[0-9]'))) {
+        showErrorDialog(context, "Invalid Name");
+        return;
+      } else if (!fullName.contains(" ")) {
+        showErrorDialog(context, "Please Enter your Full Name not First Name");
+        return;
+      } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$').hasMatch(email)) {
+        showErrorDialog(context, "Invalid Email");
+        return;
+      } else if (!isPasswordStrong(password)) {
+        showErrorDialog(context, "Weak Password");
+        return;
+      } else if (password != confirmedPassword) {
+        showErrorDialog(context, "The two passwords entered do not match. Please try again.");
+        return;
+      }
+
       showLoading(context);
 
-        await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: password);
-        print("user Added");
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       hideLoading(context);
+      print("User Added");
     } on FirebaseAuthException catch (error) {
       hideLoading(context);
-      showErrorDialog(context,
-          error.message ?? "Something went wrong. please try again later!");
+      showErrorDialog(context, error.message ?? "Something went wrong. Please try again later!");
     }
   }
+
+  bool isPasswordStrong(String password) {
+    return password.length >= 6 &&
+        password.contains(RegExp(r'[A-Z]')) &&
+        password.contains(RegExp(r'[a-z]')) &&
+        password.contains(RegExp(r'[0-9]'));
+  }
+
+
 }

@@ -13,8 +13,7 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // خخخخخخخخخخخخخخخخخخخخخخخخخخ why
- // await Firebase.initializeApp();
+
   await _initFirebase();
 
   runApp(ChangeNotifierProvider(
@@ -23,8 +22,7 @@ Future<void> main() async {
 
 Future<void> _initFirebase() async {
   final options = DefaultFirebaseOptions.currentPlatform;
-// احا بتعمل هوت ريستارت منين
-  //هوت ريستارت مش هوت ريلود يا علق
+
 try{
   final app=  await Firebase.initializeApp(options: options);
   debugPrint(app.name);
