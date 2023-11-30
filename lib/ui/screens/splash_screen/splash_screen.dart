@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
 import 'package:health360/utils/app_asset.dart';
 import '../home_screen/home_screen.dart';
@@ -23,6 +24,9 @@ class _SplashState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.top
+    ]);
     return Scaffold(
         body: Container(
           decoration: const BoxDecoration(

@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:health360/ui/screens/auth_ui/create_account/create_account_screen.dart';
 import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
 import 'package:health360/ui/screens/splash_screen/splash_screen.dart';
+import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +18,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await _initFirebase();
-
   runApp(ChangeNotifierProvider(
       create: (_) => SettingsProvider(), child: const MyApp()));
 }
@@ -40,6 +41,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       routes: {
         HomeScreen.routeName: (_) => const HomeScreen(),

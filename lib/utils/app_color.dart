@@ -7,4 +7,5 @@ abstract class AppColor{
   static const Color liteGrey = Color.fromARGB(34, 95, 95, 96);
   static const Color transparent = Colors.transparent;
   static const Color primary = Color.fromARGB(255, 252, 125, 115);
+  static const Color secondary = Color.fromARGB(255, 78, 61, 62);
 }

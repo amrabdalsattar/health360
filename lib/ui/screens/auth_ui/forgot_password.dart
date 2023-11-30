@@ -148,7 +148,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   child: Material(
                     elevation: 2,
                     borderRadius: BorderRadius.circular(20),
-                    color: AppColor.primary,
+                    color: AppColor.secondary,
                     child: MaterialButton(
                       onPressed: () async {
                         await resetPassword(
