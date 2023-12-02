@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,8 +6,7 @@ import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
 import 'package:health360/ui/screens/splash_screen/splash_screen.dart';
-import 'package:health360/utils/app_color.dart';
-import 'package:health360/utils/settings_provider.dart';
+import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -49,12 +46,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         HomeScreen.routeName: (_) => const HomeScreen(),
-        SplashScreen.routeName: (_) => const SplashScreen(),
-        SignInScreen.routeName: (_) => SignInScreen(),
+        // SplashScreen.routeName: (_) => const SplashScreen(),
+        SignInScreen.routeName: (_) => const SignInScreen(),
         CreateAccountScreen.routeName: (_) => const CreateAccountScreen(),
         ResetPasswordScreen.routeName: (_) => const ResetPasswordScreen()
       },
-      initialRoute: SplashScreen.routeName,
+      initialRoute: SignInScreen.routeName,
       home: const HomeScreen(),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/auth_ui/create_account/create_account_screen.dart';
 import 'package:health360/utils/app_color.dart';
@@ -33,7 +32,7 @@ void signInErrorDialog(BuildContext context, String errorMessage){
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30)
       ),
-      title: Text(
+      title: const Text(
         "Error!",
         style: TextStyle(
           color: Colors.red, // Change the text color

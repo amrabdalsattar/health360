@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/button.dart';
 import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/logo_collection.dart';
 import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/text_field.dart';
@@ -22,11 +21,14 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final _formKey = GlobalKey<FormState>();
   String email = "";
 
   String password = "";
 
   bool passwordShowed = true;
+
+  Color? formValidationColor = AppColor.primary;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +38,12 @@ class _SignInScreenState extends State<SignInScreen> {
         backgroundColor: AppColor.transparent,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Container(
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Container(
 
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          child: Form(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
                 /// change it to headline-large
@@ -54,7 +57,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-
                 /// change it to headline-medium
                 const Text("Please sign in to continue",
                     style: TextStyle(
@@ -67,37 +69,65 @@ class _SignInScreenState extends State<SignInScreen> {
                 Column(
                   children: [
                     MyTextField(
+                      formValidationColor: formValidationColor,
+                      validator: (email){
+                        if(!RegExp(
+                          r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
+                        ).hasMatch(email!)){
+                          formValidationColor =AppColor.red;
+                          return "Email isn't valid";
+                        }
+                        return null;
+                      },
                       onChanged: (text) {
                         email = text;
                       },
                       label: 'EMAIL',
-                      icon: Icon(Icons.email_outlined),
+                      icon: const Icon(Icons.email_outlined),
                     ),
                     MyTextField(
-                        onChanged: (text) {
-                          password = text;
+                      formValidationColor: formValidationColor,
+                      validator: (password) {
+                        if (password == null || password.isEmpty) {
+                          formValidationColor = AppColor.red;
+                          return "Password is required";
+                        }
+
+                        // Check if the password has at least one uppercase, one lowercase, and a minimum of 6 characters
+                        if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$').hasMatch(password)) {
+                          formValidationColor =AppColor.red;
+                          return "Password is incorrect";
+                        }
+
+                        return null;
+                      },
+                      onChanged: (text) {
+                        password = text;
+                      },
+                      label: 'PASSWORD',
+                      icon: InkWell(
+                        onTap: () {
+                          passwordShowed = !passwordShowed;
+                          setState(() {});
                         },
-                        label: 'PASSWORD',
-                        icon: InkWell(
-                          onTap: () {
-                            passwordShowed = !passwordShowed;
-                            setState(() {});
-                          },
-                          child: passwordShowed == false
-                              ? const Icon(CupertinoIcons.lock_open)
-                              : const Icon(CupertinoIcons.lock),
-                        ),
-                        obscure: passwordShowed),
+                        child: passwordShowed == false
+                            ? const Icon(CupertinoIcons.lock_open)
+                            : const Icon(CupertinoIcons.lock),
+                      ),
+                      obscure: passwordShowed,
+                    ),
+
                   ],
                 ),
                 Row(
                   children: [
                     TextButton(
                         onPressed: () {
+
                           Navigator.pushNamed(
                               context, ResetPasswordScreen.routeName);
                         },
-                        child: Text(
+                        child: const Text(
                           "Forgot Password?",
                           style: TextStyle(color: AppColor.secondary),
                         )),
@@ -145,41 +175,30 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void login() async {
     try {
-      if (email.isEmpty ||
-          !RegExp(
-            r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
-          ).hasMatch(email)) {
-        showErrorDialog(context, "Please Enter a Valid Email");
-        return;
-      } else if (password.isEmpty) {
-        showErrorDialog(context, "Please Enter your Password");
-        return;
+      if (_formKey.currentState!.validate()) {
+        showLoading(context);
+
+        final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        hideLoading(context);
+
+        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              backgroundColor: Colors.green,
+              content: Text('Log in Successfully')),
+        );
       }
-      showLoading(context);
 
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      hideLoading(context);
-      // If login is successful, navigate to the home screen
-      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     } on FirebaseAuthException catch (e) {
-      print("the Exception is -------------------------------- ${e.code}");
-      print("the message is -------------------------------- ${e.message}");
 
-      // Differentiate between specific error codes
       if (e.code == 'invalid-credential') {
+        formValidationColor = AppColor.red;
         hideLoading(context);
         showErrorDialog(
             context, "Incorrect password or Email. Please try again.");
-      } else if (e.message == 'user-not-found') {
-        hideLoading(context);
-        showErrorDialog(context, "User not found. Please check your email.");
-      } else {
-        hideLoading(context);
-        // For other errors, show a general error message
-        showErrorDialog(context, "An error occurred: ${e.message}");
       }
     }
   }
