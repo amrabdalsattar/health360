@@ -59,6 +59,7 @@ class LogoCollection extends StatelessWidget {
 
   }
   Future<UserCredential> signInWithTwitter(BuildContext context) async {
+    showLoading(context);
     // Create a TwitterLogin instance
     final twitterLogin = TwitterLogin(
         apiKey: 'PIe88BYkqGGRIcj4jU4zP2xSP',
@@ -69,6 +70,7 @@ class LogoCollection extends StatelessWidget {
     // Trigger the sign-in flow
     final authResult = await twitterLogin.login();
     Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+    hideLoading(context);
     // Create a credential from the access token
     final twitterAuthCredential = TwitterAuthProvider.credential(
       accessToken: authResult.authToken!,
