@@ -5,7 +5,6 @@ import 'package:health360/ui/screens/auth_ui/create_account/create_account_scree
 import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
-import 'package:health360/ui/screens/splash_screen/splash_screen.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -37,12 +36,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of(context);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.top
+    ]);
     return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.light,
-        ),
-      ),
+      theme: provider.appMode,
       debugShowCheckedModeBanner: false,
       routes: {
         HomeScreen.routeName: (_) => const HomeScreen(),
@@ -51,7 +50,7 @@ class MyApp extends StatelessWidget {
         CreateAccountScreen.routeName: (_) => const CreateAccountScreen(),
         ResetPasswordScreen.routeName: (_) => const ResetPasswordScreen()
       },
-      initialRoute: SignInScreen.routeName,
+      initialRoute: HomeScreen.routeName,
       home: const HomeScreen(),
     );
   }

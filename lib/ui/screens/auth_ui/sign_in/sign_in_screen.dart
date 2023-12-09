@@ -28,8 +28,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   bool passwordShowed = true;
 
-  Color? formValidationColor = AppColor.primary;
-
   @override
   Widget build(BuildContext context) {
 
@@ -69,12 +67,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 Column(
                   children: [
                     MyTextField(
-                      formValidationColor: formValidationColor,
+
                       validator: (email){
                         if(!RegExp(
                           r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
                         ).hasMatch(email!)){
-                          formValidationColor =AppColor.red;
+
                           return "Email isn't valid";
                         }
                         return null;
@@ -86,16 +84,16 @@ class _SignInScreenState extends State<SignInScreen> {
                       icon: const Icon(Icons.email_outlined),
                     ),
                     MyTextField(
-                      formValidationColor: formValidationColor,
+
                       validator: (password) {
                         if (password == null || password.isEmpty) {
-                          formValidationColor = AppColor.red;
+
                           return "Password is required";
                         }
 
                         // Check if the password has at least one uppercase, one lowercase, and a minimum of 6 characters
                         if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$').hasMatch(password)) {
-                          formValidationColor =AppColor.red;
+
                           return "Password is incorrect";
                         }
 
@@ -188,17 +186,21 @@ class _SignInScreenState extends State<SignInScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               backgroundColor: Colors.green,
-              content: Text('Log in Successfully')),
+              content: Text('Welcome back!')),
         );
       }
 
     } on FirebaseAuthException catch (e) {
 
       if (e.code == 'invalid-credential') {
-        formValidationColor = AppColor.red;
+
         hideLoading(context);
         showErrorDialog(
             context, "Incorrect password or Email. Please try again.");
+      }else{
+        hideLoading(context);
+        showErrorDialog(
+            context, e.message!);
       }
     }
   }

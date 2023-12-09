@@ -30,7 +30,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
   String? errorMessage;
 
-  Color? formValidationColor =AppColor.primary;
 
   bool passwordShowed = true;
   bool confirmPasswordShowed = true;
@@ -66,16 +65,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 Column(
                   children: [
                     MyTextField(
-                      formValidationColor: formValidationColor,
+
                       validator: (fullName) {
                         if (fullName == null || fullName.isEmpty) {
-                          formValidationColor = AppColor.red;
+
                           return "Your Name is required";
                         }else if(fullName.contains(RegExp(r'[0-9]'))) {
-                          formValidationColor = AppColor.red;
+
                           return "Invalid Name";
                         }else if (!fullName.contains(" ")) {
-                          formValidationColor = AppColor.red;
+
                           return "Please Enter your Full Name not First Name";
                         }
                       },
@@ -86,16 +85,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       icon: const Icon(Icons.person),
                     ),
                     MyTextField(
-                      formValidationColor: formValidationColor,
+
                       validator: (email){
                         if(email == null || email.isEmpty){
-                          formValidationColor = AppColor.red;
+
                           return "Email shouldn't be Empty";
                         }
                         if (!RegExp
                           (r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
                             .hasMatch(email)) {
-                          formValidationColor = AppColor.red;
+
                           return "Invalid Email";
                         }
                       },
@@ -106,14 +105,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       icon: const Icon(Icons.email_outlined),
                     ),
                     MyTextField(
-                      formValidationColor: formValidationColor,
+
                       validator: (password){
                         if (password == null || password.isEmpty) {
-                          formValidationColor = AppColor.red;
+
                           return "password is required";
                         } if (!isPasswordStrong(password)) {
-                          formValidationColor = AppColor.red;
-                          return "Password: 6+ chars, mix of uppercase & lowercase letters.";
+
+                          return "Password: 6+ chars, mix of upper & lower";
                         }
                       },
                       visible:
@@ -138,12 +137,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         if (password != confirmedPassword &&
                             confirmedPassword != null &&
                             confirmedPassword.isNotEmpty) {
-                          formValidationColor = AppColor.red;
                           return
-                            "The two passwords entered do not match. Please try again.";
+                            "Passwords don't match. Please try again";
                         }
                       },
-                        formValidationColor: formValidationColor,
+
                         visible:
                             matchedPassword(password, confirmedPassword) == true
                                 ? true

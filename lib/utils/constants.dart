@@ -1,0 +1,7 @@
+abstract class Constant{
+  static const String pullUpDescription = "Upper body compound exercise. Grip bar, hang, engage shoulders for controlled pull, ascend until chin clears bar, and lower with precision. Maintain straight body, close elbows, engage core. Suitable for various fitness levels. Enhances upper body strength and definition.";
+  static const String sitUpDescription = "Core exercise. Lie down, bend knees, and place feet flat. Cross arms over chest or behind head. Engage core, lift upper body towards knees, then lower with control. Keep feet on the ground. Smooth, controlled motion. Suitable for various fitness levels. Enhances core strength.";
+  static const String bicepsCurlDescription = "Isolate arm exercise. Stand with feet shoulder-width apart, hold dumbbells at sides with palms facing forward. Keeping upper arms stationary, curl weights towards shoulders, then lower with control. Maintain proper form. Suitable for various fitness levels. Targets biceps for strength and definition.";
+  static const String pushUpDescription = "Upper body compound exercise. Start in plank position, hands shoulder-width apart. Lower chest towards the ground, keeping body straight, then push back up. Engage core and maintain a straight line. Suitable for various fitness levels. Strengthens chest, shoulders, triceps, and core.";
+
+}

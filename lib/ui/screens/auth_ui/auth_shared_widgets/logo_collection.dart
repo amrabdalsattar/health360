@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
 import 'package:health360/utils/dialog_utils.dart';
@@ -17,12 +18,13 @@ class LogoCollection extends StatelessWidget {
       children: [
         InkWell(
             onTap: (){
-              signInWithGoogle();
+              signInWithGoogle(context);
             },
             child: Image.asset(AppAsset.google,
               width: 40, height: 40,)),
         InkWell(
           onTap: (){
+            signInWithFacebook(context);
 
           },
             child: Image.asset(AppAsset.facebook,
@@ -39,7 +41,7 @@ class LogoCollection extends StatelessWidget {
       ],
     );
   }
-  Future<UserCredential> signInWithGoogle() async {
+  Future<UserCredential> signInWithGoogle(BuildContext context) async {
 
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -54,8 +56,8 @@ class LogoCollection extends StatelessWidget {
     );
     print("User Signed in");
     // Once signed in, return the UserCredential
+    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     return await FirebaseAuth.instance.signInWithCredential(credential);
-
 
   }
   Future<UserCredential> signInWithTwitter(BuildContext context) async {
@@ -69,8 +71,9 @@ class LogoCollection extends StatelessWidget {
 
     // Trigger the sign-in flow
     final authResult = await twitterLogin.login();
-    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     hideLoading(context);
+
+    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     // Create a credential from the access token
     final twitterAuthCredential = TwitterAuthProvider.credential(
       accessToken: authResult.authToken!,
@@ -80,6 +83,25 @@ class LogoCollection extends StatelessWidget {
     // Once signed in, return the UserCredential
 
     return await FirebaseAuth.instance.signInWithCredential(twitterAuthCredential);
+
+  }
+  Future<dynamic> signInWithFacebook(BuildContext context) async {
+    try{
+      showLoading(context);
+      // Trigger the sign-in flow
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+
+      // Create a credential from the access token
+      final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+      // Once signed in, return the UserCredential
+      hideLoading(context);
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+    } catch (e){
+      hideLoading(context);
+      showErrorDialog(context, e.toString());
+    }
 
   }
 }

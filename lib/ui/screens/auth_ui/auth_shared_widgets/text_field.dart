@@ -9,7 +9,7 @@ class MyTextField extends StatelessWidget {
   final bool obscure;
   final bool? visible;
   final String? Function(String?)? validator;
-  final Color? formValidationColor;
+
 
   final void Function(String)? onChanged;
   const MyTextField({super.key,
@@ -20,7 +20,6 @@ class MyTextField extends StatelessWidget {
     this.errorText,
     this.visible = false,
     this.validator,
-    this.formValidationColor,
   });
 
   @override
@@ -39,10 +38,10 @@ class MyTextField extends StatelessWidget {
               validator: validator,
               onChanged: onChanged,
               decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide:
-                  BorderSide(color: formValidationColor!, width: 2.0),
-                  borderRadius: const BorderRadius.all(
+                  BorderSide(color: AppColor.primary, width: 2.0),
+                  borderRadius: BorderRadius.all(
                     Radius.circular(
                       30.0,
                     ),
