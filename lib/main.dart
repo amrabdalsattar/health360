@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +6,7 @@ import 'package:health360/ui/screens/auth_ui/create_account/create_account_scree
 import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
+import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +25,8 @@ Future<void> _initFirebase() async {
 
 try{
   final app=  await Firebase.initializeApp(options: options);
+  FirebaseFirestore.instance.settings =
+      const Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
   debugPrint(app.name);
 }catch(e){
   print(e);
@@ -36,6 +40,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: AppColor.grey,
+        systemNavigationBarColor: AppColor.black
+    ));
     SettingsProvider provider = Provider.of(context);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
       SystemUiOverlay.top
@@ -50,7 +58,7 @@ class MyApp extends StatelessWidget {
         CreateAccountScreen.routeName: (_) => const CreateAccountScreen(),
         ResetPasswordScreen.routeName: (_) => const ResetPasswordScreen()
       },
-      initialRoute: HomeScreen.routeName,
+      initialRoute: SignInScreen.routeName,
       home: const HomeScreen(),
     );
   }

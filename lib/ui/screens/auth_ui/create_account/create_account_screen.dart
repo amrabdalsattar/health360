@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health360/data/models/user_model.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
 
 import '../../../../utils/app_color.dart';
@@ -29,7 +31,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   String fullName = "";
 
   String? errorMessage;
-
 
   bool passwordShowed = true;
   bool confirmPasswordShowed = true;
@@ -65,16 +66,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 Column(
                   children: [
                     MyTextField(
-
                       validator: (fullName) {
                         if (fullName == null || fullName.isEmpty) {
-
                           return "Your Name is required";
-                        }else if(fullName.contains(RegExp(r'[0-9]'))) {
-
+                        } else if (fullName.contains(RegExp(r'[0-9]'))) {
                           return "Invalid Name";
-                        }else if (!fullName.contains(" ")) {
-
+                        } else if (!fullName.contains(" ")) {
                           return "Please Enter your Full Name not First Name";
                         }
                       },
@@ -85,16 +82,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       icon: const Icon(Icons.person),
                     ),
                     MyTextField(
-
-                      validator: (email){
-                        if(email == null || email.isEmpty){
-
+                      validator: (email) {
+                        if (email == null || email.isEmpty) {
                           return "Email shouldn't be Empty";
                         }
-                        if (!RegExp
-                          (r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                        if (!RegExp(
+                                r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
                             .hasMatch(email)) {
-
                           return "Invalid Email";
                         }
                       },
@@ -105,13 +99,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       icon: const Icon(Icons.email_outlined),
                     ),
                     MyTextField(
-
-                      validator: (password){
+                      validator: (password) {
                         if (password == null || password.isEmpty) {
-
                           return "password is required";
-                        } if (!isPasswordStrong(password)) {
-
+                        }
+                        if (!isPasswordStrong(password)) {
                           return "Password: 6+ chars, mix of upper & lower";
                         }
                       },
@@ -133,15 +125,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       obscure: passwordShowed,
                     ),
                     MyTextField(
-                      validator: (confirmedPassword){
-                        if (password != confirmedPassword &&
-                            confirmedPassword != null &&
-                            confirmedPassword.isNotEmpty) {
-                          return
-                            "Passwords don't match. Please try again";
-                        }
-                      },
-
+                        validator: (confirmedPassword) {
+                          if (password != confirmedPassword &&
+                              confirmedPassword != null &&
+                              confirmedPassword.isNotEmpty) {
+                            return "Passwords don't match. Please try again";
+                          }
+                        },
                         visible:
                             matchedPassword(password, confirmedPassword) == true
                                 ? true
@@ -178,18 +168,23 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   void register() async {
     try {
       if (_formKey.currentState!.validate()) {
-      showLoading(context);
+        showLoading(context);
 
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      hideLoading(context);
-      Navigator.pop(context);
-      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-      const SnackBar(
-          backgroundColor: Colors.green,
-          content: Text('Log in Successfully'));
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        AppUser newUser = AppUser(
+            id: userCredential.user!.uid, email: email, fullName: fullName);
+        await registerUserInFireStore(newUser);
+        AppUser.currentUser = newUser;
+        hideLoading(context);
+        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        const SnackBar(
+            backgroundColor: Colors.green,
+            content: Text('Log in Successfully'));
       }
     } on FirebaseAuthException catch (error) {
       hideLoading(context);
@@ -210,5 +205,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       return true;
     }
     return false;
+  }
+
+  Future registerUserInFireStore(AppUser user) async {
+    CollectionReference<AppUser> usersCollection = AppUser.collection();
+    await usersCollection.doc(user.id).set(user);
   }
 }

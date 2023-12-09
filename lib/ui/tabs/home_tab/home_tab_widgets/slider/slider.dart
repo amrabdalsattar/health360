@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:health360/ui/tabs/home_tab/exercise/exercise_components/slider_widget.dart';
+import 'package:health360/ui/tabs/home_tab/home_tab_widgets/slider/slider_widget.dart';
 import '../../../../../data/api_managers/api_manager.dart';
 import '../../../../shared_components/loading.dart';
+
 
 class NewsSlider extends StatefulWidget {
   const NewsSlider({super.key});

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/dialog_utils.dart';
+
+import '../../../../data/models/user_model.dart';
 
 class SignInScreen extends StatefulWidget {
 
@@ -180,6 +183,8 @@ class _SignInScreenState extends State<SignInScreen> {
           email: email,
           password: password,
         );
+        AppUser currentUser = await getUserFromFireStore(credential.user!.uid);
+        AppUser.currentUser = currentUser;
         hideLoading(context);
 
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);
@@ -203,5 +208,11 @@ class _SignInScreenState extends State<SignInScreen> {
             context, e.message!);
       }
     }
+  }
+
+  Future<AppUser> getUserFromFireStore(String id) async {
+    CollectionReference<AppUser> userCollection = AppUser.collection();
+    DocumentSnapshot<AppUser> documentSnapshot = await userCollection.doc(id).get();
+    return documentSnapshot.data()!;
   }
 }

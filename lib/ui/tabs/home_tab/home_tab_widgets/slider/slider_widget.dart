@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../../data/responses/article_response.dart';
 import '../../../../shared_components/loading.dart';
 
+
 class SliderWidget extends StatelessWidget {
   final List<Article> articles;
   const SliderWidget({super.key, required this.articles});

@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/details_model.dart';
 import 'package:health360/data/models/exercise_model.dart';
-import 'package:health360/ui/tabs/home_tab/exercise/exercise_components/exercise_dialog.dart';
 import 'package:health360/utils/app_color.dart';
+
+import 'exercise_dialog.dart';
 
 class Exercise extends StatelessWidget {
   final ExerciseDM exerciseDM;

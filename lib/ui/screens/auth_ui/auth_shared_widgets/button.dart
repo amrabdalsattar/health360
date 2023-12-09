@@ -6,9 +6,12 @@ import '../../../../utils/app_color.dart';
 class MyButton extends StatelessWidget {
   final String text;
   final void Function() onPressed;
+  final Icon icon;
   const MyButton({super.key,
     required this.text,
-    required this.onPressed});
+    required this.onPressed,
+    this.icon = const Icon(CupertinoIcons.arrow_right, size: 18,)
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class MyButton extends StatelessWidget {
               children: [
                 Text(text),
                 const Spacer(),
-                const Icon(CupertinoIcons.arrow_right, size: 18,)
+                icon
               ],
             )),
       ),

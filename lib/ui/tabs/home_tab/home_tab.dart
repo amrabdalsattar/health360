@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:health360/data/data_constants/list_of_app_needs.dart';
 
-import 'exercise/exercise.dart';
-import 'exercise/exercise_components/slider.dart';
+import 'home_tab_widgets/exercise/exercise_components/exercise.dart';
+import 'home_tab_widgets/slider/slider.dart';
+
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
