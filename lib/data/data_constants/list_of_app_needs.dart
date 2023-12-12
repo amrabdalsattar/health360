@@ -15,6 +15,13 @@ abstract class ListOfNeeds{
         "Strength",
         AppColor.liteGreen
     ),
+    ExerciseDM(AppAsset.pushUp,
+        "Push Up",
+        "6 minuets",
+        "2 Rounds",
+        "Strength",
+        AppColor.liteGreen
+    ),
     ExerciseDM(AppAsset.sitUp,
         "Sit Up",
         "10 minuets",
@@ -27,21 +34,19 @@ abstract class ListOfNeeds{
         "10 minuets",
         "3 Rounds",
         "Muscles",
-        AppColor.purple
+        AppColor.yellow
     ),
-    ExerciseDM(AppAsset.pushUp,
-        "Push Up",
-        "6 minuets",
-        "2 Rounds",
-        "Strength",
-        AppColor.liteGreen
-    ),
+
   ];
 
   static final List<DetailsDM> details = [
     DetailsDM(imagePath: AppAsset.pullUpFV,
         description: Constant.pullUpDescription,
         route: ExerciseCountDown(title: "Pull Up")),
+
+    DetailsDM(imagePath: AppAsset.pushUpFV,
+        description: Constant.pushUpDescription,
+        route: ExerciseCountDown(title: "Push Up")),
 
     DetailsDM(imagePath: AppAsset.sitUpFV,
         description: Constant.sitUpDescription,
@@ -51,12 +56,27 @@ abstract class ListOfNeeds{
         description: Constant.bicepsCurlDescription,
         route: ExerciseCountDown(title: "Biceps curl")),
 
-    DetailsDM(imagePath: AppAsset.pushUpFV,
-        description: Constant.pushUpDescription,
-        route: ExerciseCountDown(title: "Push Up")),
+
 
 
 
   ];
 
+  static final List<ExerciseDM> spiritualPractices = [
+    ExerciseDM(AppAsset.meditation, "Meditation", "15 Minuets", "", "Spiritual", AppColor.purple),
+    ExerciseDM(AppAsset.yoga, "Yoga", "15 Minuets", "", "Spiritual", AppColor.purple),
+    ExerciseDM(AppAsset.breathWork, "Breath-work", "7 Minuets", "", "Spiritual", AppColor.purple),
+  ];
+
+  static final List<DetailsDM> spiritualPracticesDetails = [
+    DetailsDM(imagePath: AppAsset.meditationFV,
+        description: Constant.meditationDescription,
+        route: const ExerciseCountDown(title: "Meditation", duration: 15,)),
+    DetailsDM(imagePath: AppAsset.yogaFV,
+        description: Constant.yogaDescription,
+        route: const ExerciseCountDown(title: "Yoga", duration: 15,)),
+    DetailsDM(imagePath: AppAsset.breathWorkFV,
+        description: Constant.breathworkDescription,
+        route: const ExerciseCountDown(title: "Breath-work", duration: 7, isBreathwork: true,)),
+  ];
 }

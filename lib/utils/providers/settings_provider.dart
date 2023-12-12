@@ -6,6 +6,7 @@ import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/main_provider.dart';
 
 import '../../ui/tabs/home_tab/home_tab.dart';
+import '../app_asset.dart';
 
 class SettingsProvider extends MainProvider {
   int currentTabIndex = 0;
@@ -29,5 +30,20 @@ class SettingsProvider extends MainProvider {
 
   Widget navigateTab(int currentTabIndex, List<Widget> tabs){
     return tabs[currentTabIndex];
+  }
+
+  bool isAssetPath = true;
+  String profileImagePath = AppAsset.avatar;
+
+  void changeProfileImage(String newProfileImagePath){
+    isAssetPath = false;
+    profileImagePath = newProfileImagePath;
+    notifyListeners();
+  }
+  String breathworkStatus = "Inhale";
+
+  void changeBreathworkStatus(String status){
+    breathworkStatus = status;
+    notifyListeners();
   }
 }

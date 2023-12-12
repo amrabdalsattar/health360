@@ -9,9 +9,10 @@ import 'exercise_dialog.dart';
 class Exercise extends StatelessWidget {
   final ExerciseDM exerciseDM;
   final DetailsDM detailsDM;
+  final bool isExercise;
 
   const Exercise({super.key, required this.exerciseDM,
-    required this.detailsDM});
+    required this.detailsDM, this.isExercise = true});
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +70,12 @@ class Exercise extends StatelessWidget {
                           const SizedBox(
                             width: 16,
                           ),
-                          const Icon(
-                            Icons.fitness_center,
-                            color: AppColor.midGrey,
+                          Visibility(
+                            visible: isExercise,
+                            child: const Icon(
+                              Icons.fitness_center,
+                              color: AppColor.midGrey,
+                            ),
                           ),
                           const SizedBox(
                             width: 6,

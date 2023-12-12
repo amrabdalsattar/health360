@@ -18,18 +18,19 @@ class HomeTab extends StatelessWidget {
           children: [
             const NewsSlider(),
             Container(
-                margin: EdgeInsets.symmetric(vertical: 20),
-                child: const Text("Recommended Exercises",
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                child: const Text("Spiritual practice",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500))),
             // Use ListView.separated to add dividers between exercises
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: ListOfNeeds.exercises.length,
-              separatorBuilder: (context, index) => SizedBox(height: 10),
+              itemCount: ListOfNeeds.spiritualPractices.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
               itemBuilder: (context, index) => Exercise(
-                exerciseDM: ListOfNeeds.exercises[index],
-                detailsDM: ListOfNeeds.details[index],
+                exerciseDM: ListOfNeeds.spiritualPractices[index],
+                detailsDM: ListOfNeeds.spiritualPracticesDetails[index],
+                isExercise: false,
               ),
             ),
           ],
