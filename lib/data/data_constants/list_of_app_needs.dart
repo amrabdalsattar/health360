@@ -1,3 +1,4 @@
+import 'package:health360/data/models/meals_model.dart';
 import 'package:health360/ui/screens/count_down_screen/count_down.dart';
 import 'package:health360/utils/app_asset.dart';
 import 'package:health360/utils/app_color.dart';
@@ -7,6 +8,7 @@ import '../models/details_model.dart';
 import '../models/exercise_model.dart';
 
 abstract class ListOfNeeds{
+
   static final List<ExerciseDM> exercises = [
     ExerciseDM(AppAsset.pullUp,
         "Pull Up",
@@ -39,6 +41,43 @@ abstract class ListOfNeeds{
 
   ];
 
+  static final List<MealsDM> breakfastMeals = [
+    MealsDM(calories: "193",
+        imagePath: AppAsset.shakshuka,
+        mealTitle: "Shakshuka"),
+    MealsDM(calories: "584",
+        imagePath: AppAsset.boiledEggs,
+        mealTitle: "Boiled Eggs & Toast"),
+  ];
+
+  static final List<MealsDM> lunchMeals = [
+    MealsDM(calories: "900",
+        imagePath: AppAsset.grilledChicken,
+        mealTitle: "Grilled Chicken & Salad & Toast"),
+    MealsDM(calories: "1183",
+        imagePath: AppAsset.steak,
+        mealTitle: "Steak & Potatoes"),
+  ];
+
+  static final List<MealsDM> dinnerMeals = [
+    MealsDM(calories: "325",
+        imagePath: AppAsset.mashedPotatoes,
+        mealTitle: "Mashed Potatoes & Hot Pepper"),
+    MealsDM(calories: "600",
+        imagePath: AppAsset.fruitSalad,
+        mealTitle: "Fruit Salad & Yogurt"),
+  ];
+
+  static final List<MealsDM> snackMeals = [
+    MealsDM(calories: "303",
+        imagePath: AppAsset.bananaSmoothie,
+        mealTitle: "Banana Smoothie & Apple"),
+    MealsDM(calories: "176",
+        imagePath: AppAsset.sweetPotatoes,
+        mealTitle: "Sweet Potatoes & Honey"),
+  ];
+
+
   static final List<DetailsDM> details = [
     DetailsDM(imagePath: AppAsset.pullUpFV,
         description: Constant.pullUpDescription,
@@ -50,11 +89,11 @@ abstract class ListOfNeeds{
 
     DetailsDM(imagePath: AppAsset.sitUpFV,
         description: Constant.sitUpDescription,
-        route: ExerciseCountDown(title: "Sit Up")),
+        route: const ExerciseCountDown(title: "Sit Up")),
 
     DetailsDM(imagePath: AppAsset.bicepsFV,
         description: Constant.bicepsCurlDescription,
-        route: ExerciseCountDown(title: "Biceps curl")),
+        route: const ExerciseCountDown(title: "Biceps curl")),
 
 
 
@@ -79,4 +118,5 @@ abstract class ListOfNeeds{
         description: Constant.breathworkDescription,
         route: const ExerciseCountDown(title: "Breath-work", duration: 7, isBreathwork: true,)),
   ];
+
 }

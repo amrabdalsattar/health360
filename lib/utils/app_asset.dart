@@ -21,4 +21,15 @@ abstract class AppAsset {
   static const String yogaFV = "${basePath}yoga_for_view.png";
   static const String meditationFV = "${basePath}meditation_for_view.jpg";
   static const String breathWorkFV = "${basePath}breathwork_for_view.jpg";
+
+  static const String mealsBasePath = "assets/meals/";
+  static const String shakshuka = "${mealsBasePath}shakshuka.jpg";
+  static const String boiledEggs = "${mealsBasePath}boiled_eggs.jpg";
+  static const String grilledChicken = "${mealsBasePath}grilled_chicken.jpg";
+  static const String steak = "${mealsBasePath}steak.jpg";
+  static const String mashedPotatoes = "${mealsBasePath}mashed_potatoes.jpg";
+  static const String fruitSalad = "${mealsBasePath}fruit_salad.jpeg";
+  static const String bananaSmoothie = "${mealsBasePath}banana_smoothie.jpg";
+  static const String sweetPotatoes = "${mealsBasePath}sweet_potatoes.jpg";
+
 }

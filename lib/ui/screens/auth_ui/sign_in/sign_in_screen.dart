@@ -25,11 +25,12 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
+
   String email = "";
 
   String password = "";
 
-  bool passwordShowed = true;
+  bool _passwordShowed = true;
 
   @override
   Widget build(BuildContext context) {
@@ -108,14 +109,14 @@ class _SignInScreenState extends State<SignInScreen> {
                       label: 'PASSWORD',
                       icon: InkWell(
                         onTap: () {
-                          passwordShowed = !passwordShowed;
+                          _passwordShowed = !_passwordShowed;
                           setState(() {});
                         },
-                        child: passwordShowed == false
+                        child: _passwordShowed == false
                             ? const Icon(CupertinoIcons.lock_open)
                             : const Icon(CupertinoIcons.lock),
                       ),
-                      obscure: passwordShowed,
+                      obscure: _passwordShowed,
                     ),
 
                   ],

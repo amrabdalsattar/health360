@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/utils/app_asset.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
@@ -59,6 +60,7 @@ class _PickImageState extends State<PickImage> {
       child: content,
       onTap: () {
         pickImage();
+        
       },
     );
   }
@@ -71,8 +73,13 @@ class _PickImageState extends State<PickImage> {
       return;
     }
     provider.changeProfileImage(pickedImage.path);
+    uploadImage();
     setState(() {
       _selectedImage = File(pickedImage.path);
     });
+  }
+
+  void uploadImage() {
+
   }
 }

@@ -6,4 +6,6 @@ abstract class Constant{
   static const String yogaDescription = "Yoga, an ancient Indian practice, unites mind and body through postures, breathing, and meditation. It promotes flexibility, strength, and relaxation, fostering mindfulness. Suitable for all, yoga offers a customizable approach to wellness, serving as a timeless sanctuary for balance.";
   static const String meditationDescription = "Meditation fosters mindfulness through focused attention, promoting calmness and inner awareness. Rooted in tradition, it reduces stress and enhances concentration, contributing to overall emotional well-being. Whether practiced alone or integrated into routines, meditation is a valuable tool for a centered state of mind.";
   static const String breathworkDescription = "Breathwork, intentional breath control for stress reduction and mental well-being. Techniques like diaphragmatic breathing enhance focus and relaxation. Integrated into meditation, it fosters a deeper mind-body connection.";
+  static const String messageToUser = "The calorie information provided is a general estimate. Individual factors such as health conditions and personal circumstances are crucial. Always consult a healthcare professional for personalized advice tailored to your needs.";
+  static const List<String> meals = ["Breakfast", "Lunch", "Dinner", "Snacks"];
 }

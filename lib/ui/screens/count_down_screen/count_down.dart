@@ -23,9 +23,10 @@ class ExerciseCountDown extends StatefulWidget {
 }
 
 class ExerciseCountDownState extends State<ExerciseCountDown> {
-  // Controller
+
   final CountdownController _controller = CountdownController();
   late SettingsProvider provider;
+  int duration = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +53,13 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
         children: [
           Visibility(
               visible: widget.isBreathwork,
-              child: Text(provider.breathworkStatus, style:
-              const TextStyle(fontSize: 25,
-                  color: AppColor.secondary,
-                  fontWeight: FontWeight.bold),)),
+              child: Text(
+                provider.breathworkStatus,
+                style: const TextStyle(
+                    fontSize: 25,
+                    color: AppColor.secondary,
+                    fontWeight: FontWeight.bold),
+              )),
           const SizedBox(
             height: 20,
           ),
@@ -84,52 +88,53 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
                   content: Text('Timer is done!'),
                 ),
               );
-              // You can add any additional logic here if needed
             },
           ),
           const SizedBox(
             height: 30,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CountDownButton(
                 title: "Start",
                 onPressed: () {
+                  duration = 1;
                   _controller.start();
                 },
               ),
               CountDownButton(
                 title: "Pause",
                 onPressed: () {
+                  duration = 600;
                   _controller.pause();
                 },
               ),
               CountDownButton(
                 title: "Resume",
                 onPressed: () {
+                  duration = 1;
                   _controller.resume();
                 },
               ),
               CountDownButton(
                 title: "Restart",
                 onPressed: () {
+                  duration = 1;
                   provider.changeBreathworkStatus("Inhale");
                   _controller.restart();
                 },
               ),
             ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
         ],
       ),
     );
   }
-  void inhaleAndExhaleAlgorithm(int seconds, int minutes){
+
+  void inhaleAndExhaleAlgorithm(int seconds, int minutes) {
     if ((seconds % 5) - 1 == 0) {
-      Future.delayed(const Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: duration), () {
         if (provider.breathworkStatus == "Inhale" &&
             minutes != widget.duration) {
           provider.changeBreathworkStatus("Exhale");
@@ -138,7 +143,8 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
         } else {
           provider.changeBreathworkStatus("Inhale");
         }
-      });
+      }
+      );
     }
   }
 }
