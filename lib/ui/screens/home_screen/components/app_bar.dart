@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:health360/ui/shared_components/profile_photo.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../data/models/user_model.dart';
@@ -36,21 +37,7 @@ class CustomAppBar extends StatelessWidget {
       toolbarHeight: 100,
       actions: [
         InkWell(
-          child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(color: AppColor.grey, width: 2)),
-              width: 50,
-              margin:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: provider.isAssetPath
-                      ? Image.asset(provider.profileImagePath)
-                      : Image.file(
-                    File(provider.profileImagePath),
-                    fit: BoxFit.cover,
-                  ))),
+          child: const ProfilePhoto(),
           onTap: () {
             showModalBottomSheet(
                 context: context,

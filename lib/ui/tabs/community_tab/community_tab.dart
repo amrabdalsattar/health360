@@ -1,10 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:health360/ui/tabs/community_tab/components/post.dart';
+import 'package:health360/utils/app_color.dart';
+import 'package:provider/provider.dart';
 
-class CommunityTab extends StatelessWidget {
+import '../../../utils/providers/settings_provider.dart';
+
+class CommunityTab extends StatefulWidget {
   const CommunityTab({super.key});
 
   @override
+  State<CommunityTab> createState() => _CommunityTabState();
+}
+
+class _CommunityTabState extends State<CommunityTab> {
+  late SettingsProvider provider;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      provider.refreshTodoList();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container();
+    provider = Provider.of(context);
+    return Scaffold(
+      backgroundColor: AppColor.white,
+      body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 26),
+        child: ListView.builder(
+            itemCount: provider.posts.length,
+            itemBuilder: (context, index) => Post(
+                  postDM: provider.posts[index],
+                )),
+      ),
+    );
   }
 }

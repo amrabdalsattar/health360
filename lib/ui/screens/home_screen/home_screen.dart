@@ -5,6 +5,8 @@ import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../tabs/community_tab/components/fab.dart';
+
 class HomeScreen extends StatelessWidget {
   static const String routeName = "home";
 
@@ -21,6 +23,8 @@ class HomeScreen extends StatelessWidget {
       ),
       body: SafeArea(child: provider.navigateTab(provider.currentTabIndex, provider.tabs)),
       bottomNavigationBar: const BottomNav(),
+      floatingActionButton: const FAB(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

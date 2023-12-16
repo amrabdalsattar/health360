@@ -17,8 +17,10 @@ Future<void> main() async {
 
   var provider = SettingsProvider();
   await provider.loadConfig();
+
   await _initFirebase();
-  runApp(ChangeNotifierProvider(create: (_) => provider, child: const MyApp()));
+  runApp(ChangeNotifierProvider(create: (_) => provider,
+      child: const MyApp()));
 }
 
 Future<void> _initFirebase() async {
@@ -47,7 +49,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         HomeScreen.routeName: (_) => const HomeScreen(),
-        // SplashScreen.routeName: (_) => const SplashScreen(),
         SignInScreen.routeName: (_) => const SignInScreen(),
         CreateAccountScreen.routeName: (_) => const CreateAccountScreen(),
         ResetPasswordScreen.routeName: (_) => const ResetPasswordScreen(),

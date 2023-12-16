@@ -2,13 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/user_model.dart';
 import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/button.dart';
-import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/text_field.dart';
 import 'package:health360/ui/screens/home_screen/profile/profile_components/pick_image.dart';
 import 'package:health360/ui/screens/home_screen/profile/profile_components/profile_text_field.dart';
-import 'package:health360/utils/app_color.dart';
-import 'package:image_picker/image_picker.dart';
-
-import '../../../../utils/app_asset.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -33,7 +28,7 @@ class Profile extends StatelessWidget {
           ProfileTextField(text: "Name: ${AppUser.currentUser!.fullName}",),
           ProfileTextField(text: "E-mail: ${AppUser.currentUser!.email}",),
           ProfileTextField(text: "ID: ${AppUser.currentUser!.id}",),
-          MyButton(text: "Edit", onPressed: (){}, icon: const Icon(Icons.edit),)
+          MyButton(text: "Edit", onPressed: (){}, icon: const Icon(Icons.edit),),
         ],
       ),
     );

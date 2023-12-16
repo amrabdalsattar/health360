@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/tabs/community_tab/community_tab.dart';
 import 'package:health360/ui/tabs/fitness_tab/fitness_tab.dart';
@@ -6,6 +7,7 @@ import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/main_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/models/post_model.dart';
 import '../../ui/tabs/home_tab/home_tab.dart';
 import '../app_asset.dart';
 
@@ -85,8 +87,42 @@ class SettingsProvider extends MainProvider {
     notifyListeners();
   }
 
-  SharedPreferences? _preferences;
+  String postContent = "";
+
+  void setPostContent(String text){
+    postContent = text;
+    notifyListeners();
+  }
+
+List<PostDM> posts = [];
+
+  refreshTodoList() async {
+    CollectionReference<PostDM> postsCollection = FirebaseFirestore.instance
+        .collection("posts")
+        .withConverter<PostDM>(fromFirestore: (docSnapShot, _) {
+      Map json = docSnapShot.data() as Map;
+      PostDM post = PostDM.fromJson(json);
+      return post;
+    }, toFirestore: (postDM, _) {
+      return postDM.toJson();
+    });
+
+    QuerySnapshot<PostDM> postsSnapshot = await postsCollection
+        .orderBy("date")
+        .get();
+
+    List<QueryDocumentSnapshot<PostDM>> docs = postsSnapshot.docs;
+
+    posts = docs.map((docSnapshot) {
+      return docSnapshot.data();
+    }).toList();
+
+    notifyListeners();
+  }
+
+  SharedPreferences? preferences;
+
   Future<void> loadConfig() async {
-    _preferences = await SharedPreferences.getInstance();
+    preferences = await SharedPreferences.getInstance();
   }
 }
