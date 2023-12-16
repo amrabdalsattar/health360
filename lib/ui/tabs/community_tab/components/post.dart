@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../../../../data/models/post_model.dart';
 import '../../../../utils/app_color.dart';
 
-
 class Post extends StatelessWidget {
   final PostDM postDM;
 
@@ -40,7 +39,7 @@ class Post extends StatelessWidget {
                             horizontal: 20, vertical: 25),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
-                            child: provider.isAssetPath
+                            child: postDM.photoPath.contains("assets")
                                 ? Image.asset(
                                     postDM.photoPath,
                                     fit: BoxFit.cover,
