@@ -2,11 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import '../../../../data/models/post_model.dart';
 import '../../../../utils/app_color.dart';
+import '../../../../utils/app_theme.dart';
 
 class Post extends StatelessWidget {
   final PostDM postDM;
@@ -15,14 +14,16 @@ class Post extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsProvider provider = Provider.of(context);
+
     return Column(
       children: [
         Container(
           padding: const EdgeInsets.only(bottom: 20),
           margin: const EdgeInsets.only(top: 20),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20), border: Border.all()),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Theme.of(context) == AppTheme.lightMode?
+              AppColor.black : AppColor.darkPrimary,)),
           child: Column(
             children: [
               Row(
@@ -63,7 +64,7 @@ class Post extends StatelessWidget {
                                 postDM.name,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -72,12 +73,12 @@ class Post extends StatelessWidget {
                                 formatTimeAgo(postDM.date),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontSize: 10),
+                                style: const TextStyle(fontSize: 10),
                               ),
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Text(postDM.postContent),

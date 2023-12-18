@@ -81,11 +81,11 @@ abstract class ListOfNeeds{
   static final List<DetailsDM> details = [
     DetailsDM(imagePath: AppAsset.pullUpFV,
         description: Constant.pullUpDescription,
-        route: ExerciseCountDown(title: "Pull Up")),
+        route: const ExerciseCountDown(title: "Pull Up")),
 
     DetailsDM(imagePath: AppAsset.pushUpFV,
         description: Constant.pushUpDescription,
-        route: ExerciseCountDown(title: "Push Up")),
+        route: const ExerciseCountDown(title: "Push Up")),
 
     DetailsDM(imagePath: AppAsset.sitUpFV,
         description: Constant.sitUpDescription,

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:health360/data/models/details_model.dart';
 import 'package:health360/data/models/exercise_model.dart';
 import 'package:health360/utils/app_color.dart';
-
 import 'exercise_dialog.dart';
 
 class Exercise extends StatelessWidget {
@@ -54,7 +53,8 @@ class Exercise extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: exerciseDM.exerciseTypeColor,
                                   borderRadius: BorderRadius.circular(20)),
-                              child: Text(exerciseDM.exerciseType)),
+                              child: Text(exerciseDM.exerciseType,
+                                style: const TextStyle(color: AppColor.black,),)),
                         ],
                       ),
                       Row(
@@ -66,7 +66,7 @@ class Exercise extends StatelessWidget {
                           const SizedBox(
                             width: 6,
                           ),
-                          Text(exerciseDM.duration),
+                          Text(exerciseDM.duration, style: Theme.of(context).textTheme.bodyMedium,),
                           const SizedBox(
                             width: 16,
                           ),
@@ -82,6 +82,7 @@ class Exercise extends StatelessWidget {
                           ),
                           Expanded(
                               child: Text(exerciseDM.level,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                   overflow: TextOverflow.ellipsis)),
                         ],
                       ),

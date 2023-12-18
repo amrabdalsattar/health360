@@ -9,12 +9,14 @@ import 'package:health360/ui/screens/auth_ui/create_account/create_account_scree
 import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
 import 'package:health360/utils/app_color.dart';
+import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/dialog_utils.dart';
+import 'package:health360/utils/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../data/models/user_model.dart';
 
 class SignInScreen extends StatefulWidget {
-
   static const routeName = "SignIn";
 
   const SignInScreen({super.key});
@@ -34,7 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    SettingsProvider provider = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.transparent,
@@ -44,39 +46,28 @@ class _SignInScreenState extends State<SignInScreen> {
         key: _formKey,
         child: SingleChildScrollView(
           child: Container(
-
             margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                /// change it to headline-large
-                const Text(
+                Text(
                   "Login",
-                  style: TextStyle(
-                      color: AppColor.black,
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                /// change it to headline-medium
-                const Text("Please sign in to continue",
-                    style: TextStyle(
-                        color: AppColor.grey,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold)),
+                Text("Please sign in to continue",
+                    style: Theme.of(context).textTheme.headlineMedium),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .08,
                 ),
                 Column(
                   children: [
                     MyTextField(
-
-                      validator: (email){
-                        if(!RegExp(
+                      validator: (email) {
+                        if (!RegExp(
                           r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
-                        ).hasMatch(email!)){
-
+                        ).hasMatch(email!)) {
                           return "Email isn't valid";
                         }
                         return null;
@@ -88,16 +79,14 @@ class _SignInScreenState extends State<SignInScreen> {
                       icon: const Icon(Icons.email_outlined),
                     ),
                     MyTextField(
-
                       validator: (password) {
                         if (password == null || password.isEmpty) {
-
                           return "Password is required";
                         }
 
                         // Check if the password has at least one uppercase, one lowercase, and a minimum of 6 characters
-                        if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$').hasMatch(password)) {
-
+                        if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$')
+                            .hasMatch(password)) {
                           return "Password is incorrect";
                         }
 
@@ -118,20 +107,19 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       obscure: _passwordShowed,
                     ),
-
                   ],
                 ),
                 Row(
                   children: [
                     TextButton(
                         onPressed: () {
-
                           Navigator.pushNamed(
                               context, ResetPasswordScreen.routeName);
                         },
-                        child: const Text(
+                        child: Text(
                           "Forgot Password?",
-                          style: TextStyle(color: AppColor.secondary),
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         )),
                     const Spacer(),
                     MyButton(
@@ -155,15 +143,16 @@ class _SignInScreenState extends State<SignInScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account?"),
+                    Text("Don't have an account?", style: Theme.of(context).textTheme.bodyMedium,),
                     TextButton(
                         onPressed: () {
                           Navigator.pushNamed(
                               context, CreateAccountScreen.routeName);
                         },
-                        child: const Text(
+                        child: Text(
                           "Sign up",
-                          style: TextStyle(color: AppColor.primary),
+                          style: TextStyle(color: provider.appMode == ThemeMode.light ?
+                          AppColor.primary : AppColor.darkAccent),
                         ))
                   ],
                 )
@@ -180,7 +169,8 @@ class _SignInScreenState extends State<SignInScreen> {
       if (_formKey.currentState!.validate()) {
         showLoading(context);
 
-        final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        final credential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
         );
@@ -191,29 +181,25 @@ class _SignInScreenState extends State<SignInScreen> {
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-              backgroundColor: Colors.green,
-              content: Text('Welcome back!')),
+              backgroundColor: Colors.green, content: Text('Welcome back!')),
         );
       }
-
     } on FirebaseAuthException catch (e) {
-
       if (e.code == 'invalid-credential') {
-
         hideLoading(context);
         showErrorDialog(
             context, "Incorrect password or Email. Please try again.");
-      }else{
+      } else {
         hideLoading(context);
-        showErrorDialog(
-            context, e.message!);
+        showErrorDialog(context, e.message!);
       }
     }
   }
 
   Future<AppUser> getUserFromFireStore(String id) async {
     CollectionReference<AppUser> userCollection = AppUser.collection();
-    DocumentSnapshot<AppUser> documentSnapshot = await userCollection.doc(id).get();
+    DocumentSnapshot<AppUser> documentSnapshot =
+        await userCollection.doc(id).get();
     return documentSnapshot.data()!;
   }
 }

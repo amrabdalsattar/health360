@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +18,8 @@ class CalculateButton extends StatelessWidget {
     return ElevatedButton(
         style: ButtonStyle(
             backgroundColor:
-            MaterialStateProperty.all(AppColor.grey),
+            MaterialStateProperty.all(provider.appMode == ThemeMode.light?
+            AppColor.grey : AppColor.darkAccent),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30))),
             fixedSize: MaterialStateProperty.all(Size.fromWidth(
@@ -29,6 +31,6 @@ class CalculateButton extends StatelessWidget {
             return BodyResult(bMIResult: result,);
           }));
         },
-        child: Text("Calculate"));
+        child: const Text("Calculate"));
   }
 }

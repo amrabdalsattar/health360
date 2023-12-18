@@ -23,7 +23,9 @@ class _NewsSliderState extends State<NewsSlider> {
           } else if (snapshot.hasError) {
             return Text(snapshot.error.toString());
           } else {
-            return const LoadingWidget();
+            return Container(
+                margin: const EdgeInsets.all(10),
+                child: const Center(child: LoadingWidget()));
           }
         });
   }

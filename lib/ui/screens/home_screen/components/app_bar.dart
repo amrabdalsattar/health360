@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:health360/ui/shared_components/profile_photo.dart';
-import 'package:provider/provider.dart';
+import 'package:health360/utils/app_theme.dart';
 
 import '../../../../data/models/user_model.dart';
 import '../../../../utils/app_color.dart';
-import '../../../../utils/providers/settings_provider.dart';
 import '../profile/profile.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -14,7 +11,6 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsProvider provider = Provider.of(context);
     return AppBar(
       elevation: 0,
       title: Column(
@@ -22,18 +18,20 @@ class CustomAppBar extends StatelessWidget {
         children: [
           Text(
             AppUser.currentUser!.fullName,
-            style: const TextStyle(color: AppColor.grey, fontSize: 14),
+            style: TextStyle(color: Theme.of(context) == AppTheme.lightMode?
+            AppColor.grey : AppColor.darkGrey, fontSize: 14),
           ),
           const SizedBox(
             height: 10,
           ),
-          const Text(
+          Text(
             "Health360",
-            style: TextStyle(color: AppColor.black),
+            style: Theme.of(context).textTheme.bodyLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
         ],
       ),
-      backgroundColor: AppColor.white,
+      backgroundColor: Theme.of(context).canvasColor,
       toolbarHeight: 100,
       actions: [
         InkWell(

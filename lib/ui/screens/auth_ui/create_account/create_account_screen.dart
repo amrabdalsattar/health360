@@ -53,12 +53,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             child: Column(
               children: [
                 /// change it to headline-large
-                const Text(
+                Text(
                   "Create Account",
-                  style: TextStyle(
-                      color: AppColor.black,
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .08,

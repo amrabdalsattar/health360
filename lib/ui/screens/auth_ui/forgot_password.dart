@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/dialog_utils.dart';
+import 'package:health360/utils/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 enum AuthStatus {
   successful,
@@ -25,7 +28,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final _key = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   static final auth = FirebaseAuth.instance;
-  static late AuthStatus _status;
 
   @override
   void dispose() {
@@ -37,18 +39,20 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     try {
       await auth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      print("Error sending password reset email: $e");
+      if (kDebugMode) {
+        print("Error sending password reset email: $e");
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of(context);
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         width: size.width,
         height: size.height,
-        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.only(
               left: 16.0, right: 16.0, top: 50.0, bottom: 25.0),
@@ -59,33 +63,26 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               children: [
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: const Icon(Icons.close),
+                  child: Icon(Icons.close, color: provider.appMode == ThemeMode.light?
+                    AppColor.black : AppColor.white,),
                 ),
                 const SizedBox(height: 70),
-                const Text(
+                Text(
                   "Forgot Password",
-                  style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+                  style: Theme.of(context).textTheme.headlineLarge
+                      ?.copyWith(fontSize: 35),
                 ),
                 const SizedBox(height: 10),
-                const Text(
+                Text(
                   'Please enter your email address to recover your password.',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge
+                      ?.copyWith(fontSize: 15),
                 ),
                 const SizedBox(height: 40),
-                const Text(
+                Text(
                   'Email address',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge
+                      ?.copyWith(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
@@ -98,18 +95,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     return null;
                   },
                   autofocus: false,
-                  style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: AppColor.grey),
-                  decoration: const InputDecoration(
+                  style: Theme.of(context).textTheme.bodyLarge
+                      ?.copyWith(fontSize: 15, fontWeight: FontWeight.bold),
+                  decoration: InputDecoration(
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                    border: OutlineInputBorder(
+                        const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: AppColor.black,
+                        color: AppColor.grey,
                         width: 1,
                       ),
                       borderRadius: BorderRadius.all(
@@ -120,8 +115,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: AppColor.primary, width: 2.0),
-                      borderRadius: BorderRadius.all(
+                          BorderSide(color: provider.appMode == ThemeMode.light?
+                              AppColor.primary: AppColor.darkAccent, width: 2.0),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(
                           30.0,
                         ),
@@ -133,7 +129,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     filled: true,
                     errorStyle: TextStyle(fontSize: 15),
                     hintText: 'email address',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
                         color: AppColor.grey),
@@ -146,7 +142,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   child: Material(
                     elevation: 2,
                     borderRadius: BorderRadius.circular(20),
-                    color: AppColor.secondary,
+                    color: Theme.of(context).primaryColor,
                     child: MaterialButton(
                       onPressed: () async {
                         if (_emailController.text.isNotEmpty &&

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/auth_ui/create_account/create_account_screen.dart';
 import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
@@ -7,6 +8,7 @@ import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
 import 'package:health360/ui/screens/body_composition_screen/body_composition_screen.dart';
 import 'package:health360/ui/screens/body_composition_screen/result/body_result.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
+import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -14,11 +16,10 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await _initFirebase();
   var provider = SettingsProvider();
   await provider.loadConfig();
 
-  await _initFirebase();
   runApp(ChangeNotifierProvider(create: (_) => provider,
       child: const MyApp()));
 }
@@ -32,7 +33,9 @@ Future<void> _initFirebase() async {
         const Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
     debugPrint(app.name);
   } catch (e) {
-    print(e);
+    if (kDebugMode) {
+      print(e);
+    }
   }
 }
 
@@ -45,7 +48,9 @@ class MyApp extends StatelessWidget {
     SettingsProvider provider = Provider.of(context);
 
     return MaterialApp(
-      theme: provider.appMode,
+      theme: AppTheme.lightMode,
+      darkTheme: AppTheme.darkMode,
+      themeMode: provider.appMode,
       debugShowCheckedModeBanner: false,
       routes: {
         HomeScreen.routeName: (_) => const HomeScreen(),

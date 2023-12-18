@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/auth_ui/create_account/create_account_screen.dart';
+import 'package:health360/ui/shared_components/loading.dart';
 import 'package:health360/utils/app_color.dart';
 
 void showLoading(BuildContext context){
@@ -14,7 +15,7 @@ void showLoading(BuildContext context){
             children: [
               Text("Loading..."),
               Spacer(),
-              CircularProgressIndicator(color: AppColor.primary,),
+              LoadingWidget()
             ],
           ),
         );

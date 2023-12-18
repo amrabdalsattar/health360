@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/meals_model.dart';
-import 'package:health360/utils/app_asset.dart';
 import 'package:health360/utils/app_color.dart';
+import 'package:health360/utils/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../../utils/app_theme.dart';
 
 
 class MealWidget extends StatelessWidget {
@@ -10,6 +13,7 @@ class MealWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of(context);
     return InkWell(
       child: Container(
           decoration: BoxDecoration(
@@ -23,6 +27,7 @@ class MealWidget extends StatelessWidget {
                 width: 100,
                 height: 100,
                 padding: const EdgeInsets.all(6),
+
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: Image.asset(
@@ -45,7 +50,7 @@ class MealWidget extends StatelessWidget {
                               flex: 7,
                               child: Text(
                                 mealsDM.mealTitle,
-                                style: TextStyle(fontSize: 18),
+                                style: const TextStyle(fontSize: 18),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -54,9 +59,10 @@ class MealWidget extends StatelessWidget {
                             Expanded(
                               flex: 3,
                               child: Container(
-                                padding: EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                  color: AppColor.primary,
+                                  color: provider.appMode == ThemeMode.light?
+                                  AppColor.primary : AppColor.darkAccent,
                                   borderRadius: BorderRadius.circular(30)
                                 ),
                                 child: Center(
@@ -67,7 +73,7 @@ class MealWidget extends StatelessWidget {
                                     children: [
                                       Text(
                                         mealsDM.calories,
-                                        style: TextStyle(fontSize: 14, color: AppColor.white),
+                                        style: const TextStyle(fontSize: 14, color: AppColor.white),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),

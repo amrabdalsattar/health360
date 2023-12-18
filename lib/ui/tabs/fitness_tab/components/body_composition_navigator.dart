@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/body_composition_screen/body_composition_screen.dart';
+import 'package:health360/utils/app_theme.dart';
+import 'package:health360/utils/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../utils/app_color.dart';
 
@@ -8,6 +11,7 @@ class BodyCompositionNavigator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of(context);
     return InkWell(
       onTap: (){
         Navigator.pushNamed(context, BodyCompositionScreen.routeName);
@@ -26,20 +30,21 @@ class BodyCompositionNavigator extends StatelessWidget {
               children: [
                 Container(
                     decoration: BoxDecoration(
-                        color: AppColor.primary,
+                        color: provider.appMode == ThemeMode.light?
+                        AppColor.primary : AppColor.darkAccent,
                         borderRadius: BorderRadius.circular(30)),
                     child: const Icon(
                       Icons.man,
                       size: 40,
                     )),
                 const SizedBox(width: 16,),
-                const Text(
+                Text(
                   "Body composition",
-                  style: TextStyle(color: AppColor.grey, fontSize: 18,),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColor.grey, fontSize: 18),
                 ),
               ],
             ),
-            const Icon(Icons.arrow_forward)
+            Icon(Icons.arrow_forward, color: provider.appMode == ThemeMode.light? AppColor.black : AppColor.white,)
           ],
         ),
       ),

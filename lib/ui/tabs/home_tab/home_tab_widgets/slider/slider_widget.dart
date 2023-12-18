@@ -29,7 +29,7 @@ class SliderWidget extends StatelessWidget {
               children: [
                 CachedNetworkImage(
                   imageUrl: result.urlToImage!,
-                  placeholder: (_, __) => const LoadingWidget(),
+                  placeholder: (_, __) => const Center(child: LoadingWidget()),
                   errorWidget: (_, __, ___) => const Icon(Icons.error),
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,
@@ -48,9 +48,9 @@ class SliderWidget extends StatelessWidget {
                   child: Align(
                       alignment: Alignment.bottomLeft,
                       child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                           child: Text(result.title!,
-                            style: TextStyle(color: Colors.white,
+                            style: const TextStyle(color: Colors.white,
                                 fontSize: 18, fontWeight: FontWeight.bold),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,))),

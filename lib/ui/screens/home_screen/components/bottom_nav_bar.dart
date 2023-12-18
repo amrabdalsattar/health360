@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -12,18 +13,13 @@ class BottomNav extends StatelessWidget {
     SettingsProvider provider = Provider.of(context);
     return Theme(
       data: Theme.of(context).copyWith(
-          canvasColor: AppColor.white
+          canvasColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor
       ),
       child: BottomAppBar(
         notchMargin: 4,
         shape: const CircularNotchedRectangle(),
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        shadowColor: AppColor.primary,
         child: BottomNavigationBar(
-          enableFeedback: true,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: AppColor.black,
-            unselectedItemColor: AppColor.grey,
             currentIndex: provider.currentTabIndex,
             onTap: (index){
               provider.setCurrentTabIndex(index);
@@ -35,6 +31,6 @@ class BottomNav extends StatelessWidget {
             ]
         ),
       ),
-    );;
+    );
   }
 }

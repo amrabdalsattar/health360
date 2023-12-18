@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:health360/ui/tabs/community_tab/community_tab.dart';
 import 'package:health360/ui/tabs/fitness_tab/fitness_tab.dart';
 import 'package:health360/ui/tabs/settings_tab/settings_tab.dart';
-import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/main_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,7 +12,6 @@ import '../app_asset.dart';
 
 class SettingsProvider extends MainProvider {
   int currentTabIndex = 0;
-  ThemeData appMode = AppTheme.lightMode;
   List<Widget> tabs = [
     const HomeTab(),
     const FitnessTab(),
@@ -21,10 +19,6 @@ class SettingsProvider extends MainProvider {
     const SettingsTab(),
   ];
 
-  void setMode(ThemeData newMode) {
-    appMode = newMode;
-    notifyListeners();
-  }
 
   void setCurrentTabIndex(int index) {
     currentTabIndex = index;
@@ -119,10 +113,45 @@ List<PostDM> posts = [];
 
     notifyListeners();
   }
-
+  ThemeMode appMode = ThemeMode.light;
+  bool switchState = false;
   SharedPreferences? preferences;
+  final String _themeKey = "theme";
 
+  void setSwitchState(bool newSwitch){
+    switchState = newSwitch;
+    notifyListeners();
+    saveSwitchState(newSwitch);
+  }
+  Future<void> saveSwitchState(bool newSwitch) async {
+    String switchValue = (newSwitch == false ? "false" : "true");
+    await preferences!.setString("switch", switchValue);
+  }
+  String? getSwitch() {
+    return preferences!.getString("switch");
+  }
+  void setCurrentMode(ThemeMode newThemeMode) {
+    appMode = newThemeMode;
+    notifyListeners();
+    saveTheme(newThemeMode);
+  }
+  Future<void> saveTheme(ThemeMode themeMode) async {
+    String themeValue = (themeMode == ThemeMode.light ? "light" : "dark");
+    await preferences!.setString(_themeKey, themeValue);
+  }
+  String? getTheme() {
+    return preferences!.getString(_themeKey);
+  }
   Future<void> loadConfig() async {
     preferences = await SharedPreferences.getInstance();
+
+    String? themeMode = getTheme();
+    String? switchStatus = getSwitch();
+    if (themeMode != null) {
+      appMode = (themeMode == "light" ? ThemeMode.light : ThemeMode.dark);
+    }
+    if (switchStatus != null) {
+      switchState = (switchStatus == "false" ? false : true);
+    }
   }
 }

@@ -8,6 +8,8 @@ import 'package:health360/utils/dialog_utils.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../utils/app_theme.dart';
+
 class AddPostScreen extends StatelessWidget {
   AddPostScreen({super.key});
 
@@ -37,11 +39,14 @@ class AddPostScreen extends StatelessWidget {
                               provider.postContent = "";
                               Navigator.pop(context);
                             },
-                            child: const Icon(CupertinoIcons.xmark)),
+                            child: Icon(CupertinoIcons.xmark,
+                              color: provider.appMode == ThemeMode.light?
+                            AppColor.black : AppColor.white,)),
                         ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(AppColor.primary),
+                                MaterialStateProperty.all(provider.appMode == ThemeMode.light?
+                                AppColor.primary : AppColor.darkAccent,),
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -63,12 +68,15 @@ class AddPostScreen extends StatelessWidget {
                     ),
                     const ProfilePhoto(),
                     TextField(
-                      style: const TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 18,
+                        color: provider.appMode == ThemeMode.light?
+                      AppColor.black : AppColor.white,),
                       autocorrect: true,
                       maxLines: null,
                       maxLength: maxCharacters,
                       decoration: InputDecoration(
-                        fillColor: AppColor.liteGrey,
+                        fillColor: provider.appMode == ThemeMode.light?
+                      AppColor.liteGrey : AppColor.darkPrimary,
                         filled: true,
                         hintText: "What's on your mind?",
                         counterText: "",

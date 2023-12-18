@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:health360/ui/screens/body_composition_screen/components/body_composition_app_bar.dart';
@@ -7,7 +5,6 @@ import 'package:health360/ui/screens/body_composition_screen/components/calculat
 import 'package:health360/ui/screens/body_composition_screen/components/gender.dart';
 import 'package:health360/ui/screens/body_composition_screen/components/height_slider.dart';
 import 'package:health360/ui/screens/body_composition_screen/components/weight_and_age.dart';
-import 'package:health360/ui/screens/body_composition_screen/result/body_result.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 

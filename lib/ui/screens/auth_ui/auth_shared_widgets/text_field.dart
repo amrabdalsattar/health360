@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:health360/utils/app_theme.dart';
+import 'package:health360/utils/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../utils/app_color.dart';
 
@@ -24,6 +27,7 @@ class MyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of(context);
     return Container(
       decoration: const BoxDecoration(),
 
@@ -38,10 +42,11 @@ class MyTextField extends StatelessWidget {
               validator: validator,
               onChanged: onChanged,
               decoration: InputDecoration(
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderSide:
-                  BorderSide(color: AppColor.primary, width: 2.0),
-                  borderRadius: BorderRadius.all(
+                  BorderSide(color: provider.appMode == ThemeMode.light?
+                  AppColor.primary : AppColor.darkAccent, width: 2.0),
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(
                       30.0,
                     ),
@@ -61,13 +66,11 @@ class MyTextField extends StatelessWidget {
                   child: const Icon(Icons.check_circle, color: Colors.green,),
 
                 ),
-                labelStyle: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.normal,
-                ),
+                labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColor.grey),
               ),
-              style: const TextStyle(
-                color: AppColor.black,
+              style: TextStyle(
+                color: provider.appMode == ThemeMode.light?
+                AppColor.black : AppColor.white,
                 fontWeight: FontWeight.bold,
               ),
               obscureText: obscure,

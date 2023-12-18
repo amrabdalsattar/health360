@@ -14,4 +14,10 @@ abstract class AppColor{
   static const Color liteGreen = Color.fromARGB(255, 160, 232, 147);
   static const Color yellow = Color.fromARGB(255, 253, 217, 125);
   static const Color purple = Color.fromARGB(255, 195, 181, 254);
+
+  /// dark
+  static const Color darkPrimary = Color.fromARGB(255, 46, 56, 66);
+  static const Color darkSecondary = Color.fromARGB(255, 12, 12, 13);
+  static const Color darkAccent = Color.fromARGB(255, 247, 134, 85);
+  static const Color darkGrey = Color.fromARGB(255, 119, 129, 142);
 }

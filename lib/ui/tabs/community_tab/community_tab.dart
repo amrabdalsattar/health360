@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:health360/ui/tabs/community_tab/components/post.dart';
-import 'package:health360/utils/app_color.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/providers/settings_provider.dart';
@@ -17,6 +16,7 @@ class _CommunityTabState extends State<CommunityTab> {
 
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       provider.refreshTodoList();
     });
@@ -26,7 +26,6 @@ class _CommunityTabState extends State<CommunityTab> {
   Widget build(BuildContext context) {
     provider = Provider.of(context);
     return Scaffold(
-      backgroundColor: AppColor.white,
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 26),
         child: ListView.builder(

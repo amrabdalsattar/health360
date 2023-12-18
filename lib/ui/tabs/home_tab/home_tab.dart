@@ -4,7 +4,6 @@ import 'package:health360/data/data_constants/list_of_app_needs.dart';
 import 'home_tab_widgets/exercise/exercise_components/exercise.dart';
 import 'home_tab_widgets/slider/slider.dart';
 
-
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
 
@@ -19,8 +18,9 @@ class HomeTab extends StatelessWidget {
             const NewsSlider(),
             Container(
                 margin: const EdgeInsets.symmetric(vertical: 20),
-                child: const Text("Spiritual practice",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500))),
+                child: Text("Spiritual practice",
+                    style: Theme.of(context).textTheme.headlineLarge?.
+                    copyWith(fontWeight: FontWeight.w500, fontSize: 20))),
             // Use ListView.separated to add dividers between exercises
             ListView.separated(
               shrinkWrap: true,

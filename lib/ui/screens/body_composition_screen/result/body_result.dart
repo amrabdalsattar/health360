@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/body_composition_screen/components/body_composition_app_bar.dart';
 import 'package:health360/ui/screens/body_composition_screen/result/components/bmi_widget.dart';
 import 'package:health360/utils/app_color.dart';
+import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/constants.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
@@ -65,7 +66,7 @@ class BodyResult extends StatelessWidget {
               ),
               sizedBox,
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: AppColor.liteGrey,
                     borderRadius: BorderRadius.circular(20)),
@@ -78,22 +79,22 @@ class BodyResult extends StatelessWidget {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                       textAlign: TextAlign.center,
                     ),
-                    span("Sedentary (little or no exercise):", 1.2),
+                    span("Sedentary (little or no exercise):", 1.2, context),
                     sizedBox,
                     span(
                         "Lightly active (light exercise/sports 1-3 days/week):",
-                        1.375),
+                        1.375, context),
                     sizedBox,
                     span(
                         "Moderately active (moderate exercise/sports 3-5 days/week):",
-                        1.55),
+                        1.55, context),
                     sizedBox,
                     span("Very active (hard exercise/sports 6-7 days a week):",
-                        1.725),
+                        1.725, context),
                     sizedBox,
                     span(
                         "Extra active (very hard exercise/sports & physical job or 2x training):",
-                        1.9)
+                        1.9, context)
                   ],
                 ),
               ),
@@ -140,14 +141,15 @@ class BodyResult extends StatelessWidget {
     }
   }
 
-  Widget span(String activeStatus, double tdee) {
+  Widget span(String activeStatus, double tdee, BuildContext context) {
     return RichText(
       text: TextSpan(
         children: [
           TextSpan(
             text: "$activeStatus\n",
             style:
-                TextStyle(fontWeight: FontWeight.bold, color: AppColor.black),
+            const TextStyle(fontWeight: FontWeight.bold,
+                    color: AppColor.darkGrey),
           ),
           TextSpan(
             text: (bMRCalculation(provider.age, provider.weight,
@@ -156,7 +158,8 @@ class BodyResult extends StatelessWidget {
                 .toStringAsFixed(1),
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.blue, // Set your desired color here
+              color: provider.appMode == ThemeMode.light?
+              Colors.blue : AppColor.darkAccent, // Set your desired color here
             ),
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +23,15 @@ class Gender extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-              color:
-              (provider.isMale && type == "male") || (!provider.isMale && type == "female")
+              color: provider.appMode == ThemeMode.light ? (
+              (provider.isMale && type == "male")
+                  || (!provider.isMale && type == "female")
                   ? AppColor.primary
-                  : AppColor.liteGrey,
+                  : AppColor.liteGrey ): (
+                  (provider.isMale && type == "male")
+                      || (!provider.isMale && type == "female")
+                      ? AppColor.darkPrimary
+                      : AppColor.liteGrey ),
               borderRadius: BorderRadius.circular(20)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -40,7 +46,7 @@ class Gender extends StatelessWidget {
               ),
               Text(
                 type == "male" ? "Male" : "Female",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ],
           ),

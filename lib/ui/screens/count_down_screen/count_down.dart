@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/count_down_screen/count_down_components/button.dart';
 import 'package:health360/utils/app_color.dart';
+import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:timer_count_down/timer_controller.dart';
@@ -23,7 +24,6 @@ class ExerciseCountDown extends StatefulWidget {
 }
 
 class ExerciseCountDownState extends State<ExerciseCountDown> {
-
   final CountdownController _controller = CountdownController();
   late SettingsProvider provider;
   int duration = 1;
@@ -38,13 +38,14 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
         elevation: 0,
         title: Text(
           widget.title,
-          style: TextStyle(color: AppColor.black),
+          style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize: 20),
         ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: provider.appMode == ThemeMode.light?
+          AppColor.black : AppColor.darkAccent,),
         ),
       ),
       body: Column(
@@ -55,10 +56,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
               visible: widget.isBreathwork,
               child: Text(
                 provider.breathworkStatus,
-                style: const TextStyle(
-                    fontSize: 25,
-                    color: AppColor.secondary,
-                    fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headlineLarge,
               )),
           const SizedBox(
             height: 20,
@@ -74,11 +72,10 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
 
               return Text(
                 '$minutes:${seconds < 10 ? '0$seconds' : seconds}',
-                style: const TextStyle(
-                  fontSize: 80,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.green,
-                ),
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    fontSize: 80,
+                    color: provider.appMode == ThemeMode.light?
+                    AppColor.green : AppColor.darkAccent),
               );
             },
             interval: const Duration(seconds: 1),
@@ -102,6 +99,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
                   duration = 1;
                   _controller.start();
                 },
+                color: AppColor.darkPrimary,
               ),
               CountDownButton(
                 title: "Pause",
@@ -109,6 +107,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
                   duration = 600;
                   _controller.pause();
                 },
+                  color: AppColor.darkPrimary
               ),
               CountDownButton(
                 title: "Resume",
@@ -116,6 +115,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
                   duration = 1;
                   _controller.resume();
                 },
+                color: AppColor.darkPrimary,
               ),
               CountDownButton(
                 title: "Restart",
@@ -124,6 +124,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
                   provider.changeBreathworkStatus("Inhale");
                   _controller.restart();
                 },
+                color: AppColor.darkPrimary,
               ),
             ],
           ),
@@ -143,8 +144,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
         } else {
           provider.changeBreathworkStatus("Inhale");
         }
-      }
-      );
+      });
     }
   }
 }

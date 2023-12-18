@@ -31,8 +31,7 @@ class SignInWithGoogle extends StatelessWidget {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    print("User Signed in");
-    // Once signed in, return the UserCredential
+
     Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     return await FirebaseAuth.instance.signInWithCredential(credential);
 

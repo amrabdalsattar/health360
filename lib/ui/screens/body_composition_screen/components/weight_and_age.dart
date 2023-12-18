@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,9 @@ class WeightAndAge extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-            color: AppColor.primary, borderRadius: BorderRadius.circular(20)),
+            color: provider.appMode == ThemeMode.light?
+            AppColor.primary : AppColor.darkPrimary,
+            borderRadius: BorderRadius.circular(20)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
