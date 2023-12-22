@@ -9,7 +9,6 @@ import 'package:health360/ui/screens/auth_ui/create_account/create_account_scree
 import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
 import 'package:health360/utils/app_color.dart';
-import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/dialog_utils.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
@@ -179,10 +178,6 @@ class _SignInScreenState extends State<SignInScreen> {
         hideLoading(context);
 
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              backgroundColor: Colors.green, content: Text('Welcome back!')),
-        );
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-credential') {

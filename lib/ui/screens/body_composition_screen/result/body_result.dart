@@ -119,7 +119,7 @@ class BodyResult extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: AppColor.midGrey)),
                 child: const Text(
-                  "CAUTION! ${Constant.messageToUser}",
+                  "${Constant.messageToUser}",
                   style: TextStyle(
                       color: AppColor.green,
                       fontSize: 12,

@@ -111,6 +111,9 @@ List<PostDM> posts = [];
 
     notifyListeners();
   }
+
+  String currentLocale = "en";
+
   ThemeMode appMode = ThemeMode.light;
   bool switchState = false;
   SharedPreferences? preferences;

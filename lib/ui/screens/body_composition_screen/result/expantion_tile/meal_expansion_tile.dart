@@ -74,6 +74,7 @@ class MealExpansionTile extends StatelessWidget {
       return ListOfNeeds.snackMeals;
     }
   }
+
   List<DetailsDM> detailsGenerator() {
     if (Constant.meals[index] == "Breakfast") {
       return ListOfNeeds.breakfastDetails;

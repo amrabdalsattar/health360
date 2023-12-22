@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/details_model.dart';
 
-import '../../../../../../utils/app_color.dart';
 
 class MealDialog extends StatefulWidget {
   final DetailsDM detailsDM;
   final String title;
-  final bool visible;
 
   const MealDialog(
-      {super.key, required this.detailsDM, required this.title,
-        this.visible = true});
+      {super.key, required this.detailsDM, required this.title});
 
   @override
   MealDialogState createState() => MealDialogState();

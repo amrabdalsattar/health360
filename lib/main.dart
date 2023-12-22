@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health360/ui/screens/auth_ui/create_account/create_account_screen.dart';
 import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
@@ -20,8 +21,7 @@ Future<void> main() async {
   var provider = SettingsProvider();
   await provider.loadConfig();
 
-  runApp(ChangeNotifierProvider(create: (_) => provider,
-      child: const MyApp()));
+  runApp(ChangeNotifierProvider(create: (_) => provider, child: const MyApp()));
 }
 
 Future<void> _initFirebase() async {
@@ -48,6 +48,16 @@ class MyApp extends StatelessWidget {
     SettingsProvider provider = Provider.of(context);
 
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+      ],
+      locale: Locale(provider.currentLocale),
       theme: AppTheme.lightMode,
       darkTheme: AppTheme.darkMode,
       themeMode: provider.appMode,

@@ -6,7 +6,6 @@ import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../tabs/home_tab/home_tab_widgets/exercise/exercise_components/exercise_dialog.dart';
 
 class MealWidget extends StatelessWidget {
   final MealsDM mealsDM;
@@ -110,7 +109,6 @@ class MealWidget extends StatelessWidget {
               builder: (context) => MealDialog(
                     detailsDM: detailsDM,
                     title: mealsDM.mealTitle,
-                visible: false,
                   ));
         });
   }
