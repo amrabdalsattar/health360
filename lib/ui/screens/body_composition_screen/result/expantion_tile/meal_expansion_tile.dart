@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health360/data/data_constants/list_of_app_needs.dart';
+import 'package:health360/data/models/details_model.dart';
 import 'package:health360/ui/screens/body_composition_screen/result/expantion_tile/meal_widget/meal_widget.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
@@ -21,22 +22,28 @@ class MealExpansionTile extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: AppColor.midGrey),
-        color: provider.appMode == ThemeMode.light?
-        AppColor.white : AppColor.darkPrimary,
+        color: provider.appMode == ThemeMode.light
+            ? AppColor.white
+            : AppColor.darkPrimary,
       ),
       child: ExpansionTile(
         tilePadding: const EdgeInsets.symmetric(horizontal: 16),
-        collapsedIconColor: provider.appMode == ThemeMode.light?
-        AppColor.primary : AppColor.darkAccent,
-        iconColor: provider.appMode == ThemeMode.light?
-        AppColor.primary : AppColor.darkAccent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10)
-        ),
-        title: Text(Constant.meals[index], style: TextStyle(
+        collapsedIconColor: provider.appMode == ThemeMode.light
+            ? AppColor.primary
+            : AppColor.darkAccent,
+        iconColor: provider.appMode == ThemeMode.light
+            ? AppColor.primary
+            : AppColor.darkAccent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        title: Text(
+          Constant.meals[index],
+          style: TextStyle(
             fontWeight: FontWeight.bold,
-          color: provider.appMode == ThemeMode.light?
-        AppColor.primary : AppColor.darkAccent,),),
+            color: provider.appMode == ThemeMode.light
+                ? AppColor.primary
+                : AppColor.darkAccent,
+          ),
+        ),
         children: [
           Container(
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -44,22 +51,38 @@ class MealExpansionTile extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: mealGenerator().length,
-                separatorBuilder: (context, index) => const SizedBox(height: 10,),
-                itemBuilder: (context, index) => MealWidget(mealsDM: mealGenerator()[index],)),
+                separatorBuilder: (context, index) => const SizedBox(
+                      height: 10,
+                    ),
+                itemBuilder: (context, index) => MealWidget(
+                      mealsDM: mealGenerator()[index], detailsDM: detailsGenerator()[index],
+                    )),
           ),
         ],
       ),
     );
   }
-  List<MealsDM> mealGenerator(){
-    if(Constant.meals[index] == "Breakfast"){
+
+  List<MealsDM> mealGenerator() {
+    if (Constant.meals[index] == "Breakfast") {
       return ListOfNeeds.breakfastMeals;
-    }else if(Constant.meals[index] == "Lunch"){
+    } else if (Constant.meals[index] == "Lunch") {
       return ListOfNeeds.lunchMeals;
-    } else if(Constant.meals[index] == "Dinner"){
-  return ListOfNeeds.dinnerMeals;
-  }else{
-    return ListOfNeeds.snackMeals;
+    } else if (Constant.meals[index] == "Dinner") {
+      return ListOfNeeds.dinnerMeals;
+    } else {
+      return ListOfNeeds.snackMeals;
+    }
   }
-}
+  List<DetailsDM> detailsGenerator() {
+    if (Constant.meals[index] == "Breakfast") {
+      return ListOfNeeds.breakfastDetails;
+    } else if (Constant.meals[index] == "Lunch") {
+      return ListOfNeeds.lunchDetails;
+    } else if (Constant.meals[index] == "Dinner") {
+      return ListOfNeeds.dinnerDetails;
+    } else {
+      return ListOfNeeds.snackDetails;
+    }
+  }
 }

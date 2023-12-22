@@ -6,12 +6,15 @@ import 'package:health360/ui/screens/home_screen/profile/profile_components/pick
 import 'package:health360/ui/screens/home_screen/profile/profile_components/profile_text_field.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/app_theme.dart';
+import 'package:health360/utils/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
       height: MediaQuery
@@ -27,7 +30,7 @@ class Profile extends StatelessWidget {
               Navigator.pop(context);
             },
                 icon: Icon(CupertinoIcons.xmark,
-                  color: Theme.of(context) == AppTheme.lightMode ? AppColor
+                  color: provider.appMode == ThemeMode.light? AppColor
                       .black : AppColor.white,)),
           ),
           Text("Hey, ${firstName(AppUser.currentUser!.fullName)}",

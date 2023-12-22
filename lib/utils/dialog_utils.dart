@@ -11,11 +11,11 @@ void showLoading(BuildContext context){
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30)
           ),
-          content: const Row(
+          content: Row(
             children: [
-              Text("Loading..."),
-              Spacer(),
-              LoadingWidget()
+              Text("Loading...", style: Theme.of(context).textTheme.bodyMedium,),
+              const Spacer(),
+              const LoadingWidget()
             ],
           ),
         );
@@ -43,9 +43,7 @@ void signInErrorDialog(BuildContext context, String errorMessage){
       ),
       content: Text(
         errorMessage,
-        style: const TextStyle(
-          fontSize: 16.0,
-        ),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
       ),
       actions: [
         TextButton(
@@ -96,9 +94,7 @@ void showErrorDialog(BuildContext context, String message){
       ),
       content: Text(
         message,
-        style: const TextStyle(
-          fontSize: 16.0,
-        ),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
       ),
       actions: [
         TextButton(

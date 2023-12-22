@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/details_model.dart';
-import 'package:health360/utils/providers/settings_provider.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../../utils/app_color.dart';
-import '../../../../../../utils/app_theme.dart';
 
 class ExerciseDialog extends StatefulWidget {
   final DetailsDM detailsDM;
   final String title;
 
   const ExerciseDialog(
-      {super.key, required this.detailsDM, required this.title});
+      {super.key, required this.detailsDM, required this.title,});
 
   @override
   ExerciseDialogState createState() => ExerciseDialogState();
@@ -53,13 +50,16 @@ class ExerciseDialogState extends State<ExerciseDialog>
             ),
             scrollable: true,
             title: Text(widget.title,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18)),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontSize: 18)),
             content: SizedBox(
               height: 500,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Image.asset(widget.detailsDM.imagePath, height: 200),
+                  Image.asset(widget.detailsDM.imagePath??"", height: 200),
                   Text(widget.detailsDM.description,
                       style: Theme.of(context).textTheme.bodyMedium),
                   ElevatedButton(
@@ -76,10 +76,12 @@ class ExerciseDialogState extends State<ExerciseDialog>
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => widget.detailsDM.route));
+                              builder: (context) => widget.detailsDM.route!));
                     },
                     child: Text("Start",
-                        style: Theme.of(context).textTheme.bodyMedium
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
                             ?.copyWith(color: AppColor.white)),
                   ),
                 ],

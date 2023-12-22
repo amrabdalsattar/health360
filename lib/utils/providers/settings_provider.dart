@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:health360/ui/tabs/community_tab/community_tab.dart';
 import 'package:health360/ui/tabs/fitness_tab/fitness_tab.dart';
 import 'package:health360/ui/tabs/settings_tab/settings_tab.dart';
-import 'package:health360/utils/providers/main_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/models/post_model.dart';
 import '../../ui/tabs/home_tab/home_tab.dart';
 import '../app_asset.dart';
 
-class SettingsProvider extends MainProvider {
+class SettingsProvider extends ChangeNotifier {
   int currentTabIndex = 0;
   List<Widget> tabs = [
     const HomeTab(),
@@ -18,8 +17,7 @@ class SettingsProvider extends MainProvider {
     const CommunityTab(),
     const SettingsTab(),
   ];
-
-
+  
   void setCurrentTabIndex(int index) {
     currentTabIndex = index;
     notifyListeners();

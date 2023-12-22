@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class DetailsDM {
-  String imagePath;
+  String? imagePath;
   String description;
-  Widget route;
+  Widget? route;
 
   DetailsDM({
-    required this.imagePath,
+    this.imagePath,
     required this.description,
-    required this.route});
+    this.route});
 }

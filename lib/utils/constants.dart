@@ -8,4 +8,12 @@ abstract class Constant{
   static const String breathworkDescription = "Breathwork, intentional breath control for stress reduction and mental well-being. Techniques like diaphragmatic breathing enhance focus and relaxation. Integrated into meditation, it fosters a deeper mind-body connection.";
   static const String messageToUser = "The calorie information provided is a general estimate. Individual factors such as health conditions and personal circumstances are crucial. Always consult a healthcare professional for personalized advice tailored to your needs.";
   static const List<String> meals = ["Breakfast", "Lunch", "Dinner", "Snacks"];
+  static const String shakshukaIngredients = "- 1/2 tablespoon olive oil\n- 1/4 onion\n- 1/4 red bell pepper\n- 1/2 clove garlic\n- 1/4 teaspoon ground cumin\n- 1/4 teaspoon ground paprika\n- 1/8 teaspoon ground cayenne pepper (optional)\n- 1/4 can (100 grams) diced tomatoes\n- 1 large egg";
+  static const String boiledEggsIngredients = "- 3 Boiled Eggs\n- 2 Brown Toast\n- 1 Apple\n- 1 Banana";
+  static const String grilledChickenIngredients = "- 4 Brown Toast\n- 300gm Grilled Chicken Breasts\n- 2 Tomatoes Slices\n- 1 Cucumber\n- lettuce\n- 2 tablespoons of mayonnaise";
+  static const String steakAndPotatoesIngredients = "- 2 Medium Sized Potatoes\n- 300gm Steak with Tablespoon Butter\n- 200gm White Rice with TableSpoon Olive Oil";
+  static const String mashedPotatoesIngredients = "- Mashed potatoes (Medium-sized)\n- Minced hot pepper\n- Mixed vegetables (such as green pepper, green onion, and carrots)\n- Arabic bread (medium-sized)";
+  static const String fruitSaladIngredients = "- 2 containers of low-fat natural yogurt\n - 1 Banana\n - Five strawberries\n- Two apples\n- Five blueberries";
+  static const String bananaSmoothieIngredients = "- 200ml Banana Smoothie\n- 1 Apple";
+  static const String sweetPotatoesIngredients = "- 1 Sweet Potatoes\n- Honey Tablespoon";
 }

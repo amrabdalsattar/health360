@@ -1,6 +1,6 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/button.dart';
+import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
 
 import 'package:health360/utils/app_color.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +46,11 @@ class SettingsTab extends StatelessWidget {
                     context),
               ],
             ),
-          )
+          ),
+          MyButton(text: "Log out", onPressed: (){
+            Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+            provider.setCurrentTabIndex(0);
+          })
         ],
       ),
     );

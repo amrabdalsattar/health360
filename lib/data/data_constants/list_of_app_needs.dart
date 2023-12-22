@@ -49,6 +49,12 @@ abstract class ListOfNeeds{
         imagePath: AppAsset.boiledEggs,
         mealTitle: "Boiled Eggs & Toast"),
   ];
+  static final List<DetailsDM> breakfastDetails = [
+
+    DetailsDM(description: Constant.shakshukaIngredients,),
+    DetailsDM(description: Constant.boiledEggsIngredients ,),
+
+  ];
 
   static final List<MealsDM> lunchMeals = [
     MealsDM(calories: "900",
@@ -57,6 +63,12 @@ abstract class ListOfNeeds{
     MealsDM(calories: "1183",
         imagePath: AppAsset.steak,
         mealTitle: "Steak & Potatoes"),
+  ];
+  static final List<DetailsDM> lunchDetails = [
+
+    DetailsDM(description: Constant.grilledChickenIngredients,),
+    DetailsDM(description: Constant.steakAndPotatoesIngredients,),
+
   ];
 
   static final List<MealsDM> dinnerMeals = [
@@ -67,6 +79,12 @@ abstract class ListOfNeeds{
         imagePath: AppAsset.fruitSalad,
         mealTitle: "Fruit Salad & Yogurt"),
   ];
+  static final List<DetailsDM> dinnerDetails = [
+
+    DetailsDM(description: Constant.mashedPotatoesIngredients,),
+    DetailsDM(description: Constant.fruitSaladIngredients,),
+
+  ];
 
   static final List<MealsDM> snackMeals = [
     MealsDM(calories: "303",
@@ -75,6 +93,12 @@ abstract class ListOfNeeds{
     MealsDM(calories: "176",
         imagePath: AppAsset.sweetPotatoes,
         mealTitle: "Sweet Potatoes & Honey"),
+  ];
+  static final List<DetailsDM> snackDetails = [
+
+    DetailsDM(description: Constant.bananaSmoothieIngredients,),
+    DetailsDM(description: Constant.sweetPotatoesIngredients,),
+
   ];
 
 

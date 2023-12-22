@@ -8,7 +8,6 @@ import 'package:health360/utils/dialog_utils.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../utils/app_theme.dart';
 
 class AddPostScreen extends StatelessWidget {
   AddPostScreen({super.key});
