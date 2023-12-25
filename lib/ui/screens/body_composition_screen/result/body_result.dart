@@ -1,29 +1,27 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/body_composition_screen/components/body_composition_app_bar.dart';
 import 'package:health360/ui/screens/body_composition_screen/result/components/bmi_widget.dart';
 import 'package:health360/utils/app_color.dart';
-import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/constants.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
-
 import 'expantion_tile/meal_expansion_tile.dart';
 
 class BodyResult extends StatelessWidget {
   static const String routeName = "result";
 
   final double bMIResult;
-
   String get resultPhrase {
     String resultText = '';
     if (bMIResult >= 30) {
-      resultText = "Obese";
+      resultText = "obese".tr();
     } else if (bMIResult >= 25 && bMIResult < 30) {
-      resultText = "Overweight";
+      resultText = "overweight".tr();
     } else if (bMIResult >= 18.5 && bMIResult <= 24.9) {
-      resultText = "Normal";
+      resultText = "normal".tr();
     } else {
-      resultText = "Thin";
+      resultText = "thin".tr();
     }
     return resultText;
   }
@@ -42,10 +40,10 @@ class BodyResult extends StatelessWidget {
       height: 10,
     );
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(60),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
         child: BodyCompositionAppBar(
-          title: "Result",
+          title: "result".tr(),
         ),
       ),
       body: SafeArea(
@@ -60,8 +58,8 @@ class BodyResult extends StatelessWidget {
               Row(
 
                 children: [
-                  Expanded(child: BMIWidget(bMIResult: bMIResult.toStringAsFixed(1), title: "BMI")),
-                  Expanded(child: BMIWidget(bMIResult: resultPhrase, title: "Range of")),
+                  Expanded(child: BMIWidget(bMIResult: bMIResult.toStringAsFixed(1), title: "bodyMassIndex".tr())),
+                  Expanded(child: BMIWidget(bMIResult: resultPhrase, title: "rangeOf".tr())),
                 ],
               ),
               sizedBox,
@@ -73,27 +71,25 @@ class BodyResult extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text(
-                      "Calories Limit",
+                    Text(
+                      "caloriesLimit".tr(),
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                       textAlign: TextAlign.center,
                     ),
-                    span("Sedentary (little or no exercise):", 1.2, context),
+                    span("sedentary".tr(), 1.2, context),
                     sizedBox,
-                    span(
-                        "Lightly active (light exercise/sports 1-3 days/week):",
+                    span("lightlyActive".tr(),
                         1.375, context),
                     sizedBox,
-                    span(
-                        "Moderately active (moderate exercise/sports 3-5 days/week):",
+                    span("moderatelyActive".tr(),
                         1.55, context),
                     sizedBox,
-                    span("Very active (hard exercise/sports 6-7 days a week):",
+                    span("veryActive".tr(),
                         1.725, context),
                     sizedBox,
                     span(
-                        "Extra active (very hard exercise/sports & physical job or 2x training):",
+                        "extraActive".tr(),
                         1.9, context)
                   ],
                 ),
@@ -101,8 +97,10 @@ class BodyResult extends StatelessWidget {
               sizedBox,
               Container(
                   margin: const EdgeInsets.symmetric(vertical: 20),
-                  child: const Text("Suggested Meals",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500))),
+                  child: const Text("suggestedMeals",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)
+                  ).tr()
+              ),
               sizedBox,
               ListView.builder(
                 shrinkWrap: true,
@@ -119,12 +117,12 @@ class BodyResult extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: AppColor.midGrey)),
                 child: const Text(
-                  "${Constant.messageToUser}",
+                  "caution",
                   style: TextStyle(
                       color: AppColor.green,
                       fontSize: 12,
                       fontWeight: FontWeight.bold),
-                ),
+                ).tr(),
               ),
             ],
           ),

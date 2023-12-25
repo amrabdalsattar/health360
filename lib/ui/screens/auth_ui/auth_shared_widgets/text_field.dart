@@ -31,14 +31,13 @@ class MyTextField extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(),
 
-      /// Adjust the `top` value to change the position of the label
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: Column(
           children: [
             const SizedBox(height: 20,),
             TextFormField(
-
+              autofocus: false,
               validator: validator,
               onChanged: onChanged,
               decoration: InputDecoration(

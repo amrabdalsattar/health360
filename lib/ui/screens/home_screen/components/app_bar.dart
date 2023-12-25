@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health360/ui/shared_components/profile_photo.dart';
 import 'package:health360/utils/app_theme.dart';
+import 'package:health360/utils/cache_helper.dart';
 
 import '../../../../data/models/user_model.dart';
 import '../../../../utils/app_color.dart';
@@ -17,7 +18,7 @@ class CustomAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            AppUser.currentUser!.fullName,
+            CacheData.getData(key: "fullName"),
             style: TextStyle(color: Theme.of(context) == AppTheme.lightMode?
             AppColor.grey : AppColor.darkGrey, fontSize: 14),
           ),

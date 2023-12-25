@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/user_model.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
+import 'package:health360/utils/cache_helper.dart';
 
 import '../../../../utils/app_color.dart';
 import '../../../../utils/dialog_utils.dart';
@@ -54,7 +56,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               children: [
                 /// change it to headline-large
                 Text(
-                  "Create Account",
+                  "createAcc".tr(),
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 SizedBox(
@@ -65,51 +67,54 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     MyTextField(
                       validator: (fullName) {
                         if (fullName == null || fullName.isEmpty) {
-                          return "Your Name is required";
+                          return "reqName".tr();
                         } else if (fullName.contains(RegExp(r'[0-9]'))) {
-                          return "Invalid Name";
+                          return "invalidName".tr();
                         } else if (!fullName.contains(" ")) {
-                          return "Please Enter your Full Name not First Name";
+                          return "enterFullName".tr();
                         }
+                        return null;
                       },
                       onChanged: (text) {
                         fullName = text;
                       },
-                      label: 'FULL NAME',
+                      label: "fullName".tr(),
                       icon: const Icon(Icons.person),
                     ),
                     MyTextField(
                       validator: (email) {
                         if (email == null || email.isEmpty) {
-                          return "Email shouldn't be Empty";
+                          return "emailEmpty".tr();
                         }
                         if (!RegExp(
                                 r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
                             .hasMatch(email)) {
-                          return "Invalid Email";
+                          return "emailNotValid".tr();
                         }
+                        return null;
                       },
                       onChanged: (text) {
                         email = text;
                       },
-                      label: 'EMAIL',
+                      label: "email".tr(),
                       icon: const Icon(Icons.email_outlined),
                     ),
                     MyTextField(
                       validator: (password) {
                         if (password == null || password.isEmpty) {
-                          return "password is required";
+                          return "passwordRequired".tr();
                         }
                         if (!isPasswordStrong(password)) {
-                          return "Password: 6+ chars, mix of upper & lower";
+                          return "charsValidation".tr();
                         }
+                        return null;
                       },
                       visible:
                           isPasswordStrong(password) == true ? true : false,
                       onChanged: (text) {
                         password = text;
                       },
-                      label: 'PASSWORD',
+                      label: "password".tr(),
                       icon: InkWell(
                         onTap: () {
                           passwordShowed = !passwordShowed;
@@ -126,8 +131,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           if (password != confirmedPassword &&
                               confirmedPassword != null &&
                               confirmedPassword.isNotEmpty) {
-                            return "Passwords don't match. Please try again";
+                            return "passwordsNotMatched".tr();
                           }
+                          return null;
                         },
                         visible:
                             matchedPassword(password, confirmedPassword) == true
@@ -136,7 +142,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         onChanged: (text) {
                           confirmedPassword = text;
                         },
-                        label: 'CONFIRM PASSWORD',
+                        label: "confirmPassword".tr(),
                         icon: InkWell(
                           onTap: () {
                             confirmPasswordShowed = !confirmPasswordShowed;
@@ -151,9 +157,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 ),
                 MyButton(
                     onPressed: () {
+                      CacheData.setData(key: "email", value: email);
+                      CacheData.setData(key: "password", value: password);
+                      CacheData.setData(key: "fullName", value: fullName);
                       register();
                     },
-                    text: "SIGN UP"),
+                    text: "signUp".tr()),
               ],
             ),
           ),
@@ -172,21 +181,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           email: email,
           password: password,
         );
+        CacheData.setData(key: "id", value: userCredential.user!.uid);
         AppUser newUser = AppUser(
-            id: userCredential.user!.uid, email: email, fullName: fullName);
+            id: CacheData.getData(key: "id"),
+            email: CacheData.getData(key: "email"),
+            fullName: CacheData.getData(key: "fullName"));
         await registerUserInFireStore(newUser);
         AppUser.currentUser = newUser;
         hideLoading(context);
         Navigator.pop(context);
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-        const SnackBar(
-            backgroundColor: Colors.green,
-            content: Text('Log in Successfully'));
       }
     } on FirebaseAuthException catch (error) {
       hideLoading(context);
-      showErrorDialog(context,
-          error.message ?? "Something went wrong. Please try again later!");
+      showErrorDialog(context, error.message ?? "somethingWentWrong".tr());
     }
   }
 

@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/details_model.dart';
-
 import '../../../../../../utils/app_color.dart';
 
 class ExerciseDialog extends StatefulWidget {
@@ -78,11 +78,11 @@ class ExerciseDialogState extends State<ExerciseDialog>
                           MaterialPageRoute(
                               builder: (context) => widget.detailsDM.route!));
                     },
-                    child: Text("Start",
+                    child: Text("start",
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium
-                            ?.copyWith(color: AppColor.white)),
+                            ?.copyWith(color: AppColor.white)).tr(),
                   ),
                 ],
               ),

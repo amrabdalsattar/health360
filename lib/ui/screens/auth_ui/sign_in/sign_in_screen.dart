@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:health360/ui/screens/auth_ui/create_account/create_account_scree
 import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
 import 'package:health360/utils/app_color.dart';
+import 'package:health360/utils/cache_helper.dart';
 import 'package:health360/utils/dialog_utils.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
@@ -49,14 +51,14 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               children: [
                 Text(
-                  "Login",
+                  "login",
                   style: Theme.of(context).textTheme.headlineLarge,
-                ),
+                ).tr(),
                 const SizedBox(
                   height: 10,
                 ),
-                Text("Please sign in to continue",
-                    style: Theme.of(context).textTheme.headlineMedium),
+                Text("plsSignToCon",
+                    style: Theme.of(context).textTheme.headlineMedium).tr(),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .08,
                 ),
@@ -67,26 +69,26 @@ class _SignInScreenState extends State<SignInScreen> {
                         if (!RegExp(
                           r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
                         ).hasMatch(email!)) {
-                          return "Email isn't valid";
+                          return "emailNotValid".tr();
                         }
                         return null;
                       },
                       onChanged: (text) {
                         email = text;
                       },
-                      label: 'EMAIL',
+                      label: "email".tr(),
                       icon: const Icon(Icons.email_outlined),
                     ),
                     MyTextField(
                       validator: (password) {
                         if (password == null || password.isEmpty) {
-                          return "Password is required";
+                          return "passwordRequired".tr();
                         }
 
                         // Check if the password has at least one uppercase, one lowercase, and a minimum of 6 characters
                         if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$')
                             .hasMatch(password)) {
-                          return "Password is incorrect";
+                          return "passwordIsIncorrect".tr();
                         }
 
                         return null;
@@ -94,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       onChanged: (text) {
                         password = text;
                       },
-                      label: 'PASSWORD',
+                      label: "password".tr(),
                       icon: InkWell(
                         onTap: () {
                           _passwordShowed = !_passwordShowed;
@@ -116,40 +118,43 @@ class _SignInScreenState extends State<SignInScreen> {
                               context, ResetPasswordScreen.routeName);
                         },
                         child: Text(
-                          "Forgot Password?",
+                          "forgotPassword".tr(),
                           style: Theme.of(context).textTheme.bodyLarge
                               ?.copyWith(fontWeight: FontWeight.bold),
                         )),
                     const Spacer(),
                     MyButton(
+                      fontSize: 10,
                         onPressed: () {
+                        CacheData.setData(key: "email", value: email);
+                        CacheData.setData(key: "password", value: password);
                           login();
                         },
-                        text: "LOGIN"),
+                        text: "login".tr().toUpperCase()),
                   ],
                 ),
-                const Text(
-                  "or Login with",
-                  style: TextStyle(color: AppColor.grey),
+                Text(
+                  "orLoginWith".tr(),
+                  style: const TextStyle(color: AppColor.grey),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.04,
                 ),
                 const LogoCollection(),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.18,
+                  height: MediaQuery.of(context).size.height * 0.16,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account?", style: Theme.of(context).textTheme.bodyMedium,),
+                    Text("haveNoAcc".tr(), style: Theme.of(context).textTheme.bodyMedium,),
                     TextButton(
                         onPressed: () {
                           Navigator.pushNamed(
                               context, CreateAccountScreen.routeName);
                         },
                         child: Text(
-                          "Sign up",
+                          "signUp".tr(),
                           style: TextStyle(color: provider.appMode == ThemeMode.light ?
                           AppColor.primary : AppColor.darkAccent),
                         ))
@@ -176,6 +181,8 @@ class _SignInScreenState extends State<SignInScreen> {
         AppUser currentUser = await getUserFromFireStore(credential.user!.uid);
         AppUser.currentUser = currentUser;
         hideLoading(context);
+        CacheData.setData(key: "fullName", value: AppUser.currentUser!.fullName);
+        CacheData.setData(key: "id", value: AppUser.currentUser!.id);
 
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);
       }
@@ -183,7 +190,7 @@ class _SignInScreenState extends State<SignInScreen> {
       if (e.code == 'invalid-credential') {
         hideLoading(context);
         showErrorDialog(
-            context, "Incorrect password or Email. Please try again.");
+            context, "incorrectPassOrEmail".tr());
       } else {
         hideLoading(context);
         showErrorDialog(context, e.message!);

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/details_model.dart';
 
@@ -48,7 +49,8 @@ class MealDialogState extends State<MealDialog>
               borderRadius: BorderRadius.circular(20),
             ),
             scrollable: true,
-            title: Text("${widget.title} Ingredients",
+            title: Text(context.locale == const Locale("ar") ?
+            "${"ingredients".tr()} ${widget.title}" : "${widget.title} ${"ingredients".tr()}",
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium

@@ -1,28 +1,28 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/button.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
-
 import 'package:health360/utils/app_color.dart';
+import 'package:health360/utils/cache_helper.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/providers/settings_provider.dart';
 
 class SettingsTab extends StatelessWidget {
   static late SettingsProvider provider;
-  static bool langSwitch = false;
 
   const SettingsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     SettingsTab.provider = Provider.of(context);
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Settings",
+          Text("settings".tr(),
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge!
@@ -34,7 +34,7 @@ class SettingsTab extends StatelessWidget {
               children: [
 
                 buildRow(
-                    "Dark Mode",
+                    "darkMode".tr(),
                     provider.switchState,
                         (switchMode) => {
                       provider.setSwitchState(switchMode),
@@ -47,7 +47,12 @@ class SettingsTab extends StatelessWidget {
               ],
             ),
           ),
-          MyButton(text: "Log out", onPressed: (){
+          MyButton(
+              text: "logOut".tr(), onPressed: (){
+                CacheData.removeData(key: "email");
+                CacheData.removeData(key: "fullName");
+                CacheData.removeData(key: "password");
+                CacheData.removeData(key: "id");
             Navigator.pushReplacementNamed(context, SignInScreen.routeName);
             provider.setCurrentTabIndex(0);
           })

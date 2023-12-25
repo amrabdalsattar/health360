@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/body_composition_screen/body_composition_screen.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
@@ -40,13 +41,12 @@ class BodyCompositionNavigator extends StatelessWidget {
                 const SizedBox(
                   width: 16,
                 ),
-                Text(
-                  "Body composition",
+                Text("bodyComposition",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium
                       ?.copyWith(color: AppColor.grey, fontSize: 18),
-                ),
+                ).tr(),
               ],
             ),
             Icon(

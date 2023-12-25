@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/tabs/fitness_tab/components/body_composition_navigator.dart';
 
@@ -18,9 +19,10 @@ class FitnessTab extends StatelessWidget {
             const BodyCompositionNavigator(),
             Container(
                 margin: const EdgeInsets.symmetric(vertical: 20),
-                child: Text("Recommended Exercises",
+                child: Text("recommendedExercises",
                     style: Theme.of(context).textTheme.headlineLarge
-                        ?.copyWith(fontSize: 20, fontWeight: FontWeight.w500))),
+                        ?.copyWith(fontSize: 20, fontWeight: FontWeight.w500)).tr()
+            ),
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

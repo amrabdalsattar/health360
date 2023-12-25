@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/user_model.dart';
@@ -7,7 +8,6 @@ import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/dialog_utils.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
-
 
 class AddPostScreen extends StatelessWidget {
   AddPostScreen({super.key});
@@ -61,7 +61,7 @@ class AddPostScreen extends StatelessWidget {
                               hideLoading(context);
                             }
                           },
-                          child: const Text("Post"),
+                          child: Text("post".tr()),
                         )
                       ],
                     ),
@@ -77,7 +77,7 @@ class AddPostScreen extends StatelessWidget {
                         fillColor: provider.appMode == ThemeMode.light?
                       AppColor.liteGrey : AppColor.darkPrimary,
                         filled: true,
-                        hintText: "What's on your mind?",
+                        hintText: "whatsOnUrMind".tr(),
                         counterText: "",
                         focusedBorder: UnderlineInputBorder(
                             borderSide: const BorderSide(color: Colors.transparent),

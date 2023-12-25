@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/tabs/community_tab/community_tab.dart';
@@ -6,6 +8,7 @@ import 'package:health360/ui/tabs/settings_tab/settings_tab.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/models/post_model.dart';
+import '../../data/models/user_model.dart';
 import '../../ui/tabs/home_tab/home_tab.dart';
 import '../app_asset.dart';
 
@@ -17,7 +20,7 @@ class SettingsProvider extends ChangeNotifier {
     const CommunityTab(),
     const SettingsTab(),
   ];
-  
+
   void setCurrentTabIndex(int index) {
     currentTabIndex = index;
     notifyListeners();
@@ -112,9 +115,10 @@ List<PostDM> posts = [];
     notifyListeners();
   }
 
-  String currentLocale = "en";
-
   ThemeMode appMode = ThemeMode.light;
+
+
+
   bool switchState = false;
   SharedPreferences? preferences;
   final String _themeKey = "theme";
@@ -124,35 +128,40 @@ List<PostDM> posts = [];
     notifyListeners();
     saveSwitchState(newSwitch);
   }
+
   Future<void> saveSwitchState(bool newSwitch) async {
     String switchValue = (newSwitch == false ? "false" : "true");
     await preferences!.setString("switch", switchValue);
   }
+
   String? getSwitch() {
     return preferences!.getString("switch");
   }
+
   void setCurrentMode(ThemeMode newThemeMode) {
     appMode = newThemeMode;
     notifyListeners();
     saveTheme(newThemeMode);
   }
+
   Future<void> saveTheme(ThemeMode themeMode) async {
     String themeValue = (themeMode == ThemeMode.light ? "light" : "dark");
     await preferences!.setString(_themeKey, themeValue);
   }
+
   String? getTheme() {
     return preferences!.getString(_themeKey);
   }
   Future<void> loadConfig() async {
     preferences = await SharedPreferences.getInstance();
-
     String? themeMode = getTheme();
     String? switchStatus = getSwitch();
+
     if (themeMode != null) {
       appMode = (themeMode == "light" ? ThemeMode.light : ThemeMode.dark);
     }
     if (switchStatus != null) {
       switchState = (switchStatus == "false" ? false : true);
     }
+    }
   }
-}

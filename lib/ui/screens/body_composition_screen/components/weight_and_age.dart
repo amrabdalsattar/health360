@@ -1,8 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../utils/app_color.dart';
 
 class WeightAndAge extends StatelessWidget {
@@ -26,9 +25,9 @@ class WeightAndAge extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              type == "Age" ? "Age" : "Weight",
+              type == "Age" ? "age" : "weight",
               style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
+            ).tr(),
             const SizedBox(
               height: 15,
             ),

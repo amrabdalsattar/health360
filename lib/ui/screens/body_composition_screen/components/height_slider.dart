@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/utils/app_color.dart';
-import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class HeightSlider extends StatelessWidget {
               children: [
                 Text(provider.heightValue.toStringAsFixed(1),
                   style: Theme.of(context).textTheme.headlineLarge),
-                Text("CM", style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12),),
+                Text("cm", style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12),).tr(),
               ],
             ),
             Slider(

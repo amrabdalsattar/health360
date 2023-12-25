@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/data/data_constants/list_of_app_needs.dart';
 
@@ -18,7 +19,7 @@ class HomeTab extends StatelessWidget {
             const NewsSlider(),
             Container(
                 margin: const EdgeInsets.symmetric(vertical: 20),
-                child: Text("Spiritual practice",
+                child: Text("spiritualPractice".tr(),
                     style: Theme.of(context).textTheme.headlineLarge?.
                     copyWith(fontWeight: FontWeight.w500, fontSize: 20))),
             // Use ListView.separated to add dividers between exercises

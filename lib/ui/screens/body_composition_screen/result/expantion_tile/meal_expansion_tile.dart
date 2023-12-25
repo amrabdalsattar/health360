@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/data/data_constants/list_of_app_needs.dart';
 import 'package:health360/data/models/details_model.dart';
@@ -64,11 +65,11 @@ class MealExpansionTile extends StatelessWidget {
   }
 
   List<MealsDM> mealGenerator() {
-    if (Constant.meals[index] == "Breakfast") {
+    if (Constant.meals[index] == "breakfast".tr()) {
       return ListOfNeeds.breakfastMeals;
-    } else if (Constant.meals[index] == "Lunch") {
+    } else if (Constant.meals[index] == "lunch".tr()) {
       return ListOfNeeds.lunchMeals;
-    } else if (Constant.meals[index] == "Dinner") {
+    } else if (Constant.meals[index] == "dinner".tr()) {
       return ListOfNeeds.dinnerMeals;
     } else {
       return ListOfNeeds.snackMeals;
@@ -76,11 +77,11 @@ class MealExpansionTile extends StatelessWidget {
   }
 
   List<DetailsDM> detailsGenerator() {
-    if (Constant.meals[index] == "Breakfast") {
+    if (Constant.meals[index] == "breakfast".tr()) {
       return ListOfNeeds.breakfastDetails;
-    } else if (Constant.meals[index] == "Lunch") {
+    } else if (Constant.meals[index] == "lunch".tr()) {
       return ListOfNeeds.lunchDetails;
-    } else if (Constant.meals[index] == "Dinner") {
+    } else if (Constant.meals[index] == "dinner".tr()) {
       return ListOfNeeds.dinnerDetails;
     } else {
       return ListOfNeeds.snackDetails;

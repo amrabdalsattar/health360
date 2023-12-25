@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health360/ui/screens/auth_ui/create_account/create_account_screen.dart';
 import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
@@ -10,6 +10,7 @@ import 'package:health360/ui/screens/body_composition_screen/body_composition_sc
 import 'package:health360/ui/screens/body_composition_screen/result/body_result.dart';
 import 'package:health360/ui/screens/home_screen/home_screen.dart';
 import 'package:health360/utils/app_theme.dart';
+import 'package:health360/utils/cache_helper.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -17,11 +18,19 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  CacheData.cacheInitialization();
   await _initFirebase();
   var provider = SettingsProvider();
   await provider.loadConfig();
-
-  runApp(ChangeNotifierProvider(create: (_) => provider, child: const MyApp()));
+  var email = CacheData.getData(key: "email");
+  runApp(EasyLocalization(
+      supportedLocales: const [Locale('en', 'US'), Locale('ar')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en', 'US'),
+      child: ChangeNotifierProvider(
+          create: (_) => provider,
+          child: email == null ? const MyApp() : const HomeScreen())));
 }
 
 Future<void> _initFirebase() async {
@@ -45,19 +54,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print(CacheData.getData(key: "email"));
+    print(CacheData.getData(key: "id"));
+    print(CacheData.getData(key: "fullName"));
     SettingsProvider provider = Provider.of(context);
 
     return MaterialApp(
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
-      ],
-      locale: Locale(provider.currentLocale),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       theme: AppTheme.lightMode,
       darkTheme: AppTheme.darkMode,
       themeMode: provider.appMode,

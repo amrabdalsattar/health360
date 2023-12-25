@@ -1,19 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 abstract class Constant{
-  static const String pullUpDescription = "Upper body compound exercise. Grip bar, hang, engage shoulders for controlled pull, ascend until chin clears bar, and lower with precision. Maintain straight body, close elbows, engage core. Suitable for various fitness levels. Enhances upper body strength and definition.";
-  static const String sitUpDescription = "Core exercise. Lie down, bend knees, and place feet flat. Cross arms over chest or behind head. Engage core, lift upper body towards knees, then lower with control. Keep feet on the ground. Smooth, controlled motion. Suitable for various fitness levels. Enhances core strength.";
-  static const String bicepsCurlDescription = "Isolate arm exercise. Stand with feet shoulder-width apart, hold dumbbells at sides with palms facing forward. Keeping upper arms stationary, curl weights towards shoulders, then lower with control. Maintain proper form. Suitable for various fitness levels. Targets biceps for strength and definition.";
-  static const String pushUpDescription = "Upper body compound exercise. Start in plank position, hands shoulder-width apart. Lower chest towards the ground, keeping body straight, then push back up. Engage core and maintain a straight line. Suitable for various fitness levels. Strengthens chest, shoulders, triceps, and core.";
-  static const String yogaDescription = "Yoga, an ancient Indian practice, unites mind and body through postures, breathing, and meditation. It promotes flexibility, strength, and relaxation, fostering mindfulness. Suitable for all, yoga offers a customizable approach to wellness, serving as a timeless sanctuary for balance.";
-  static const String meditationDescription = "Meditation fosters mindfulness through focused attention, promoting calmness and inner awareness. Rooted in tradition, it reduces stress and enhances concentration, contributing to overall emotional well-being. Whether practiced alone or integrated into routines, meditation is a valuable tool for a centered state of mind.";
-  static const String breathworkDescription = "Breathwork, intentional breath control for stress reduction and mental well-being. Techniques like diaphragmatic breathing enhance focus and relaxation. Integrated into meditation, it fosters a deeper mind-body connection.";
-  static const String messageToUser = "CAUTION! The calorie information provided is a general estimate. Individual factors such as health conditions and personal circumstances are crucial. Always consult a healthcare professional for personalized advice tailored to your needs.";
-  static const List<String> meals = ["Breakfast", "Lunch", "Dinner", "Snacks"];
-  static const String shakshukaIngredients = "- 1/2 tablespoon olive oil\n- 1/4 onion\n- 1/4 red bell pepper\n- 1/2 clove garlic\n- 1/4 teaspoon ground cumin\n- 1/4 teaspoon ground paprika\n- 1/8 teaspoon ground cayenne pepper (optional)\n- 1/4 can (100 grams) diced tomatoes\n- 1 large egg";
-  static const String boiledEggsIngredients = "- 3 Boiled Eggs\n- 2 Brown Toast\n- 1 Apple\n- 1 Banana";
-  static const String grilledChickenIngredients = "- 4 Brown Toast\n- 300gm Grilled Chicken Breasts\n- 2 Tomatoes Slices\n- 1 Cucumber\n- lettuce\n- 2 tablespoons of mayonnaise";
-  static const String steakAndPotatoesIngredients = "- 2 Medium Sized Potatoes\n- 300gm Steak with Tablespoon Butter\n- 200gm White Rice with TableSpoon Olive Oil";
-  static const String mashedPotatoesIngredients = "- Mashed potatoes (Medium-sized)\n- Minced hot pepper\n- Mixed vegetables (such as green pepper, green onion, and carrots)\n- Arabic bread (medium-sized)";
-  static const String fruitSaladIngredients = "- 2 containers of low-fat natural yogurt\n - 1 Banana\n - Five strawberries\n- Two apples\n- Five blueberries";
-  static const String bananaSmoothieIngredients = "- 200ml Banana Smoothie\n- 1 Apple";
-  static const String sweetPotatoesIngredients = "- 1 Sweet Potatoes\n- Honey Tablespoon";
+  static List<String> meals = ["breakfast".tr(), "lunch".tr(), "dinner".tr(), "snacks".tr()];
 }

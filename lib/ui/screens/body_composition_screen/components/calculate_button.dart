@@ -1,7 +1,7 @@
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +31,6 @@ class CalculateButton extends StatelessWidget {
             return BodyResult(bMIResult: result,);
           }));
         },
-        child: const Text("Calculate"));
+        child: const Text("calculate").tr());
   }
 }

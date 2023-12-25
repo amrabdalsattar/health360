@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:health360/ui/screens/body_composition_screen/components/body_composition_app_bar.dart';
@@ -7,7 +8,6 @@ import 'package:health360/ui/screens/body_composition_screen/components/height_s
 import 'package:health360/ui/screens/body_composition_screen/components/weight_and_age.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
-
 import '../../../utils/app_color.dart';
 
 class BodyCompositionScreen extends StatelessWidget {
@@ -23,10 +23,10 @@ class BodyCompositionScreen extends StatelessWidget {
         statusBarColor: AppColor.black,
         systemNavigationBarColor: AppColor.black));
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(60),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
         child: BodyCompositionAppBar(
-          title: "Body composition",
+          title: "bodyComposition".tr(),
         ),
       ),
       body: SafeArea(

@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/count_down_screen/count_down_components/button.dart';
 import 'package:health360/utils/app_color.dart';
-import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:timer_count_down/timer_controller.dart';
@@ -94,7 +94,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CountDownButton(
-                title: "Start",
+                title: "start".tr(),
                 onPressed: () {
                   duration = 1;
                   _controller.start();
@@ -102,7 +102,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
                 color: AppColor.darkPrimary,
               ),
               CountDownButton(
-                title: "Pause",
+                title: "pause".tr(),
                 onPressed: () {
                   duration = 600;
                   _controller.pause();
@@ -110,7 +110,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
                   color: AppColor.darkPrimary
               ),
               CountDownButton(
-                title: "Resume",
+                title: "resume".tr(),
                 onPressed: () {
                   duration = 1;
                   _controller.resume();
@@ -118,7 +118,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
                 color: AppColor.darkPrimary,
               ),
               CountDownButton(
-                title: "Restart",
+                title: "restart".tr(),
                 onPressed: () {
                   duration = 1;
                   provider.changeBreathworkStatus("Inhale");

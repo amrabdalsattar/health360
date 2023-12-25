@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../../../../data/models/post_model.dart';
 import '../../../../utils/app_color.dart';
 import '../../../../utils/app_theme.dart';
@@ -70,7 +70,7 @@ class Post extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                formatTimeAgo(postDM.date),
+                                formatTimeAgo(postDM.date, context),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(fontSize: 10),
@@ -119,7 +119,7 @@ class Post extends StatelessWidget {
     );
   }
 
-  String formatTimeAgo(DateTime dateTime) {
+  String formatTimeAgo(DateTime dateTime, BuildContext context) {
     Duration difference = DateTime.now().difference(dateTime);
 
     if (difference.inDays > 0) {
@@ -129,7 +129,7 @@ class Post extends StatelessWidget {
     } else if (difference.inMinutes > 0) {
       return '${difference.inMinutes} minute${difference.inMinutes > 1 ? 's' : ''} ago';
     } else {
-      return 'just now';
+      return "justNow".tr();
     }
   }
 }

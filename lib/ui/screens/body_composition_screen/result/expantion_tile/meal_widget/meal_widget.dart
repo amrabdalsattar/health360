@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/details_model.dart';
 import 'package:health360/data/models/meals_model.dart';
@@ -73,21 +74,27 @@ class MealWidget extends StatelessWidget {
                                           CrossAxisAlignment.baseline,
                                       textBaseline: TextBaseline.alphabetic,
                                       children: [
-                                        Text(
-                                          mealsDM.calories,
-                                          style: const TextStyle(
-                                              fontSize: 14,
-                                              color: AppColor.white),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
+                                        Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            mealsDM.calories,
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                color: AppColor.white),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
                                         ),
-                                        const Text(
-                                          "kcal",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: AppColor.black),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
+                                        Expanded(
+                                          flex: 5,
+                                          child: Text(
+                                            "kcal".tr(),
+                                            style: const TextStyle(
+                                                fontSize: 12,
+                                                color: AppColor.black),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.visible,
+                                          ),
                                         ),
                                       ],
                                     ),
