@@ -157,9 +157,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 ),
                 MyButton(
                     onPressed: () {
-                      CacheData.setData(key: "email", value: email);
-                      CacheData.setData(key: "password", value: password);
-                      CacheData.setData(key: "fullName", value: fullName);
+
                       register();
                     },
                     text: "signUp".tr()),
@@ -181,13 +179,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           email: email,
           password: password,
         );
-        CacheData.setData(key: "id", value: userCredential.user!.uid);
+
+
         AppUser newUser = AppUser(
-            id: CacheData.getData(key: "id"),
-            email: CacheData.getData(key: "email"),
-            fullName: CacheData.getData(key: "fullName"));
+            id: userCredential.user!.uid,
+            email: email,
+            fullName: fullName);
         await registerUserInFireStore(newUser);
+
         AppUser.currentUser = newUser;
+        CacheData.setData(key: "email", value: email);
+        CacheData.setData(key: "password", value: password);
+        CacheData.setData(key: "fullName", value: fullName);
+        CacheData.setData(key: "id", value: userCredential.user!.uid);
+
         hideLoading(context);
         Navigator.pop(context);
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);

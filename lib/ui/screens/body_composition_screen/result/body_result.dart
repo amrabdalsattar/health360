@@ -6,7 +6,7 @@ import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/constants.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
-import 'expantion_tile/meal_expansion_tile.dart';
+import 'expansion_tile/meal_expansion_tile.dart';
 
 class BodyResult extends StatelessWidget {
   static const String routeName = "result";

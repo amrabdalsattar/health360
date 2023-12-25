@@ -2,10 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/data/models/details_model.dart';
 import 'package:health360/data/models/meals_model.dart';
-import 'package:health360/ui/screens/body_composition_screen/result/expantion_tile/meal_widget/meal_dialog.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
+
+import 'meal_dialog.dart';
 
 
 class MealWidget extends StatelessWidget {

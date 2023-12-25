@@ -58,7 +58,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 10,
                 ),
                 Text("plsSignToCon",
-                    style: Theme.of(context).textTheme.headlineMedium).tr(),
+                        style: Theme.of(context).textTheme.headlineMedium)
+                    .tr(),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .08,
                 ),
@@ -119,15 +120,15 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                         child: Text(
                           "forgotPassword".tr(),
-                          style: Theme.of(context).textTheme.bodyLarge
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
                               ?.copyWith(fontWeight: FontWeight.bold),
                         )),
                     const Spacer(),
                     MyButton(
-                      fontSize: 10,
+                        fontSize: 10,
                         onPressed: () {
-                        CacheData.setData(key: "email", value: email);
-                        CacheData.setData(key: "password", value: password);
                           login();
                         },
                         text: "login".tr().toUpperCase()),
@@ -147,7 +148,10 @@ class _SignInScreenState extends State<SignInScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("haveNoAcc".tr(), style: Theme.of(context).textTheme.bodyMedium,),
+                    Text(
+                      "haveNoAcc".tr(),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                     TextButton(
                         onPressed: () {
                           Navigator.pushNamed(
@@ -155,8 +159,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                         child: Text(
                           "signUp".tr(),
-                          style: TextStyle(color: provider.appMode == ThemeMode.light ?
-                          AppColor.primary : AppColor.darkAccent),
+                          style: TextStyle(
+                              color: provider.appMode == ThemeMode.light
+                                  ? AppColor.primary
+                                  : AppColor.darkAccent),
                         ))
                   ],
                 )
@@ -178,19 +184,23 @@ class _SignInScreenState extends State<SignInScreen> {
           email: email,
           password: password,
         );
+
+
         AppUser currentUser = await getUserFromFireStore(credential.user!.uid);
         AppUser.currentUser = currentUser;
-        hideLoading(context);
-        CacheData.setData(key: "fullName", value: AppUser.currentUser!.fullName);
+        CacheData.setData(
+            key: "fullName", value: AppUser.currentUser!.fullName);
         CacheData.setData(key: "id", value: AppUser.currentUser!.id);
+        CacheData.setData(key: "email", value: email);
+        CacheData.setData(key: "password", value: password);
+        hideLoading(context);
 
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-credential') {
         hideLoading(context);
-        showErrorDialog(
-            context, "incorrectPassOrEmail".tr());
+        showErrorDialog(context, "incorrectPassOrEmail".tr());
       } else {
         hideLoading(context);
         showErrorDialog(context, e.message!);

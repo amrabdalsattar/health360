@@ -23,14 +23,13 @@ Future<void> main() async {
   await _initFirebase();
   var provider = SettingsProvider();
   await provider.loadConfig();
-  var email = CacheData.getData(key: "email");
   runApp(EasyLocalization(
       supportedLocales: const [Locale('en', 'US'), Locale('ar')],
       path: 'assets/translations',
       fallbackLocale: const Locale('en', 'US'),
       child: ChangeNotifierProvider(
           create: (_) => provider,
-          child: email == null ? const MyApp() : const HomeScreen())));
+          child: const MyApp())));
 }
 
 Future<void> _initFirebase() async {
@@ -54,9 +53,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print(CacheData.getData(key: "email"));
-    print(CacheData.getData(key: "id"));
-    print(CacheData.getData(key: "fullName"));
     SettingsProvider provider = Provider.of(context);
 
     return MaterialApp(
@@ -75,7 +71,8 @@ class MyApp extends StatelessWidget {
         BodyCompositionScreen.routeName: (_) => const BodyCompositionScreen(),
         BodyResult.routeName: (_) => BodyResult(),
       },
-      initialRoute: SignInScreen.routeName,
+      initialRoute: CacheData.getData(key: "email") == null?
+      SignInScreen.routeName : HomeScreen.routeName,
       home: const HomeScreen(),
     );
   }

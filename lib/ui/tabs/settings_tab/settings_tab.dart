@@ -49,11 +49,18 @@ class SettingsTab extends StatelessWidget {
           ),
           MyButton(
               text: "logOut".tr(), onPressed: (){
+                print(CacheData.getData(key: "email"));
+                print(CacheData.getData(key: "id"));
+                print(CacheData.getData(key: "fullName"));
                 CacheData.removeData(key: "email");
                 CacheData.removeData(key: "fullName");
                 CacheData.removeData(key: "password");
                 CacheData.removeData(key: "id");
             Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+
+                print(CacheData.getData(key: "email"));
+                print(CacheData.getData(key: "id"));
+                print(CacheData.getData(key: "fullName"));
             provider.setCurrentTabIndex(0);
           })
         ],
