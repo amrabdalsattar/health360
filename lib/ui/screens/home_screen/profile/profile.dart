@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health360/data/models/user_model.dart';
 import 'package:health360/ui/screens/home_screen/profile/profile_components/pick_image.dart';
 import 'package:health360/ui/screens/home_screen/profile/profile_components/profile_text_field.dart';
 import 'package:health360/utils/app_color.dart';

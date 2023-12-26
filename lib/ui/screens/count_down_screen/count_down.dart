@@ -43,6 +43,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
+            provider.changeBreathworkStatus("inhale".tr());
           },
           icon: Icon(Icons.arrow_back, color: provider.appMode == ThemeMode.light?
           AppColor.black : AppColor.darkAccent,),
@@ -55,7 +56,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
           Visibility(
               visible: widget.isBreathwork,
               child: Text(
-                provider.breathworkStatus,
+                provider.breathworkStatus.tr(),
                 style: Theme.of(context).textTheme.headlineLarge,
               )),
           const SizedBox(
@@ -121,7 +122,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
                 title: "restart".tr(),
                 onPressed: () {
                   duration = 1;
-                  provider.changeBreathworkStatus("Inhale");
+                  provider.changeBreathworkStatus("inhale".tr());
                   _controller.restart();
                 },
                 color: AppColor.darkPrimary,
@@ -136,13 +137,13 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
   void inhaleAndExhaleAlgorithm(int seconds, int minutes) {
     if ((seconds % 5) - 1 == 0) {
       Future.delayed(Duration(seconds: duration), () {
-        if (provider.breathworkStatus == "Inhale" &&
+        if (provider.breathworkStatus == "inhale".tr() &&
             minutes != widget.duration) {
-          provider.changeBreathworkStatus("Exhale");
+          provider.changeBreathworkStatus("exhale".tr());
         } else if (minutes == 0 && seconds == 0) {
           provider.changeBreathworkStatus(provider.breathworkStatus);
         } else {
-          provider.changeBreathworkStatus("Inhale");
+          provider.changeBreathworkStatus("inhale".tr());
         }
       });
     }

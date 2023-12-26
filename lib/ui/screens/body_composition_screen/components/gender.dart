@@ -15,6 +15,7 @@ class Gender extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: () {
+          /// if the gender is male or female as should we pass in constructor
           if (type == "male") {
             provider.setGender(true);
           } else {
@@ -23,6 +24,7 @@ class Gender extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
+            /// Color Changing when the gender selected
               color: provider.appMode == ThemeMode.light
                   ? ((provider.isMale && type == "male") ||
                           (!provider.isMale && type == "female")
@@ -37,6 +39,7 @@ class Gender extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
+                /// the gender icon
                 type == "male" ? Icons.male : Icons.female,
                 size: 50,
                 color: AppColor.white,
@@ -45,9 +48,8 @@ class Gender extends StatelessWidget {
                 height: 15,
               ),
               Text(
-                type == "male"
-                    ? "male"
-                    : "female",
+                /// the text that feed us back if the user is male of female
+                type == "male" ? "male" : "female",
                 style:
                     const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ).tr(),

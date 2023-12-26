@@ -12,6 +12,7 @@ class BMIWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// this widget is basic UI without any logic
     SettingsProvider provider = Provider.of(context);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),

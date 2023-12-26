@@ -178,14 +178,14 @@ class _SignInScreenState extends State<SignInScreen> {
     try {
       if (_formKey.currentState!.validate()) {
         showLoading(context);
-
+        /// Sign in with FireBase Authentication
         final credential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
         );
 
-
+        /// Sign in with FireBase FireStore
         AppUser currentUser = await getUserFromFireStore(credential.user!.uid);
         AppUser.currentUser = currentUser;
         CacheData.setData(
@@ -207,7 +207,7 @@ class _SignInScreenState extends State<SignInScreen> {
       }
     }
   }
-
+  /// Getting user from Firestore to help in retrieving data and caching it
   Future<AppUser> getUserFromFireStore(String id) async {
     CollectionReference<AppUser> userCollection = AppUser.collection();
     DocumentSnapshot<AppUser> documentSnapshot =

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/button.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
+import 'package:health360/utils/app_asset.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/cache_helper.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,8 @@ class SettingsTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("settings".tr(),
+          Text(
+            "settings".tr(),
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge!
@@ -32,37 +34,45 @@ class SettingsTab extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-
                 buildRow(
                     "darkMode".tr(),
                     provider.switchState,
-                        (switchMode) => {
-                      provider.setSwitchState(switchMode),
-                      if (provider.switchState == true)
-                        {provider.setCurrentMode(ThemeMode.dark)}
-                      else
-                        {provider.setCurrentMode(ThemeMode.light)}
-                    },
+                    (switchMode) => {
+                          provider.setSwitchState(switchMode),
+                          if (provider.switchState == true)
+                            {provider.setCurrentMode(ThemeMode.dark)}
+                          else
+                            {provider.setCurrentMode(ThemeMode.light)}
+                        },
                     context),
               ],
             ),
           ),
           MyButton(
-              text: "logOut".tr(), onPressed: (){
-                print(CacheData.getData(key: "email"));
-                print(CacheData.getData(key: "id"));
-                print(CacheData.getData(key: "fullName"));
+              text: "logOut".tr(),
+              onPressed: () {
                 CacheData.removeData(key: "email");
                 CacheData.removeData(key: "fullName");
                 CacheData.removeData(key: "password");
                 CacheData.removeData(key: "id");
-            Navigator.pushReplacementNamed(context, SignInScreen.routeName);
-
-                print(CacheData.getData(key: "email"));
-                print(CacheData.getData(key: "id"));
-                print(CacheData.getData(key: "fullName"));
-            provider.setCurrentTabIndex(0);
-          })
+                Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+                provider.setCurrentTabIndex(0);
+              }),
+          TextButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => AboutDialog(
+                      applicationIcon: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Image.asset(AppAsset.logo)),
+                      applicationName: "Health360",
+                      applicationVersion: "1.0.0",
+                      applicationLegalese: "© 2023 Health360",
+                    ));
+              },
+              child: const Text("About Us"))
         ],
       ),
     );
@@ -79,9 +89,10 @@ class SettingsTab extends StatelessWidget {
         Text(
           text,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: provider.appMode == ThemeMode.light ? AppColor.black :
-                AppColor.white, fontWeight: FontWeight.bold
-          ),
+              color: provider.appMode == ThemeMode.light
+                  ? AppColor.black
+                  : AppColor.white,
+              fontWeight: FontWeight.bold),
         ),
         Switch(
           value: switchValue,

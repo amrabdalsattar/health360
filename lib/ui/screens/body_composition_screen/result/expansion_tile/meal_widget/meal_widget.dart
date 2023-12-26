@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 import 'meal_dialog.dart';
 
-
 class MealWidget extends StatelessWidget {
   final MealsDM mealsDM;
   final DetailsDM detailsDM;
@@ -17,6 +16,7 @@ class MealWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// the widget that shows the meal data
     SettingsProvider provider = Provider.of(context);
     return InkWell(
         child: Container(

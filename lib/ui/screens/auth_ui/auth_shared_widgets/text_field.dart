@@ -24,7 +24,7 @@ class MyTextField extends StatelessWidget {
     this.visible = false,
     this.validator,
   });
-
+/// Shared Customized TextField, The same way that should be used like Button
   @override
   Widget build(BuildContext context) {
     SettingsProvider provider = Provider.of(context);

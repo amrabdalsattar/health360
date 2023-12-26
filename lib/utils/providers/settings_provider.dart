@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:health360/ui/tabs/community_tab/community_tab.dart';
@@ -8,9 +6,9 @@ import 'package:health360/ui/tabs/settings_tab/settings_tab.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/models/post_model.dart';
-import '../../data/models/user_model.dart';
 import '../../ui/tabs/home_tab/home_tab.dart';
 import '../app_asset.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SettingsProvider extends ChangeNotifier {
   int currentTabIndex = 0;
@@ -39,7 +37,7 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String breathworkStatus = "Inhale";
+  String breathworkStatus = "inhale".tr();
 
   void changeBreathworkStatus(String status) {
     breathworkStatus = status;

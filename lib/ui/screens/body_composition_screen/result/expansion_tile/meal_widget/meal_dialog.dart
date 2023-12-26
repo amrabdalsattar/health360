@@ -22,7 +22,7 @@ class MealDialogState extends State<MealDialog>
   @override
   void initState() {
     super.initState();
-
+    /// Animation Methods (باصي لصلاح)
     _controller = AnimationController(
       animationBehavior: AnimationBehavior.preserve,
       vsync: this,

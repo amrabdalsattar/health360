@@ -12,6 +12,7 @@ class BodyResult extends StatelessWidget {
   static const String routeName = "result";
 
   final double bMIResult;
+
   String get resultPhrase {
     String resultText = '';
     if (bMIResult >= 30) {
@@ -53,13 +54,16 @@ class BodyResult extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-
               sizedBox,
               Row(
-
                 children: [
-                  Expanded(child: BMIWidget(bMIResult: bMIResult.toStringAsFixed(1), title: "bodyMassIndex".tr())),
-                  Expanded(child: BMIWidget(bMIResult: resultPhrase, title: "rangeOf".tr())),
+                  Expanded(
+                      child: BMIWidget(
+                          bMIResult: bMIResult.toStringAsFixed(1),
+                          title: "bodyMassIndex".tr())),
+                  Expanded(
+                      child: BMIWidget(
+                          bMIResult: resultPhrase, title: "rangeOf".tr())),
                 ],
               ),
               sizedBox,
@@ -73,24 +77,19 @@ class BodyResult extends StatelessWidget {
                   children: [
                     Text(
                       "caloriesLimit".tr(),
-                      style:
-                          const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20),
                       textAlign: TextAlign.center,
                     ),
                     span("sedentary".tr(), 1.2, context),
                     sizedBox,
-                    span("lightlyActive".tr(),
-                        1.375, context),
+                    span("lightlyActive".tr(), 1.375, context),
                     sizedBox,
-                    span("moderatelyActive".tr(),
-                        1.55, context),
+                    span("moderatelyActive".tr(), 1.55, context),
                     sizedBox,
-                    span("veryActive".tr(),
-                        1.725, context),
+                    span("veryActive".tr(), 1.725, context),
                     sizedBox,
-                    span(
-                        "extraActive".tr(),
-                        1.9, context)
+                    span("extraActive".tr(), 1.9, context)
                   ],
                 ),
               ),
@@ -98,9 +97,9 @@ class BodyResult extends StatelessWidget {
               Container(
                   margin: const EdgeInsets.symmetric(vertical: 20),
                   child: const Text("suggestedMeals",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)
-                  ).tr()
-              ),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w500))
+                      .tr()),
               sizedBox,
               ListView.builder(
                 shrinkWrap: true,
@@ -115,7 +114,7 @@ class BodyResult extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: AppColor.liteGrey,
                     borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColor.midGrey)),
+                    border: Border.all(color: AppColor.midGrey)),
                 child: const Text(
                   "caution",
                   style: TextStyle(
@@ -145,9 +144,8 @@ class BodyResult extends StatelessWidget {
         children: [
           TextSpan(
             text: "$activeStatus\n",
-            style:
-            const TextStyle(fontWeight: FontWeight.bold,
-                    color: AppColor.darkGrey),
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: AppColor.darkGrey),
           ),
           TextSpan(
             text: (bMRCalculation(provider.age, provider.weight,
@@ -156,8 +154,9 @@ class BodyResult extends StatelessWidget {
                 .toStringAsFixed(1),
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: provider.appMode == ThemeMode.light?
-              Colors.blue : AppColor.darkAccent, // Set your desired color here
+              color: provider.appMode == ThemeMode.light
+                  ? Colors.blue
+                  : AppColor.darkAccent, // Set your desired color here
             ),
           ),
         ],

@@ -25,6 +25,7 @@ class CalculateButton extends StatelessWidget {
             fixedSize: MaterialStateProperty.all(Size.fromWidth(
                 MediaQuery.of(context).size.width * .9))),
         onPressed: () {
+          /// we should pass weight and height and make a calculation that stored in result to generate Body Mass Index (BMI)
           var result =
               provider.weight / pow(provider.heightValue / 100, 2);
           Navigator.push(context, MaterialPageRoute(builder: (context) {

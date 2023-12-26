@@ -47,6 +47,7 @@ abstract class AppTheme {
           backgroundColor: AppColor.white
       )
   );
+
   static ThemeData darkMode = ThemeData(
     canvasColor: AppColor.darkSecondary,
     primaryColor: AppColor.darkPrimary,
@@ -85,7 +86,8 @@ abstract class AppTheme {
       backgroundColor: AppColor.darkAccent,
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: AppColor.darkPrimary
+      backgroundColor: AppColor.darkPrimary,
     ),
   );
+
 }

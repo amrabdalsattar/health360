@@ -7,6 +7,7 @@ abstract class AppAsset {
   static const String facebook = "${basePath}face.png";
   static const String google = "${basePath}google.png";
   static const String avatar = "${basePath}avatar.png";
+  static const String logo = "${basePath}Group 1.png";
   static const String pullUp = "${basePath}pull_up.jpg";
   static const String sitUp = "${basePath}sit_up.jpg";
   static const String pushUp = "${basePath}push_up.jpg";

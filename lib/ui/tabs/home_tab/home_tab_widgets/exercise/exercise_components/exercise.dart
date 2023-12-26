@@ -10,11 +10,15 @@ class Exercise extends StatelessWidget {
   final DetailsDM detailsDM;
   final bool isExercise;
 
-  const Exercise({super.key, required this.exerciseDM,
-    required this.detailsDM, this.isExercise = true});
+  const Exercise(
+      {super.key,
+      required this.exerciseDM,
+      required this.detailsDM,
+      this.isExercise = true});
 
   @override
   Widget build(BuildContext context) {
+    /// Exercise Widget
     return InkWell(
       child: Container(
           decoration: BoxDecoration(
@@ -37,7 +41,8 @@ class Exercise extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -53,8 +58,12 @@ class Exercise extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: exerciseDM.exerciseTypeColor,
                                   borderRadius: BorderRadius.circular(20)),
-                              child: Text(exerciseDM.exerciseType,
-                                style: const TextStyle(color: AppColor.black,),)),
+                              child: Text(
+                                exerciseDM.exerciseType,
+                                style: const TextStyle(
+                                  color: AppColor.black,
+                                ),
+                              )),
                         ],
                       ),
                       Row(
@@ -66,10 +75,14 @@ class Exercise extends StatelessWidget {
                           const SizedBox(
                             width: 6,
                           ),
-                          Text(exerciseDM.duration, style: Theme.of(context).textTheme.bodyMedium,),
+                          Text(
+                            exerciseDM.duration,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                           const SizedBox(
                             width: 16,
                           ),
+                          /// if the exercise is Spiritual it hides the rounds
                           Visibility(
                             visible: isExercise,
                             child: const Icon(
@@ -94,11 +107,11 @@ class Exercise extends StatelessWidget {
           )),
       onTap: () {
         showDialog(
-          context: context,
-          builder: (context) => ExerciseDialog(
-            detailsDM: detailsDM,
-            title: exerciseDM.exerciseTitle,)
-        );
+            context: context,
+            builder: (context) => ExerciseDialog(
+                  detailsDM: detailsDM,
+                  title: exerciseDM.exerciseTitle,
+                ));
       },
     );
   }

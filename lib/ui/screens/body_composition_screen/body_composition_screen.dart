@@ -34,6 +34,7 @@ class BodyCompositionScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              /// Gender
               const Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(20.0),

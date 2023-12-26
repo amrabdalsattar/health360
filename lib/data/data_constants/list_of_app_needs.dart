@@ -7,6 +7,7 @@ import '../models/details_model.dart';
 import '../models/exercise_model.dart';
 
 abstract class ListOfNeeds {
+  /// List of Exercise Data Model, This is the List that i retrieve Exercise's Data from
   static final List<ExerciseDM> exercises = [
     ExerciseDM(AppAsset.pullUp, "pullUp".tr(), "8 ${"minuets".tr()}",
         "3 ${"rounds".tr()}", "strength".tr(), AppColor.liteGreen),
@@ -18,6 +19,7 @@ abstract class ListOfNeeds {
         "3 ${"rounds".tr()}", "muscles".tr(), AppColor.yellow),
   ];
 
+  /// List of Meals Data Model, This is the List that i retrieve Meal's Data from
   static final List<MealsDM> breakfastMeals = [
     MealsDM(
         calories: "193",
@@ -28,6 +30,7 @@ abstract class ListOfNeeds {
         imagePath: AppAsset.boiledEggs,
         mealTitle: "boiledEggsMeal".tr()),
   ];
+
   static final List<DetailsDM> breakfastDetails = [
     DetailsDM(
       description: "shakshukaIngredients".tr(),
@@ -35,7 +38,7 @@ abstract class ListOfNeeds {
     DetailsDM(
       description: "boiledEggsIngredients".tr(),
     ),
-  ];
+  ]; /// Details Data Model(Ingredients)
 
   static final List<MealsDM> lunchMeals = [
     MealsDM(

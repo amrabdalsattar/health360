@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:health360/data/models/user_model.dart';
 import 'package:health360/ui/shared_components/profile_photo.dart';
 import 'package:health360/utils/app_color.dart';
+import 'package:health360/utils/cache_helper.dart';
 import 'package:health360/utils/dialog_utils.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
@@ -113,16 +114,16 @@ class AddPostScreen extends StatelessWidget {
   }
 
   void addPostToFirestore(BuildContext context) {
-    CollectionReference todosCollectionRef =
+    CollectionReference postsCollectionRef =
         FirebaseFirestore.instance.collection("posts");
 
-    DocumentReference newEmptyDoc = todosCollectionRef.doc();
+    DocumentReference newEmptyDoc = postsCollectionRef.doc();
     newEmptyDoc.set({
-      "name": AppUser.currentUser!.fullName,
+      "name": CacheData.getData(key: "fullName"),
       "photo": provider.profileImagePath,
       "content" : provider.postContent,
       "date": DateTime.now(),
-      "id": AppUser.currentUser!.id,
+      "id": CacheData.getData(key: "id"),
     }).timeout(const Duration(milliseconds: 300), onTimeout: () {
       provider.refreshTodoList();
       Navigator.pop(context);
