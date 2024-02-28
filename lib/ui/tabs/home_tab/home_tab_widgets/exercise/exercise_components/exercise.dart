@@ -18,7 +18,6 @@ class Exercise extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Exercise Widget
     return InkWell(
       child: Container(
           decoration: BoxDecoration(
@@ -82,7 +81,6 @@ class Exercise extends StatelessWidget {
                           const SizedBox(
                             width: 16,
                           ),
-                          /// if the exercise is Spiritual it hides the rounds
                           Visibility(
                             visible: isExercise,
                             child: const Icon(

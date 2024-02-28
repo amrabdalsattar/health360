@@ -10,7 +10,7 @@ class ProfilePhoto extends StatelessWidget {
   final double width;
   final double height;
 
-  const ProfilePhoto({super.key, this.width = 80, this.height = 80});
+  const ProfilePhoto({super.key, this.width = 50, this.height = 50});
 
   @override
   Widget build(BuildContext context) {

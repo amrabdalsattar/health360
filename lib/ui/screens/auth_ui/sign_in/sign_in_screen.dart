@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/button.dart';
 import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/logo_collection.dart';
 import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/text_field.dart';
@@ -86,9 +87,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           return "passwordRequired".tr();
                         }
 
-                        // Check if the password has at least one uppercase, one lowercase, and a minimum of 6 characters
-                        if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$')
-                            .hasMatch(password)) {
+                        if (password.length < 6) {
                           return "passwordIsIncorrect".tr();
                         }
 
@@ -136,14 +135,14 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 Text(
                   "orLoginWith".tr(),
-                  style: const TextStyle(color: AppColor.grey),
+                  style: TextStyle(color: AppColor.grey, fontSize: 14.sp),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.04,
                 ),
                 const LogoCollection(),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.16,
+                  height: MediaQuery.of(context).size.height * 0.12,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -178,14 +177,12 @@ class _SignInScreenState extends State<SignInScreen> {
     try {
       if (_formKey.currentState!.validate()) {
         showLoading(context);
-        /// Sign in with FireBase Authentication
         final credential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
         );
 
-        /// Sign in with FireBase FireStore
         AppUser currentUser = await getUserFromFireStore(credential.user!.uid);
         AppUser.currentUser = currentUser;
         CacheData.setData(
@@ -207,7 +204,6 @@ class _SignInScreenState extends State<SignInScreen> {
       }
     }
   }
-  /// Getting user from Firestore to help in retrieving data and caching it
   Future<AppUser> getUserFromFireStore(String id) async {
     CollectionReference<AppUser> userCollection = AppUser.collection();
     DocumentSnapshot<AppUser> documentSnapshot =

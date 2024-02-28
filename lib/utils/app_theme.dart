@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/utils/app_color.dart';
 
 abstract class AppTheme {
@@ -20,22 +21,22 @@ abstract class AppTheme {
 
 
 
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
       headlineLarge: TextStyle(
         color: AppColor.black,
-        fontSize: 26,
+        fontSize: 26.sp,
         fontWeight: FontWeight.bold
       ),
       headlineMedium: TextStyle(
           color: AppColor.grey,
-          fontSize: 16,
+          fontSize: 16.sp,
         fontWeight: FontWeight.bold
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: const TextStyle(
           color: AppColor.black,
           fontWeight: FontWeight.normal
       ),
-      bodyMedium: TextStyle(color: AppColor.black)
+      bodyMedium: const TextStyle(color: AppColor.black)
     ),
 
 
@@ -64,22 +65,22 @@ abstract class AppTheme {
 
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,),
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
         headlineLarge: TextStyle(
             color: AppColor.white,
-            fontSize: 26,
+            fontSize: 26.sp,
             fontWeight: FontWeight.bold
         ),
         headlineMedium: TextStyle(
             color: AppColor.white,
-            fontSize: 16,
+            fontSize: 16.sp,
             fontWeight: FontWeight.bold
         ),
-        bodyLarge: TextStyle(
+        bodyLarge: const TextStyle(
             color: AppColor.white,
             fontWeight: FontWeight.normal
         ),
-        bodyMedium: TextStyle(color: AppColor.white)
+        bodyMedium: const TextStyle(color: AppColor.white)
     ),
 
     floatingActionButtonTheme: const FloatingActionButtonThemeData(

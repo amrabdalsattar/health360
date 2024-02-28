@@ -3,7 +3,6 @@ import 'package:health360/ui/shared_components/profile_photo.dart';
 import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/cache_helper.dart';
 
-import '../../../../data/models/user_model.dart';
 import '../../../../utils/app_color.dart';
 import '../profile/profile.dart';
 

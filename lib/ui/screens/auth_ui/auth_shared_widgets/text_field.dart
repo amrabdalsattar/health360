@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health360/utils/app_theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +24,6 @@ class MyTextField extends StatelessWidget {
     this.visible = false,
     this.validator,
   });
-/// Shared Customized TextField, The same way that should be used like Button
   @override
   Widget build(BuildContext context) {
     SettingsProvider provider = Provider.of(context);
@@ -32,10 +31,10 @@ class MyTextField extends StatelessWidget {
       decoration: const BoxDecoration(),
 
       child: Padding(
-        padding: const EdgeInsets.only(top: 8.0),
+        padding: EdgeInsets.only(top: 8.h),
         child: Column(
           children: [
-            const SizedBox(height: 20,),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.04,),
             TextFormField(
               autofocus: false,
               validator: validator,
@@ -44,17 +43,17 @@ class MyTextField extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                   borderSide:
                   BorderSide(color: provider.appMode == ThemeMode.light?
-                  AppColor.primary : AppColor.darkAccent, width: 2.0),
-                  borderRadius: const BorderRadius.all(
+                  AppColor.primary : AppColor.darkAccent, width: 2.w),
+                  borderRadius: BorderRadius.all(
                     Radius.circular(
-                      30.0,
+                      30.h,
                     ),
                   ),
                 ),
                 fillColor: AppColor.liteGrey,
                 filled: true,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(30.h),
                   borderSide: BorderSide.none,
                 ),
                 labelText: label,

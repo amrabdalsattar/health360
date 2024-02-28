@@ -38,7 +38,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Future<void> resetPassword({required String email}) async {
     try {
       if (_key.currentState!.validate()) {
-        /// Them method that resets the password
       await auth.sendPasswordResetEmail(email: email);
       }
     } catch (e) {
@@ -66,7 +65,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
-                    /// back to the previous screen when it clicked
                     onTap: () => Navigator.pop(context),
                     child: Icon(
                       Icons.close,

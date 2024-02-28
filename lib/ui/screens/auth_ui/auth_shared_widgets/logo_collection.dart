@@ -8,7 +8,6 @@ class LogoCollection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Collection of Sign In Methods, They are useless BTW :""
     return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [

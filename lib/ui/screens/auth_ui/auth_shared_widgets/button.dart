@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyButton extends StatelessWidget {
   final String text;
@@ -13,15 +14,14 @@ class MyButton extends StatelessWidget {
       required this.onPressed,
       this.fontSize = 10});
 
-  /// Shared Button, It shows up in (Sign in, Sign Up, Log out), it has a Customized shape, and his Functionality varies from screen to another depends on the passed Constructors
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomRight,
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 30),
-        width: MediaQuery.of(context).size.width * 0.3,
-        height: MediaQuery.of(context).size.height * 0.06,
+        margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 30.h),
+        width: 110.w,
+        height: 45.h,
         child: ElevatedButton(
             style: ButtonStyle(
               backgroundColor:
@@ -30,7 +30,6 @@ class MyButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30))),
             ),
 
-            /// as Referenced in the Constructor
             onPressed: onPressed,
             child: Row(
               children: [
@@ -38,7 +37,7 @@ class MyButton extends StatelessWidget {
                     flex: 8,
                     child: Text(
                       text,
-                      style: TextStyle(fontSize: fontSize),
+                      style: TextStyle(fontSize: fontSize.sp),
                     )),
                 Expanded(
                     flex: 2,
@@ -46,7 +45,7 @@ class MyButton extends StatelessWidget {
                       context.locale == const Locale('ar')
                           ? CupertinoIcons.arrow_left
                           : CupertinoIcons.arrow_right,
-                      size: 14,
+                      size: 14.sp,
                     ))
               ],
             )),

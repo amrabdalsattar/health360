@@ -137,11 +137,11 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
   void inhaleAndExhaleAlgorithm(int seconds, int minutes) {
     if ((seconds % 5) - 1 == 0) {
       Future.delayed(Duration(seconds: duration), () {
-        if (provider.breathworkStatus == "inhale".tr() &&
+        if (provider.breathworkStatus.tr() == "inhale".tr() &&
             minutes != widget.duration) {
           provider.changeBreathworkStatus("exhale".tr());
         } else if (minutes == 0 && seconds == 0) {
-          provider.changeBreathworkStatus(provider.breathworkStatus);
+          provider.changeBreathworkStatus(provider.breathworkStatus.tr());
         } else {
           provider.changeBreathworkStatus("inhale".tr());
         }

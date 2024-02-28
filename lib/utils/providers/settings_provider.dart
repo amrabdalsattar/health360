@@ -89,7 +89,7 @@ class SettingsProvider extends ChangeNotifier {
 
 List<PostDM> posts = [];
 
-  refreshTodoList() async {
+  refreshPostsList() async {
     CollectionReference<PostDM> postsCollection = FirebaseFirestore.instance
         .collection("posts")
         .withConverter<PostDM>(fromFirestore: (docSnapShot, _) {

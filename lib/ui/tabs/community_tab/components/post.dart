@@ -14,7 +14,6 @@ class Post extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         Container(
@@ -22,8 +21,11 @@ class Post extends StatelessWidget {
           margin: const EdgeInsets.only(top: 20),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Theme.of(context) == AppTheme.lightMode?
-              AppColor.black : AppColor.darkPrimary,)),
+              border: Border.all(
+                color: Theme.of(context) == AppTheme.lightMode
+                    ? AppColor.black
+                    : AppColor.darkPrimary,
+              )),
           child: Column(
             children: [
               Row(
@@ -32,12 +34,12 @@ class Post extends StatelessWidget {
                     flex: 3,
                     child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
+                            borderRadius: BorderRadius.circular(30),
                             border: Border.all(color: AppColor.grey, width: 2)),
-                        width: 60,
-                        height: 40,
+                        width: 10,
+                        height: 45,
                         margin: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 25),
+                            horizontal: 26, vertical: 25),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
                             child: postDM.photoPath.contains("assets")

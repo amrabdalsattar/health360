@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health360/data/models/user_model.dart';
 import 'package:health360/ui/shared_components/profile_photo.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/cache_helper.dart';
@@ -57,7 +56,7 @@ class AddPostScreen extends StatelessWidget {
                             if(provider.postContent.isNotEmpty){
                               showLoading(context);
                               addPostToFirestore(context);
-                              provider.refreshTodoList();
+                              provider.refreshPostsList();
                               provider.setPostContent("");
                               hideLoading(context);
                             }
@@ -125,7 +124,7 @@ class AddPostScreen extends StatelessWidget {
       "date": DateTime.now(),
       "id": CacheData.getData(key: "id"),
     }).timeout(const Duration(milliseconds: 300), onTimeout: () {
-      provider.refreshTodoList();
+      provider.refreshPostsList();
       Navigator.pop(context);
     });
   }

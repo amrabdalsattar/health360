@@ -16,16 +16,13 @@ class HomeTab extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            /// The Articles
             const NewsSlider(),
-            /// The Spiritual exercises
             Container(
                 margin: const EdgeInsets.symmetric(vertical: 20),
                 child: Text("spiritualPractice".tr(),
                     style: Theme.of(context).textTheme.headlineLarge?.
                     copyWith(fontWeight: FontWeight.w500, fontSize: 20))),
 
-            /// ListView.separated to add dividers between exercises
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

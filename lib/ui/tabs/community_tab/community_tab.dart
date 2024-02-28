@@ -18,7 +18,7 @@ class _CommunityTabState extends State<CommunityTab> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      provider.refreshTodoList();
+      provider.refreshPostsList();
     });
   }
 

@@ -32,7 +32,6 @@ class HeightSlider extends StatelessWidget {
               ],
             ),
             Slider(
-              /// division is for specifying the value that should be changes (0.5cm)
               divisions: 240,
               thumbColor: AppColor.white,
                 activeColor: provider.appMode == ThemeMode.light ?
@@ -41,7 +40,6 @@ class HeightSlider extends StatelessWidget {
                 max: 210,
                 value: provider.heightValue,
                 onChanged: (newValue) {
-                /// changing the value when the slider changes
                   provider.sliderAutomator(newValue);
                 })
           ],

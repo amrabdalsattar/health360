@@ -18,8 +18,9 @@ class WeightAndAge extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-            color: provider.appMode == ThemeMode.light?
-            AppColor.primary : AppColor.darkPrimary,
+            color: provider.appMode == ThemeMode.light
+                ? AppColor.primary
+                : AppColor.darkPrimary,
             borderRadius: BorderRadius.circular(20)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -44,11 +45,11 @@ class WeightAndAge extends StatelessWidget {
                 FloatingActionButton(
                   backgroundColor: AppColor.black,
                   heroTag: type == "Age" ? "age--" : "weight--",
+
                   onPressed: () {
-                    
-                    type == "Age" ? provider.decrementAge():
-                    provider.decrementWeight();
-                    
+                    type == "Age"
+                        ? provider.decrementAge()
+                        : provider.decrementWeight();
                   },
                   mini: true,
                   child: const Icon(Icons.remove),
@@ -57,8 +58,9 @@ class WeightAndAge extends StatelessWidget {
                   backgroundColor: AppColor.grey,
                   heroTag: type == "Age" ? "age++" : "weight++",
                   onPressed: () {
-                    type == "Age" ? provider.incrementAge() :
-                    provider.incrementWeight();
+                    type == "Age"
+                        ? provider.incrementAge()
+                        : provider.incrementWeight();
                   },
                   mini: true,
                   child: const Icon(Icons.add),

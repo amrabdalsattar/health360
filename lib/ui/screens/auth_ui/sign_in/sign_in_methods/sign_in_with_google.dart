@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../utils/app_asset.dart';
@@ -15,7 +16,7 @@ class SignInWithGoogle extends StatelessWidget {
           signInWithGoogle(context);
         },
         child: Image.asset(AppAsset.google,
-          width: 40, height: 40,));
+          width: 30.w, height: 30.h,));
   }
 
   Future<UserCredential> signInWithGoogle(BuildContext context) async {
