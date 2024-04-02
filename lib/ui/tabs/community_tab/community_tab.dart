@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/tabs/community_tab/components/post.dart';
 import 'package:provider/provider.dart';
 
@@ -27,8 +28,9 @@ class _CommunityTabState extends State<CommunityTab> {
     provider = Provider.of(context);
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 26),
+        margin: EdgeInsets.symmetric(horizontal: 20.w),
         child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
             itemCount: provider.posts.length,
             itemBuilder: (context, index) => Post(
                   postDM: provider.posts[index],

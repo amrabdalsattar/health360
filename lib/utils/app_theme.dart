@@ -15,13 +15,18 @@ abstract class AppTheme {
       selectedItemColor: AppColor.black,
       unselectedItemColor: AppColor.grey,
     ),
-
+      dividerColor: AppColor.white,
       appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.light,),
 
 
 
     textTheme: TextTheme(
+      labelLarge: TextStyle(
+          color: AppColor.secondary,
+          fontSize: 10.sp,
+          fontWeight: FontWeight.bold
+      ),
       headlineLarge: TextStyle(
         color: AppColor.black,
         fontSize: 26.sp,
@@ -62,10 +67,15 @@ abstract class AppTheme {
       unselectedItemColor: AppColor.darkGrey,
       backgroundColor: AppColor.darkPrimary
     ),
-
+    dividerColor: AppColor.darkAccent,
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,),
     textTheme: TextTheme(
+        labelLarge: TextStyle(
+            color: AppColor.white,
+            fontSize: 10.sp,
+            fontWeight: FontWeight.bold
+        ),
         headlineLarge: TextStyle(
             color: AppColor.white,
             fontSize: 26.sp,

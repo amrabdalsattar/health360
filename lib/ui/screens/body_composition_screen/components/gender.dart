@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../../utils/app_color.dart';
@@ -13,7 +14,8 @@ class Gender extends StatelessWidget {
   Widget build(BuildContext context) {
     SettingsProvider provider = Provider.of(context);
     return Expanded(
-      child: GestureDetector(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
         onTap: () {
           if (type == "male") {
             provider.setGender(true);
@@ -46,8 +48,7 @@ class Gender extends StatelessWidget {
               ),
               Text(
                 type == "male" ? "male" : "female",
-                style:
-                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 20.sp),
               ).tr(),
             ],
           ),

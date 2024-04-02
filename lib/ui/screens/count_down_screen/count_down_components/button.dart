@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CountDownButton extends StatelessWidget {
   final void Function()? onPressed;
@@ -21,6 +22,6 @@ class CountDownButton extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(color)
         ),
         onPressed: onPressed,
-        child: Text(title));
+        child: Text(title, style: TextStyle(fontSize: 14.sp),));
   }
 }

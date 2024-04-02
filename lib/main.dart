@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:health360/data/api_managers/api_manager.dart';
 import 'package:health360/ui/screens/auth_ui/create_account/create_account_screen.dart';
 import 'package:health360/ui/screens/auth_ui/forgot_password.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
@@ -24,13 +25,15 @@ Future<void> main() async {
   await _initFirebase();
   var provider = SettingsProvider();
   await provider.loadConfig();
+
   runApp(EasyLocalization(
       supportedLocales: const [Locale('en', 'US'), Locale('ar')],
       path: 'assets/translations',
       fallbackLocale: const Locale('en', 'US'),
       child: ChangeNotifierProvider(
-          create: (_) => provider,
-          child: const MyApp())));
+        create: (_) => provider,
+        child: const MyApp(),
+      )));
 }
 
 Future<void> _initFirebase() async {

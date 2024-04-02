@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -32,8 +33,8 @@ class _PickImageState extends State<PickImage> {
         child: Container(
 
             color: AppColor.liteGrey,
-            width: 100,
-            height: 100,
+            width: 100.w,
+            height: 100.h,
             child: const Icon(Icons.camera_alt_outlined, color: AppColor.black)),
       ),
     );
@@ -43,8 +44,8 @@ class _PickImageState extends State<PickImage> {
           borderRadius: BorderRadius.circular(50),
 
         ),
-        width: 100,
-        height: 100,
+        width: 100.w,
+        height: 95.h,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: Image.file(
@@ -55,6 +56,7 @@ class _PickImageState extends State<PickImage> {
       );
     }
     return InkWell(
+      borderRadius: BorderRadius.circular(20),
       child: content,
       onTap: () {
         pickImage();

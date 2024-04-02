@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 import '../../../../utils/app_color.dart';
 
@@ -25,47 +27,24 @@ class WeightAndAge extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              type == "Age" ? "age" : "weight",
-              style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ).tr(),
-            const SizedBox(
-              height: 15,
+            SizedBox(
+              height: 15.h,
             ),
-            Text(
-              type == "Age" ? "$age" : "$weight",
-              style: const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.white),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FloatingActionButton(
-                  backgroundColor: AppColor.black,
-                  heroTag: type == "Age" ? "age--" : "weight--",
-
-                  onPressed: () {
-                    type == "Age"
-                        ? provider.decrementAge()
-                        : provider.decrementWeight();
-                  },
-                  mini: true,
-                  child: const Icon(Icons.remove),
-                ),
-                FloatingActionButton(
-                  backgroundColor: AppColor.grey,
-                  heroTag: type == "Age" ? "age++" : "weight++",
-                  onPressed: () {
-                    type == "Age"
-                        ? provider.incrementAge()
-                        : provider.incrementWeight();
-                  },
-                  mini: true,
-                  child: const Icon(Icons.add),
-                ),
-              ],
+            Expanded(
+              child: Center(
+                child: NumberPicker(
+                  decoration: BoxDecoration(
+                    border: Border.symmetric(horizontal: BorderSide(color: Theme.of(context).dividerColor, width: 2)),
+                  ),
+                    selectedTextStyle: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 26.sp),
+                    textStyle: const TextStyle(color: AppColor.grey, fontSize: 15),
+                    minValue: type == "Age" ? 5 : 10,
+                    maxValue: type == "Age" ? 95 : 180,
+                    value: type == "Age" ? age : weight,
+                    onChanged: (value) => type == "Age"
+                        ? provider.ageIncrement(value)
+                        : provider.weightIncrement(value)),
+              ),
             )
           ],
         ),

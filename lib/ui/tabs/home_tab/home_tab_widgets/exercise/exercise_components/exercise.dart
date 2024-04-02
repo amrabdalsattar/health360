@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/data/models/details_model.dart';
 import 'package:health360/data/models/exercise_model.dart';
 import 'package:health360/utils/app_color.dart';
@@ -19,18 +20,19 @@ class Exercise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(36),
       child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: AppColor.midGrey),
             borderRadius: BorderRadius.circular(36),
           ),
-          height: 110,
+          height: 90.h,
           child: Row(
             children: [
               Container(
-                width: 100,
-                height: 100,
-                padding: const EdgeInsets.all(6),
+                width: 100.w,
+                height: 100.h,
+                padding: EdgeInsets.all(6.w),
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: Image.asset(
@@ -41,7 +43,7 @@ class Exercise extends StatelessWidget {
               Expanded(
                 child: Container(
                   margin:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -50,17 +52,18 @@ class Exercise extends StatelessWidget {
                         children: [
                           Text(
                             exerciseDM.exerciseTitle,
-                            style: const TextStyle(fontSize: 18),
+                            style: TextStyle(fontSize: 16.sp),
                           ),
                           Container(
-                              padding: const EdgeInsets.all(6),
+                              padding: EdgeInsets.all(6.w),
                               decoration: BoxDecoration(
                                   color: exerciseDM.exerciseTypeColor,
                                   borderRadius: BorderRadius.circular(20)),
                               child: Text(
                                 exerciseDM.exerciseType,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: AppColor.black,
+                                  fontSize: 11.sp
                                 ),
                               )),
                         ],
@@ -71,15 +74,15 @@ class Exercise extends StatelessWidget {
                             CupertinoIcons.clock_fill,
                             color: AppColor.midGrey,
                           ),
-                          const SizedBox(
-                            width: 6,
+                          SizedBox(
+                            width: 6.w,
                           ),
                           Text(
                             exerciseDM.duration,
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
-                          const SizedBox(
-                            width: 16,
+                          SizedBox(
+                            width: 16.w,
                           ),
                           Visibility(
                             visible: isExercise,
@@ -88,8 +91,8 @@ class Exercise extends StatelessWidget {
                               color: AppColor.midGrey,
                             ),
                           ),
-                          const SizedBox(
-                            width: 6,
+                          SizedBox(
+                            width: 6.w,
                           ),
                           Expanded(
                               child: Text(exerciseDM.level,

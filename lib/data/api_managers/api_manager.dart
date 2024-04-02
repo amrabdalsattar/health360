@@ -1,17 +1,17 @@
-
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:http/http.dart';
 
 import '../responses/article_response.dart';
 
-class ApiManager{
+class ApiManager {
+
   static const String apiKey = "b27f46a1e4ac4bf09ef21f6fc7e5f83d";
   static const String baseUrl = "newsapi.org";
   static const String articlesEndpoint = "/v2/everything";
 
   static Future<List<Article>> getArticles() async {
-
     Uri url = Uri.https(
         baseUrl, articlesEndpoint,
         {"apiKey": apiKey, "sources": "medical-news-today"});
@@ -25,4 +25,6 @@ class ApiManager{
     }
     throw Exception("Something Went Wrong, Please Try Again");
   }
+
+
 }

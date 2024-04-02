@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/screens/count_down_screen/count_down_components/button.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
@@ -38,7 +39,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
         elevation: 0,
         title: Text(
           widget.title,
-          style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize: 20),
+          style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize: 19.sp),
         ),
         leading: IconButton(
           onPressed: () {
@@ -46,7 +47,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
             provider.changeBreathworkStatus("inhale".tr());
           },
           icon: Icon(Icons.arrow_back, color: provider.appMode == ThemeMode.light?
-          AppColor.black : AppColor.darkAccent,),
+          AppColor.black : AppColor.darkAccent),
         ),
       ),
       body: Column(
@@ -59,8 +60,8 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
                 provider.breathworkStatus.tr(),
                 style: Theme.of(context).textTheme.headlineLarge,
               )),
-          const SizedBox(
-            height: 20,
+          SizedBox(
+            height: 20.h,
           ),
           Countdown(
             controller: _controller,
@@ -74,7 +75,7 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
               return Text(
                 '$minutes:${seconds < 10 ? '0$seconds' : seconds}',
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    fontSize: 80,
+                    fontSize: 75.sp,
                     color: provider.appMode == ThemeMode.light?
                     AppColor.green : AppColor.darkAccent),
               );
@@ -84,12 +85,13 @@ class ExerciseCountDownState extends State<ExerciseCountDown> {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Timer is done!'),
+                  backgroundColor: AppColor.green,
                 ),
               );
             },
           ),
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: 30.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

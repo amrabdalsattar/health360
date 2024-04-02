@@ -16,6 +16,7 @@ import 'package:health360/utils/dialog_utils.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../data/api_managers/api_manager.dart';
 import '../../../../data/models/user_model.dart';
 
 class SignInScreen extends StatefulWidget {

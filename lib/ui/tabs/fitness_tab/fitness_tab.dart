@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/tabs/fitness_tab/components/body_composition_navigator.dart';
 
 import '../../../data/data_constants/list_of_app_needs.dart';
@@ -11,23 +12,24 @@ class FitnessTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 26),
+        margin: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const BodyCompositionNavigator(),
             Container(
-                margin: const EdgeInsets.symmetric(vertical: 20),
+                margin: EdgeInsets.symmetric(vertical: 20.h),
                 child: Text("recommendedExercises",
                     style: Theme.of(context).textTheme.headlineLarge
-                        ?.copyWith(fontSize: 20, fontWeight: FontWeight.w500)).tr()
+                        ?.copyWith(fontSize: 18.sp, fontWeight: FontWeight.w500)).tr()
             ),
             ListView.separated(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: ListOfNeeds.exercises.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
+              separatorBuilder: (context, index) => SizedBox(height: 8.h),
               itemBuilder: (context, index) => Exercise(
                 exerciseDM: ListOfNeeds.exercises[index],
                 detailsDM: ListOfNeeds.details[index],

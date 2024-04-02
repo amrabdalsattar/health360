@@ -49,6 +49,7 @@ class BodyResult extends StatelessWidget {
       ),
       body: SafeArea(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/shared_components/profile_photo.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/cache_helper.dart';
@@ -22,12 +23,12 @@ class AddPostScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 40.h),
           height: MediaQuery.of(context).size.height,
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15),
+                margin: EdgeInsets.symmetric(horizontal: 15.w),
                 child: Column(
                   children: [
                     Row(
@@ -61,13 +62,13 @@ class AddPostScreen extends StatelessWidget {
                               hideLoading(context);
                             }
                           },
-                          child: Text("post".tr()),
+                          child: Text("post".tr(), style: const TextStyle(fontSize: 14),),
                         )
                       ],
                     ),
-                    const ProfilePhoto(),
+                    const ProfilePhoto(width: 80, height: 75,),
                     TextField(
-                      style: TextStyle(fontSize: 18,
+                      style: TextStyle(fontSize: 16.sp,
                         color: provider.appMode == ThemeMode.light?
                       AppColor.black : AppColor.white,),
                       autocorrect: true,
@@ -91,7 +92,7 @@ class AddPostScreen extends StatelessWidget {
                       },
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 6),
+                      margin: EdgeInsets.symmetric(vertical: 6.h),
                       alignment: Alignment.centerRight,
                       child: Text(
                         "${provider.postContent.length}/$maxCharacters",
@@ -99,7 +100,7 @@ class AddPostScreen extends StatelessWidget {
                             color: provider.postContent.length == maxCharacters
                                 ? AppColor.red
                                 : AppColor.grey,
-                            fontSize: 12),
+                            fontSize: 12.sp),
                       ),
                     ),
                   ],

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/screens/home_screen/components/app_bar.dart';
 import 'package:health360/ui/screens/home_screen/components/bottom_nav_bar.dart';
-import 'package:health360/utils/providers/settings_provider.dart';
+import 'package:health360/utils/providers/tabs_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../tabs/community_tab/components/fab.dart';
@@ -13,16 +14,22 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsProvider provider = Provider.of(context);
-    return Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(100),
-          child: CustomAppBar(),
+    TabsProvider tabsProvider = TabsProvider();
+    return ChangeNotifierProvider(
+      create: (_) => tabsProvider,
+      child: Consumer<TabsProvider>(
+      builder: (_, viewModel, __) => Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(65.h),
+            child: const CustomAppBar(),
+          ),
+          body: SafeArea(
+              child: viewModel.tabs[viewModel.currentTabIndex]),
+          bottomNavigationBar: BottomNav(tabsProvider: viewModel,),
+          floatingActionButton: const FAB(),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         ),
-        body: SafeArea(child: provider.navigateTab(provider.currentTabIndex, provider.tabs)),
-        bottomNavigationBar: const BottomNav(),
-        floatingActionButton: const FAB(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      );
+      ),
+    );
   }
 }
