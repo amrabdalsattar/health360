@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/data/data_constants/list_of_app_needs.dart';
 
 import 'home_tab_widgets/exercise/exercise_components/exercise.dart';
@@ -11,26 +12,24 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 26),
+        margin: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            /// The Articles
             const NewsSlider(),
-            /// The Spiritual exercises
             Container(
-                margin: const EdgeInsets.symmetric(vertical: 20),
+                margin: EdgeInsets.symmetric(vertical: 18.h),
                 child: Text("spiritualPractice".tr(),
                     style: Theme.of(context).textTheme.headlineLarge?.
-                    copyWith(fontWeight: FontWeight.w500, fontSize: 20))),
+                    copyWith(fontWeight: FontWeight.w500, fontSize: 18.sp))),
 
-            /// ListView.separated to add dividers between exercises
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: ListOfNeeds.spiritualPractices.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
+              separatorBuilder: (context, index) => SizedBox(height: 8.h),
               itemBuilder: (context, index) => Exercise(
                 exerciseDM: ListOfNeeds.spiritualPractices[index],
                 detailsDM: ListOfNeeds.spiritualPracticesDetails[index],

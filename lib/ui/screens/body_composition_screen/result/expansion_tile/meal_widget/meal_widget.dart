@@ -16,7 +16,6 @@ class MealWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// the widget that shows the meal data
     SettingsProvider provider = Provider.of(context);
     return InkWell(
         child: Container(

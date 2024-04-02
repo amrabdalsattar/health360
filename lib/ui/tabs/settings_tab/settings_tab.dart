@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/screens/auth_ui/auth_shared_widgets/button.dart';
 import 'package:health360/ui/screens/auth_ui/sign_in/sign_in_screen.dart';
 import 'package:health360/utils/app_asset.dart';
 import 'package:health360/utils/app_color.dart';
 import 'package:health360/utils/cache_helper.dart';
+import 'package:health360/utils/providers/tabs_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/providers/settings_provider.dart';
@@ -19,7 +21,7 @@ class SettingsTab extends StatelessWidget {
     SettingsTab.provider = Provider.of(context);
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -48,31 +50,38 @@ class SettingsTab extends StatelessWidget {
               ],
             ),
           ),
-          MyButton(
-              text: "logOut".tr(),
-              onPressed: () {
-                CacheData.removeData(key: "email");
-                CacheData.removeData(key: "fullName");
-                CacheData.removeData(key: "password");
-                CacheData.removeData(key: "id");
-                Navigator.pushReplacementNamed(context, SignInScreen.routeName);
-                provider.setCurrentTabIndex(0);
-              }),
+          ChangeNotifierProvider(
+            create: (_) => TabsProvider(),
+            child: Consumer<TabsProvider>(
+              builder:(_, viewModel, __) => MyButton(
+                  text: "logOut".tr(),
+                  onPressed: () {
+                    CacheData.removeData(key: "email");
+                    CacheData.removeData(key: "fullName");
+                    CacheData.removeData(key: "password");
+                    CacheData.removeData(key: "id");
+                    Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+                    viewModel.setCurrentTabIndex(0);
+                  }),
+            ),
+          ),
           TextButton(
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (context) => AboutDialog(
+
                       applicationIcon: SizedBox(
-                          width: 50,
-                          height: 50,
+                          width: 50.w,
+                          height: 50.h,
                           child: Image.asset(AppAsset.logo)),
                       applicationName: "Health360",
                       applicationVersion: "1.0.0",
                       applicationLegalese: "© 2023 Health360",
+
                     ));
               },
-              child: const Text("About Us"))
+              child: Text("About Us", style: TextStyle(fontSize: 14.sp),))
         ],
       ),
     );

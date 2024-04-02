@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/screens/home_screen/profile/profile_components/pick_image.dart';
 import 'package:health360/ui/screens/home_screen/profile/profile_components/profile_text_field.dart';
 import 'package:health360/utils/app_color.dart';
@@ -15,7 +16,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     SettingsProvider provider = Provider.of(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 40.w),
       height: MediaQuery.of(context).size.height,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

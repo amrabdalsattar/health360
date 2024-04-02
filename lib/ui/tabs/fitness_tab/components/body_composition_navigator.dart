@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/screens/body_composition_screen/body_composition_screen.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,11 +14,12 @@ class BodyCompositionNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     SettingsProvider provider = Provider.of(context);
     return InkWell(
+      borderRadius: BorderRadius.circular(30),
       onTap: () {
         Navigator.pushNamed(context, BodyCompositionScreen.routeName);
       },
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(15.w),
         height: MediaQuery.of(context).size.height * 0.1,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
@@ -34,18 +36,18 @@ class BodyCompositionNavigator extends StatelessWidget {
                             ? AppColor.primary
                             : AppColor.darkAccent,
                         borderRadius: BorderRadius.circular(30)),
-                    child: const Icon(
+                    child: Icon(
                       Icons.man,
-                      size: 40,
+                      size: 40.sp,
                     )),
-                const SizedBox(
-                  width: 16,
+                SizedBox(
+                  width: 16.w,
                 ),
                 Text("bodyComposition",
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium
-                      ?.copyWith(color: AppColor.grey, fontSize: 18),
+                      ?.copyWith(color: AppColor.grey, fontSize: 18.sp),
                 ).tr(),
               ],
             ),

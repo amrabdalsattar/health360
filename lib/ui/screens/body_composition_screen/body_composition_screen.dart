@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/screens/body_composition_screen/components/body_composition_app_bar.dart';
 import 'package:health360/ui/screens/body_composition_screen/components/calculate_button.dart';
 import 'package:health360/ui/screens/body_composition_screen/components/gender.dart';
@@ -50,6 +51,18 @@ class BodyCompositionScreen extends StatelessWidget {
                 ),
               ),
               const HeightSlider(),
+              Container(
+                margin: const EdgeInsets.only(top: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text("weight".tr(), style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 26.sp)
+                ),
+                    Text("age".tr(), style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 26.sp),
+                    ),
+                  ],
+                ),
+              ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),

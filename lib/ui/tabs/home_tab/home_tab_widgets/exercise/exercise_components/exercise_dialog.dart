@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/data/models/details_model.dart';
 import '../../../../../../utils/app_color.dart';
 
@@ -53,18 +54,18 @@ class ExerciseDialogState extends State<ExerciseDialog>
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium
-                    ?.copyWith(fontSize: 18)),
+                    ?.copyWith(fontSize: 16.sp, fontWeight: FontWeight.bold)),
             content: SizedBox(
-              height: 500,
+              height: 430.h,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Image.asset(widget.detailsDM.imagePath??"", height: 200),
+                  Image.asset(widget.detailsDM.imagePath??"", height: 200.h),
                   Text(widget.detailsDM.description,
                       style: Theme.of(context).textTheme.bodyMedium),
                   ElevatedButton(
                     style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(const Size(300, 30)),
+                      fixedSize: MaterialStateProperty.all(Size(300.w, 30.h)),
                       backgroundColor:
                           MaterialStateProperty.all(AppColor.green),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(

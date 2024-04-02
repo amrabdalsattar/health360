@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 import '../../../../../utils/app_asset.dart';
@@ -19,7 +20,7 @@ class SignInWithX extends StatelessWidget {
 
         },
         child: Image.asset(AppAsset.x,
-          width: 22, height: 22,));
+          width: 25.w, height: 25.w,));
   }
 
   Future<UserCredential> signInWithTwitter(BuildContext context) async {

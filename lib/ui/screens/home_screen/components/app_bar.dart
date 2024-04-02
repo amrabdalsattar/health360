@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:health360/ui/shared_components/profile_photo.dart';
 import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/cache_helper.dart';
 
-import '../../../../data/models/user_model.dart';
 import '../../../../utils/app_color.dart';
 import '../profile/profile.dart';
 
@@ -20,10 +20,10 @@ class CustomAppBar extends StatelessWidget {
           Text(
             CacheData.getData(key: "fullName"),
             style: TextStyle(color: Theme.of(context) == AppTheme.lightMode?
-            AppColor.grey : AppColor.darkGrey, fontSize: 14),
+            AppColor.grey : AppColor.darkGrey, fontSize: 14.sp),
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: 10.h,
           ),
           Text(
             "Health360",
@@ -36,7 +36,8 @@ class CustomAppBar extends StatelessWidget {
       toolbarHeight: 100,
       actions: [
         InkWell(
-          child: const ProfilePhoto(),
+          borderRadius: BorderRadius.circular(60),
+          child: ProfilePhoto(width: 38.w, height: 50.h,),
           onTap: () {
             showModalBottomSheet(
                 context: context,

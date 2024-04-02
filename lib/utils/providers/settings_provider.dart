@@ -11,23 +11,6 @@ import '../app_asset.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class SettingsProvider extends ChangeNotifier {
-  int currentTabIndex = 0;
-  List<Widget> tabs = [
-    const HomeTab(),
-    const FitnessTab(),
-    const CommunityTab(),
-    const SettingsTab(),
-  ];
-
-  void setCurrentTabIndex(int index) {
-    currentTabIndex = index;
-    notifyListeners();
-  }
-
-  Widget navigateTab(int currentTabIndex, List<Widget> tabs) {
-    return tabs[currentTabIndex];
-  }
-
   bool isAssetPath = true;
   String profileImagePath = AppAsset.avatar;
 
@@ -54,6 +37,14 @@ class SettingsProvider extends ChangeNotifier {
   int age = 18;
   int weight = 55;
   double heightValue = 170;
+  void ageIncrement(int newAge){
+    age = newAge;
+    notifyListeners();
+  }
+  void weightIncrement(int newWeight){
+    weight = newWeight;
+    notifyListeners();
+  }
 
   void sliderAutomator(double newValue) {
     heightValue = newValue;
@@ -89,7 +80,7 @@ class SettingsProvider extends ChangeNotifier {
 
 List<PostDM> posts = [];
 
-  refreshTodoList() async {
+  refreshPostsList() async {
     CollectionReference<PostDM> postsCollection = FirebaseFirestore.instance
         .collection("posts")
         .withConverter<PostDM>(fromFirestore: (docSnapShot, _) {
@@ -101,7 +92,7 @@ List<PostDM> posts = [];
     });
 
     QuerySnapshot<PostDM> postsSnapshot = await postsCollection
-        .orderBy("date")
+        .orderBy("date", descending: true)
         .get();
 
     List<QueryDocumentSnapshot<PostDM>> docs = postsSnapshot.docs;

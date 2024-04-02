@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../utils/app_asset.dart';
 import '../../../../../utils/dialog_utils.dart';
@@ -17,7 +18,7 @@ class SignInWithFacebook extends StatelessWidget {
 
         },
         child: Image.asset(AppAsset.facebook,
-          width: 30, height: 30,));
+          width: 25.w, height: 25.h,));
   }
 
   Future<dynamic> signInWithFacebook(BuildContext context) async {

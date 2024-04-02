@@ -48,7 +48,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         iconTheme: const IconThemeData(color: AppColor.grey),
       ),
       body: Form(
-        /// _formKey is the Controller of the TextField Input, it indicates if the data is valid or not
         key: _formKey,
         child: SingleChildScrollView(
           child: Container(
@@ -64,9 +63,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 ),
                 Column(
                   children: [
-                    /// Full Name TextField
                     MyTextField(
-                      /// the validator from it's name it validates the input depends on the conditions
                       validator: (fullName) {
                         if (fullName == null || fullName.isEmpty) {
                           return "reqName".tr(); /// if it null or empty
@@ -84,7 +81,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       icon: const Icon(Icons.person),
                     ),
 
-                    /// Email TextField
                     MyTextField(
                       validator: (email) {
                         if (email == null || email.isEmpty) {
@@ -104,7 +100,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       icon: const Icon(Icons.email_outlined),
                     ),
 
-                    /// Password TextField
                     MyTextField(
                       validator: (password) {
                         if (password == null || password.isEmpty) {
@@ -133,7 +128,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       obscure: passwordShowed,
                     ),
 
-                    /// Confirm password TextField
                     MyTextField(
                         validator: (confirmedPassword) {
                           if (password != confirmedPassword &&
@@ -165,7 +159,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 ),
                 MyButton(
                     onPressed: () {
-                      /// When the user clicked on this Button it creates a new account
                       register();
                     },
                     text: "signUp".tr()),
@@ -177,19 +170,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     );
   }
 
-  /// Register Function
   void register() async {
     try {
       if (_formKey.currentState!.validate()) {
         showLoading(context);
-        /// Sign up with Firebase Authentication
         UserCredential userCredential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
 
-        /// Sign up with Firebase Firestore, to help us retrieving data
         AppUser newUser = AppUser(
             id: userCredential.user!.uid,
             email: email,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:health360/utils/app_color.dart';
-import 'package:health360/utils/app_theme.dart';
 import 'package:health360/utils/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +11,6 @@ class BMIWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// this widget is basic UI without any logic
     SettingsProvider provider = Provider.of(context);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
